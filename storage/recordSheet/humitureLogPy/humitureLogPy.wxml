@@ -1,0 +1,85 @@
+<view id="humitureLogPy" class="humitureLogPyPage" bindtouchstart="handleTouchStart" bindtouchmove="handleTouchMove" bindtouchend="handleTouchEnd">
+  <view class="scanView" wx:if="{{!isScancode}}">
+    <view class="codeView">
+      <input type="text" placeholder="请输入设备号" value="{{param.deviceAddress}}" data-key="deviceAddress" bindinput="inputSetDataDefault"></input>
+    </view>
+    <button type="warn" bind:tap="scancode">扫描设备</button>
+    <view class="footerBtn">
+      <button type="success" bind:tap="doQuery">确定</button>
+    </view>
+  </view>
+  <view class="zoom-container" wx:if="{{isScancode}}" style="transform: scale({{gestureState.scaleRatio}}) translate({{gestureState.translateX}}px, {{gestureState.translateY}}px);transform-origin: 0 0;transition: transform 0.1s ease-out;width:{{100/gestureState.scaleRatio}}vw">
+    <view class="common-info">
+      <view id="printTable">
+        <view class="tableTitle">
+          <view class="title-h3">{{info.workName}}</view>
+          <view class="title-p">{{title}}</view>
+        </view>
+
+        <view class="tableBox">
+          <!-- 表格容器 -->
+          <view class="table">
+            <!-- 表头 -->
+            <view class="tr thead-tr">
+              <view class="th" style="width: 180rpx;">时间</view>
+              <view class="th" style="width: 150rpx;">日期</view>
+              <view class="th" style="width: 100rpx;" wx:for="{{info.datas}}" wx:key="index">
+                {{item.day}}
+              </view>
+            </view>
+
+            <!-- 表格内容 -->
+            <block wx:for="{{timeRanges}}" wx:key="index" wx:for-item="time" wx:for-index="i">
+              <view class="tr">
+                <view class="td" style="width: 180rpx;" rowspan="2">{{time.timeRange}}</view>
+                <view class="innertr">
+                  <view class="tr">
+                    <view class="td" style="width: 150rpx;">温度°C</view>
+                    <view class="td" style="width: 100rpx;" wx:for="{{info.datas}}" wx:key="subIndex" wx:for-index="subIndex">
+                      {{item['temperature'+(i+1)]}}
+                    </view>
+                  </view>
+                  <view class="tr">
+                    <view class="td" style="width: 150rpx;">湿度%RH</view>
+                    <view class="td" style="width: 100rpx;" wx:for="{{info.datas}}" wx:key="subIndex" wx:for-index="subIndex">
+                      {{item['humidity'+(i+1)]}}
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </block>
+
+            <!-- 记录人行 -->
+            <view class="tr">
+              <view class="td" style="width: 330rpx;" colspan="2">白班记录人</view>
+              <view class="td" style="width: 100rpx;" wx:for="{{info.datas}}" wx:key="index"></view>
+            </view>
+            <view class="tr">
+              <view class="td" style="width: 330rpx;" colspan="2">夜班记录人</view>
+              <view class="td" style="width: 100rpx;" wx:for="{{info.datas}}" wx:key="index"></view>
+            </view>
+          </view>
+        </view>
+
+        <view class="tip">
+          <view class="tip-p">注：</view>
+          <view class="tip-p">1、仓库作业人员每2小时记录一次温湿度度记录表，记录人在对应的位置签名确认此记录需要保存1年。</view>
+          <view class="tip-p">2、当温度或湿度接近控制标准的上限时，记录人员立即通知班长调整货物区域。</view>
+          <view class="tip-p">3、温湿度标准范围：温度:1-28°C；温度:65%以下。</view>
+        </view>
+      </view>
+
+    </view>
+  </view>
+</view>
+
+<!-- page-container：隐藏遮罩和内容，仅用于拦截返回 -->
+<page-container
+  show="{{isScancode}}"  
+  overlay="{{false}}"          
+  position="right"              
+  bindbeforeleave="handleBeforeLeave"  
+  style="display: none;"
+>
+  <!-- 空内容，仅用组件的拦截能力 -->
+</page-container>

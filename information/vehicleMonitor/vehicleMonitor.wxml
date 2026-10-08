@@ -1,0 +1,6 @@
+<van-search value="{{ value }}" use-action-slot bind:change="search" placeholder="搜索车牌">
+  <view slot="action" bind:tap="doQuery">搜索</view>
+</van-search>
+<view class="mapView">
+  <map id="map" longitude="{{longitude}}" latitude="{{latitude}}" bindmarkertap="markertap" scale="14" markers="{{markers}}" bindmarkertap="markertap" style="width: 100%; height: 100%;"></map>
+</view>

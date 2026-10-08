@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "采购单详情",
+  "usingComponents": {
+    "alert":"/common/components/alert/alert",
+    "fileviewer":"/common/components/fileviewer/fileviewer"    
+  }
+}

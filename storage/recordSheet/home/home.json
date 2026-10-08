@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "报表查询",
+  "usingComponents": {
+    "alert":"/common/components/alert/alert"       
+  }
+}

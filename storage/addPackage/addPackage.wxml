@@ -1,0 +1,68 @@
+<view class="myField">
+  <view class="item clearfix">
+    <view class="label"><text class="red">*</text>包材名称</view>
+    <view class="input-text">
+      <picker mode="selector" range="{{packMaterialBaseList}}" bindchange="packMaterialBaseChange" range-key="name" value="{{packMaterialBaseIndex}}" data-index="{{index}}">
+        <view wx:if="{{packMaterialBaseList.length !=0 && packMaterialBaseIndex!=null}}">
+          {{packMaterialBaseList[packMaterialBaseIndex].name}}
+        </view>
+        <view style="color:#c8c9cc;" wx:else>包材名称</view>
+        <van-icon name="arrow-down" class="arrow-down" />
+      </picker>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label"><text class="red">*</text>所属用户</view>
+    <view class="input-text">
+      <picker mode="selector" range="{{arrivalManufacturerTenantList}}" bindchange="arrivalManufacturerTenantChange" range-key="name" value="{{arrivalManufacturerTenantIndex}}" data-index="{{index}}">
+        <view wx:if="{{arrivalManufacturerTenantList.length !=0 && arrivalManufacturerTenantIndex!=null}}">
+          {{arrivalManufacturerTenantList[arrivalManufacturerTenantIndex].name}}
+        </view>
+        <view style="color:#c8c9cc;" wx:else>所属用户</view>
+        <van-icon name="arrow-down" class="arrow-down" />
+      </picker>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label"><text class="red">*</text>数量</view>
+    <view class="input-text">
+      <input type="text" placeholder="数量" value="{{info.nums}}" data-key="nums" data-index="{{index}}" bindinput="inputSetDataDefault"></input>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label"><text class="red">*</text>登记类型</view>
+    <view class="input-text">
+      <picker mode="selector" range="{{wmsPackOpTypeList}}" bindchange="wmsPackOpTypeChange" range-key="codeName" value="{{wmsPackOpTypeIndex}}" data-index="{{index}}">
+        <view wx:if="{{wmsPackOpTypeList.length !=0 && wmsPackOpTypeIndex!=null}}">
+          {{wmsPackOpTypeList[wmsPackOpTypeIndex].codeName}}
+        </view>
+        <view style="color:#c8c9cc;" wx:else>登记类型</view>
+        <van-icon name="arrow-down" class="arrow-down" />
+      </picker>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label"><text class="red">*</text>要求时间</view>
+    <view class="input-text">
+      <!-- <datetimepicker placeholder="选择时间" initValue="{{realDate}}" bind:change="changeDate" data-index="{{index}}" type="minute"></datetimepicker> -->
+      <picker mode="date" value="{{info.realDate}}" data-key="realDate" start="2000-01-01" end="2099-12-31" bindchange="inputSetDataDefault">
+        <view class="picker">
+          <view wx:if="{{info.realDate}}">
+            {{info.realDate}}
+          </view>
+          <view style="color:#c8c9cc;" wx:else>选择时间</view>
+          <van-icon name="arrow-down" class="arrow-down" />
+        </view>
+      </picker>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">备注</view>
+    <view class="input-text">
+      <input type="text" placeholder="备注" value="{{info.remark}}" data-key="remark" data-index="{{index}}" bindinput="inputSetDataDefault"></input>
+    </view>
+  </view>
+</view>
+<view class="footerBtn">
+  <button bindtap="submit">确认登记</button>
+</view>

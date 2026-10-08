@@ -1,0 +1,69 @@
+<view id="humitureLogPrintFd" class="humitureLogPrintFdPage" bindtouchstart="handleTouchStart" bindtouchmove="handleTouchMove" bindtouchend="handleTouchEnd">
+  <view class="scanView" wx:if="{{!isScancode}}">
+    <view class="codeView">
+      <input type="text" placeholder="请输入设备号" value="{{param.deviceAddress}}" data-key="deviceAddress" bindinput="inputSetDataDefault"></input>
+    </view>
+    <button type="warn" bind:tap="scancode">扫描设备</button>
+    <view class="footerBtn">
+      <button type="success" bind:tap="doQuery">确定</button>
+    </view>
+  </view>
+  <view class="zoom-container" wx:if="{{isScancode}}" style="transform: scale({{gestureState.scaleRatio}}) translate({{gestureState.translateX}}px, {{gestureState.translateY}}px);transform-origin: 0 0;transition: transform 0.1s ease-out;width:{{100/gestureState.scaleRatio}}vw">
+    <view class="common-info">
+      <view id="printTable">
+        <view class="tableTitle">
+          <view class="title-h3">{{info.workName}}</view>
+          <view class="title-p">{{title}}</view>
+        </view>
+        <view class="tableBox">
+          <!-- 表格容器 -->
+          <view class="table">
+            <!-- 表头 -->
+            <view class="tr thead-tr">
+              <view class="th" style="width: 40px;">日期</view>
+              <block wx:for="{{info.index}}" wx:key="*this" class="index-loop">
+                <view wx:for="{{head}}" wx:for-item="hd" wx:key="hd.code" class="th" style="width: {{hd.width ? hd.width + 'px' : '60px'}}">
+                  {{hd.name}}
+                </view>
+              </block>
+              <view class="th" style="width: 60px;">记录员</view>
+              <view class="th" style="width: 80px;">异常处理</view>
+            </view>
+
+            <!-- 表体 -->
+            <view wx:for="{{info.datas}}" wx:for-item="data" wx:key="item.day" class="tr tbody-tr">
+              <view class="td" style="width: 40px;">{{data.day}}</view>
+              <block wx:for="{{info.index}}" wx:for-index="i" wx:key="*this" class="index-loop">
+                <view wx:for="{{head}}" wx:for-item="hd" wx:key="hd.code" class="td" style="width: {{hd.width ? hd.width + 'px' : '60px'}}">
+                  {{data[hd.code + (i+1)]}}
+                </view>
+              </block>
+              <view class="td" style="width: 60px;"></view>
+              <view class="td" style="width: 80px;"></view>
+            </view>
+          </view>
+        </view>
+
+        <view class="tip">
+          <view class="tip-p">注：各类仓库的温度、湿度要求如下：</view>
+          <view class="tip-p">1、普通仓温度要求：0°C&lt;温度≤40°C，湿度不管控。</view>
+          <view class="tip-p" style="padding-left: 19px;">低温低湿仓温度要求：1°C≤温度≤28°C，湿度要求:5%≤湿度≤75%。</view>
+          <view class="tip-p" style="padding-left: 19px;">冷藏仓温度要求：温度≤10°C，湿度不管控。</view>
+          <view class="tip-p" style="padding-left: 19px;">溶剂仓1温度要求：1°C≤温度≤25°C，湿度不管控;溶剂仓2温度要求:1°C≤温度≤35°C，湿度不管控。</view>
+          <view class="tip-p">2、当温度或湿度接近控制标准的上限时，记录人员进行异常处理并通知主管或班长。</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- page-container：隐藏遮罩和内容，仅用于拦截返回 -->
+<page-container
+  show="{{isScancode}}"  
+  overlay="{{false}}"          
+  position="right"              
+  bindbeforeleave="handleBeforeLeave"  
+  style="display: none;"
+>
+  <!-- 空内容，仅用组件的拦截能力 -->
+</page-container>

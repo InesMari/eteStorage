@@ -1,0 +1,81 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<view class="container">
+  <!-- 顶部栏：返回 + 状态筛选 + 搜索 + 地图模式切换 -->
+  <view class="top-bar" wx:if="{{!isReadonly}}">
+      <!-- 状态筛选器 -->
+      <picker class="status-picker" mode="selector" range="{{statusOptions}}" bindchange="onStatusChange" range-key="codeName" value="{{statusIndex}}">
+        <view wx:if="{{statusOptions.length !=0 &&statusIndex!=null}}">
+          {{statusOptions[statusIndex].codeName}}
+        </view>
+        <view style="color:#999;" wx:else>请选择</view>
+        <van-icon name="arrow-down" class="arrow-down" />
+      </picker>
+
+      <!-- 搜索区域 -->
+      <view class="search-area">
+        <input placeholder="车牌、订单、派车单" value="{{param.searchKey}}" data-key="searchKey" bindinput="inputSetDataDefault" class="search-input" />
+        <!-- <van-button type="primary" size="small" bindtap="todoQuery">查询</van-button> -->
+      </view>
+
+    <!-- 地图模式切换按钮 -->
+    <van-button size="small" icon="exchange" type="info" bindtap="switchMode" wx:if="{{!isMapMode}}">地图</van-button>
+    <van-button size="small" icon="exchange" type="info" bindtap="switchMode" wx:if="{{isMapMode}}">列表</van-button>
+  </view>
+
+  <!-- 地图组件（地图模式时显示） -->
+  <map id="map" class="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="{{scale}}" markers="{{markers}}" bindmarkertap="onMarkerTap" bindtap="onMapTap" show-location wx:if="{{isMapMode}}">
+    <cover-view slot="callout">
+      <block wx:for="{{customCalloutMarkerIds}}" wx:key="*this">
+        <cover-view class="customCallout" marker-id="{{item}}" wx:if="{{showCalloutId === item || isReadonly}}">
+          <cover-view class="content">
+            <cover-view class="plateNumber">{{vehicleInfo.plateNumber}}</cover-view>
+            <cover-view class="tip" wx:if="{{vehicleInfo.tip}}">{{vehicleInfo.tip}}</cover-view>
+            <cover-view class="item">
+              <cover-view class="label">线路名称：</cover-view>
+              <cover-view class="text">{{format.formatTo_(vehicleInfo.routeName)}}</cover-view>
+            </cover-view>
+            <cover-view class="item">
+              <cover-view class="label">订单号：</cover-view>
+              <cover-view class="text">{{format.formatTo_(vehicleInfo.orderNum)}}</cover-view>
+            </cover-view>
+            <cover-view class="item">
+              <cover-view class="label">派车单号：</cover-view>
+              <cover-view class="text">{{format.formatTo_(vehicleInfo.waybillNum)}}</cover-view>
+            </cover-view>
+            <cover-view class="item">
+              <cover-view class="label">定位时间：</cover-view>
+              <cover-view class="text">{{format.formatTo_(vehicleInfo.gpsTime)}}</cover-view>
+            </cover-view>
+            <cover-view class="item">
+              <cover-view class="label">位置：</cover-view>
+              <cover-view class="text">{{format.formatTo_(vehicleInfo.location)}}</cover-view>
+            </cover-view>
+            <cover-view class="item">
+              <cover-view class="label">驾驶员：</cover-view>
+              <cover-view class="text">{{format.formatTo_(vehicleInfo.driverName)}}</cover-view>
+            </cover-view>
+            <cover-view class="item">
+              <cover-view class="label">手机：</cover-view>
+              <cover-view class="text">{{format.formatTo_(vehicleInfo.driverPhone)}}</cover-view>
+            </cover-view>
+          </cover-view>
+        </cover-view>
+      </block>
+    </cover-view>
+  </map>
+
+  <!-- 列表容器（列表模式时显示） -->
+  <view class="list-container" wx:else>
+    <view class="list-item" wx:for="{{filteredVehicles}}" wx:key="id" bindtap="gotoVehicleDetail" data-item="{{item}}">
+      <!-- 车辆状态图标 -->
+      <image src="/common/images/car.png" mode="widthFix" class="vehicle-icon" />
+
+      <!-- 车辆信息（车牌 + 司机） -->
+      <view class="vehicle-info">
+        <view class="plate">{{item.plateNumber}}</view>
+        <view class="driver" wx:if="{{item.waybillState != 3}}">{{format.formatEmpty(item.driverName)}}</view>
+        <view class="driver" wx:if="{{item.waybillState == 3}}">{{item.tip}}</view>
+      </view>
+    </view>
+  </view>
+</view>

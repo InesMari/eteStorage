@@ -1,0 +1,29 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<van-search value="{{ value }}" bind:change="search" placeholder="输入关键字模糊搜索" />
+<van-tabs active="{{active}}" bind:change="onChange">
+  <van-tab title="全部"></van-tab>
+  <van-tab title="未审核"></van-tab>
+  <van-tab title="审核中"></van-tab>
+  <van-tab title="审核完毕"></van-tab>
+  <van-tab title="不通过"></van-tab>
+</van-tabs>
+<image mode="widthFix" wx:if="{{isRefresh}}" class="loading-icon" src="/common/images/loading.gif"></image>
+<scroll-view class="scorll" scroll-y="{{true}}" bindscrolltoupper="toupper" upper-threshold="1" bindscrolltolower="scrolltolowerHandler">
+  <view class="list mt_20">
+    <view class="item" wx:for="{{list}}" bindtap="toDetail" data-item="{{item}}">
+      <view class="inner">
+        <view class="title clearfix"> 
+          <view class="router fl">{{item.title}}</view>
+          <view class="state {{item.verifyState==0?'state0':''}} {{item.verifyState==1?'state1':''}} {{item.verifyState==2?'state2':''}} {{item.verifyState==3?'state3':''}} {{item.verifyState==5?'state5':''}}" >
+          {{item.verifyStateName}}</view>
+        </view>
+        <view class="info">
+          <view>调拨单号：<text class="text">{{item.allocatNum}}</text></view>
+          <view>申请人：<text class="text">{{item.applyUser}}</text></view>
+          <view>申请部门：<text class="text">{{item.applyUserOrg}}</text></view>
+          <view>申请日期：<text class="text">{{item.applyDate}}</text></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

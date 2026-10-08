@@ -1,0 +1,26 @@
+<view class="contain">
+  <image class="banner" src="/common/images/banner.png" mode="widthFix" bindtap="scan"></image>
+  <view class="list clearfix">
+    <view  class="item">
+      <image src="/common/images/i_1.png"></image>
+      <view class="name">运输管理</view>
+      <view class="explain">可进行新增/调度订单</view>
+    </view>
+    <view  class="item">
+      <image src="/common/images/i_10.png"></image>
+      <view class="name">仓储管理</view>
+      <view class="explain">可进行出库入库操作</view>
+    </view>
+    <view  class="item">
+      <image src="/common/images/i_13.png"></image>
+      <view class="name">单据管理</view>
+      <view class="explain">可对付款单/请款单审核</view>
+    </view>
+  </view>
+</view>
+<view class="loginView">
+  <text>您当前尚未登录</text>
+  <button bindtap="getPhoneNumber">立即登录</button>
+</view>
+
+<view class="click_popup" bindtap="getPhoneNumber"></view>

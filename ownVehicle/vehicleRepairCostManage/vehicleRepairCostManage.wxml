@@ -1,0 +1,29 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<van-search value="{{ value }}" bind:change="search" placeholder="输入关键字模糊搜索" />
+<van-tabs active="{{active}}" bind:change="onChange">
+  <van-tab title="全部"></van-tab>
+  <van-tab title="未审核"></van-tab>
+  <van-tab title="审核通过"></van-tab>
+  <van-tab title="审核不通过"></van-tab>
+</van-tabs>
+<image mode="widthFix" wx:if="{{isRefresh}}" class="loading-icon" src="/common/images/loading.gif"></image>
+<scroll-view class="scorll" scroll-y="{{true}}" bindscrolltoupper="toupper" upper-threshold="1" bindscrolltolower="scrolltolowerHandler">
+  <view class="list mt_20">
+    <view class="item" wx:for="{{list}}" bindtap="toDetail" data-item="{{item}}">
+      <view class="inner">
+        <view class="title clearfix"> 
+          <view class="router fl">{{item.plateNumber}}</view>
+          <view class="state {{item.verifyState==0?'state0':''}} {{item.verifyState==1?'state1':''}} {{item.verifyState==2?'state3':''}}" >
+          {{item.verifyStateName}}</view>
+        </view>
+        <view class="info">
+          <text class="price">{{item.fee}} 元</text>
+          <view>费用日期：<text class="text">{{item.feeDate}}</text></view>
+          <view>费用类型：<text class="text">{{item.repairTypeName}}</text></view>
+          <view>结算方式：<text class="text">{{format.formatTo_(item.payModeName)}}</text></view>
+          <view>付款状态：<text class="text">{{item.payStateName}}</text></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

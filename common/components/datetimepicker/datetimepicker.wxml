@@ -1,0 +1,7 @@
+<picker style="{{dStyle}}" mode="multiSelector" value="{{dateTime}}" bindchange="bindDateChange" bindcolumnchange="changeDateTimeColumn" range="{{dateTimeArray}}" disabled="{{disabled}}">
+  <view class="picker" wx:if="{{dateShow}}">
+    {{dateTimeArray[0][dateTime[0]]}}-{{dateTimeArray[1][dateTime[1]]}}-{{dateTimeArray[2][dateTime[2]]}} {{dateTimeArray[3][dateTime[3]]}}:{{dateTimeArray[4][dateTime[4]]}}<text wx:if="{{!type}}">:{{dateTimeArray[5][dateTime[5]]}}</text>
+  </view>
+    <view class='component_placeholder_color' wx:if="{{!dateShow && !isInit}}">{{placeholder}}</view>
+    <view wx:if="{{!dateShow && isInit}}">{{initValue}}</view>
+</picker>

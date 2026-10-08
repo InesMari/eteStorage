@@ -1,0 +1,227 @@
+<van-cell-group wx:if="{{isBang}}">
+  <van-field
+    value="{{ value }}"
+    placeholder="车牌号"
+    label="车牌号"
+    value="{{info.plateNumber}}" data-key="plateNumber" bindinput="inputSetData" bindblur="queryInfo"
+  />
+  <van-field
+    value="{{ value }}"
+    placeholder="识别代号后6位"
+    label="识别代号后6位"
+    value="{{info.vinCheck}}" data-key="vinCheck" bindinput="inputSetData" bindblur="queryInfo"
+  />
+</van-cell-group>
+
+<view class="myField mb_30 pb_30 {{isBang?'mt_20':''}}">
+ <view class="field-title">行驶证</view>
+ <view class="item-upload clearfix">
+  <view class="upload-box fl">
+    <van-uploader 
+      file-list="{{vehicleLicenseFrontList}}" 
+      show-upload="{{vehicleLicenseFrontList.length<1 || !vehicleLicenseFrontList}}"
+      data-id="vehicleLicenseFront"
+      disabled="true"
+      deletable="{{false}}" >
+        <view class="upload-show" wx:if="{{vehicleLicenseFrontList.length<1 || !vehicleLicenseFrontList}}">
+          <image class="bg" src="../../common/images/xsz_bg.png" alt=""></image>
+          <image class="icon" src="../../common/images/upload_icon.png" alt=""></image>
+          <text>上传行驶证正面</text>
+        </view>
+    </van-uploader >
+  </view>
+  <view class="upload-box fr">
+    <van-uploader 
+      file-list="{{vehicleLicenseBackList}}" 
+      show-upload="{{vehicleLicenseBackList.length<1 || !vehicleLicenseBackList}}"
+      data-id="vehicleLicenseBack"
+      disabled="true"
+      deletable="{{false}}" >
+        <view class="upload-show" wx:if="{{vehicleLicenseBackList.length<1 || !vehicleLicenseBackList}}">
+          <image class="bg" src="../../common/images/xsz_bg.png" alt=""></image>
+          <image class="icon" src="../../common/images/upload_icon.png" alt=""></image>
+          <text>上传行驶证反面</text>
+        </view>
+    </van-uploader >
+  </view>
+ </view>
+ <view class="dbUpload clearfix">
+  <view class="fl">
+    <view class="field-title">道路运输证</view>
+    <view class="item-upload clearfix">
+      <view class="upload-box fl">
+        <van-uploader 
+          file-list="{{roadTransportCertificateList}}" 
+          show-upload="{{roadTransportCertificateList.length<1 || !roadTransportCertificateList}}"
+          data-id="roadTransportCertificate" 
+          disabled="true"
+          deletable="{{false}}" >
+            <view class="upload-show" wx:if="{{roadTransportCertificateList.length<1 || !roadTransportCertificateList}}">
+              <image class="bg" src="../../common/images/ysz_bg.png" alt=""></image>
+              <image class="icon" src="../../common/images/upload_icon.png" alt=""></image>
+              <text>上传道路运输证</text>
+            </view>
+        </van-uploader >
+      </view>
+    </view>
+  </view>
+  <view class="fr">
+    <view class="field-title">道路运输经营许可证</view>
+    <view class="item-upload clearfix">
+      <view class="upload-box fl">
+        <van-uploader 
+          file-list="{{roadOperatingPermitList}}" 
+          show-upload="{{roadOperatingPermitList.length<1 || !roadOperatingPermitList}}"
+          data-id="roadOperatingPermit" 
+          disabled="true"
+          deletable="{{false}}" >
+            <view class="upload-show" wx:if="{{roadOperatingPermitList.length<1 || !roadOperatingPermitList}}">
+              <image class="bg" src="../../common/images/ysz_bg.png" alt=""></image>
+              <image class="icon" src="../../common/images/upload_icon.png" alt=""></image>
+              <text>上传道路运输经营许可证</text>
+            </view>
+        </van-uploader >
+      </view>
+    </view>
+  </view>
+ </view>
+</view>
+<van-cell-group>
+  <van-field
+    value="{{ value }}"
+    placeholder=""
+    label="车牌号"
+    disabled="true"
+    value="{{info.plateNumber}}" data-key="plateNumber" bindinput="inputSetData"
+    wx:if="{{!isBang}}"
+  />
+  
+  <view class="myField">
+    <view class="item clearfix">
+      <view class="label">车牌颜色</view>
+      <view class="input-text disabled ">
+        {{info.licensePlateColorName}}
+      </view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">车型</view>
+      <view class="input-text disabled">
+        {{info.vehicleTypeName}}
+      </view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">报价车型</view>
+      <view class="input-text disabled">
+        {{info.vehicleTypeQuoteName}}
+      </view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">车长</view>
+      <view class="input-text disabled">
+        {{info.vehicleLengthName}}
+      </view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">能源类型</view>
+      <view class="input-text disabled">
+        {{info.energyTypeName}}
+      </view>
+    </view>
+  </view>
+  <van-field
+    value="{{ value }}"
+    placeholder=""
+    label="核定载质量"
+    disabled="true"
+    value="{{info.loadWeight}}" data-key="loadWeight" bindinput="inputSetData"
+  />
+  <van-field
+    value="{{ value }}"
+    placeholder=""
+    label="总质量"
+    disabled="true"
+    value="{{info.totalWeight}}" data-key="totalWeight" bindinput="inputSetData"
+  />
+  <van-field
+    value="{{ value }}"
+    placeholder=""
+    label="识别代号"
+    disabled="true"
+    value="{{info.vin}}" data-key="vin" bindinput="inputSetData"
+    wx:if="{{!isBang}}"
+  />
+  <van-field
+    value="{{ value }}"
+    placeholder=""
+    label="车辆所有人"
+    disabled="true"
+    value="{{info.vehicleOwner}}" data-key="vehicleOwner" bindinput="inputSetData"
+  />
+  <view class="myField">
+    <view class="item clearfix">
+      <view class="label">使用性质</view>
+      <view class="input-text disabled">
+        {{info.useCharacterName}}
+      </view>
+    </view>
+  </view>
+  <van-field
+    value="{{ value }}"
+    placeholder=""
+    label="发证机关"
+    disabled="true"
+    value="{{info.issueUnit}}" data-key="issueUnit" bindinput="inputSetData"
+  />
+  <view class="myField">
+    <view class="item clearfix">
+      <view class="label">发证日期</view>
+      <view class="input-text disabled">
+        <picker mode="date" value="{{info.issueDate}}" disabled="true" bindchange="bindDateChange" data-key="issueDate">
+          <view wx:if="{{info.issueDate}}">
+            {{info.issueDate}}
+          </view>
+          <view style="color:#c8c9cc;" wx:else>发证日期</view>
+        </picker>
+      </view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">注册日期</view>
+      <view class="input-text disabled">
+        <picker mode="date" value="{{info.registerDate}}" disabled="true" bindchange="bindDateChange" data-key="registerDate">
+          <view wx:if="{{info.registerDate}}">
+            {{info.registerDate}}
+          </view>
+          <view style="color:#c8c9cc;" wx:else>注册日期</view>
+        </picker>
+      </view>
+    </view>
+  </view>
+  <van-field
+    value="{{ value }}"
+    placeholder=""
+    label="道路运输证号"
+    disabled="true"
+    value="{{info.roadTransportCertificate}}" data-key="roadTransportCertificate" bindinput="inputSetData"
+    wx:if="{{info.roadTransportCertificate}}"
+  />
+  <van-field
+    value="{{ value }}"
+    placeholder=""
+    label="道路运输经营许可证书"
+    disabled="true"
+    value="{{info.roadOperatingPermit}}" data-key="roadOperatingPermit" bindinput="inputSetData"
+    wx:if="{{info.roadOperatingPermit}}"
+  />
+</van-cell-group>
+
+<view class="myField">
+ <view class="item clearfix">
+  <view class="label">绑定供应商</view>
+  <view class="input-text disabled">
+    <text>{{info.suppliersName}}</text>
+  </view>
+ </view>
+</view>
+<view class="footerBtn" bindtap="submit" wx:if="{{isBang}}">
+  <button>绑定</button>
+</view>

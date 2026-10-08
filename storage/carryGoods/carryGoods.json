@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "仓库预约",
+  "usingComponents": {
+    "alert":"/common/components/alert/alert"    
+  }
+}

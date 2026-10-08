@@ -1,0 +1,181 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<block wx:if="{{!showFinish}}">
+<van-tabs active="{{active}}" bind:click="toScroll">
+  <van-tab title="异常基础信息"></van-tab>
+  <van-tab title="异常评定信息"></van-tab>
+</van-tabs>
+<view class="mb_20">
+<view class="titleTab fw" id="base">异常基础信息</view>
+<view class="myField">
+  <view class="item clearfix">
+    <view class="label">事发时间</view>
+    <view class="input-text">
+      <datetimepicker placeholder="事发时间" bind:change="changeDate" isInit="{{info.incidentDate?true:false}}" initValue="{{info.incidentDate}}" type="minute" placeholder="请选择事发时间"></datetimepicker>
+      <van-icon class="arrow-down" name="arrow-down" />
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">发生地点/线路</view>
+    <view class="input-text">    
+      <input type="text" placeholder="请输入发生地点/线路" value="{{info.incidentAddress}}" data-key="incidentAddress" bindinput="inputSetDataDefault"></input>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">当事人</view>
+    <view class="input-text">
+      <input type="text" placeholder="请输入当事人" value="{{info.discoverer}}" data-key="discoverer" bindinput="inputSetDataDefault"></input>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">问题描述</view>
+    <view class="input-text">
+      <textarea class="remarkArea" placeholder="请输入详细的问题描述" value="{{info.problemDescribe}}" data-key="problemDescribe" bindinput="inputSetDataDefault"></textarea>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">事件经过</view>
+    <view class="input-text">
+      <textarea class="remarkArea" placeholder="请输入详细的事件经过" value="{{info.incidentProcess}}" data-key="incidentProcess" bindinput="inputSetDataDefault"></textarea>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">现场照片/视频</view>
+    <view class="input-text">
+      <view class="uploadList">
+        <view class="uploadItem" wx:for="{{info.files}}" bindtap="visitFile" data-item="{{item}}">
+          <image src="{{item.fileUrl}}" wx:if="{{item.fileType == 0}}"></image>
+          <view class="videoIcon" wx:if="{{item.fileType == 1}}">          
+            <van-icon class="icon" name="play-circle-o" />
+          </view>
+          <view class="delect" catchtap="delFile" data-index="{{index}}">
+            <van-icon class="cross" name="cross" />
+          </view>
+        </view>
+        <view class="uploadBtn" bindtap="chooseLocation">
+          <van-icon class="photograph" name="photograph" />
+          <text class="upload-text">上传图片/视频</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">现场应急处理措施</view>
+    <view class="input-text">
+      <textarea class="remarkArea" placeholder="请输入现场应急处理措施" value="{{info.emergencyTreatment}}" data-key="emergencyTreatment" bindinput="inputSetDataDefault"></textarea>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">请求协助内容</view>
+    <view class="input-text">
+      <textarea class="remarkArea" placeholder="请输入请求协助内容" value="{{info.assistContent}}" data-key="assistContent" bindinput="inputSetDataDefault"></textarea>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">产生后果</view>
+    <view class="input-text">
+      <input type="text" placeholder="请输入产生后果" value="{{info.party}}" data-key="party" bindinput="inputSetDataDefault"></input>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">提报部门</view>
+    <view class="input-text">{{info.orgName}}</view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">提报人</view>
+    <view class="input-text">{{info.userName}}</view>
+  </view>
+</view>
+
+<view class="titleTab fw mt_20" id="constract">异常评定信息</view>
+<view class="myField">
+  <view class="item clearfix">
+    <view class="label">异常类型<van-icon class="question" name="question" bindtap="showTip" /></view>
+    <view class="input-text">
+      <view class="type {{ info.type==1?'active':'' }}" bindtap="changeType" data-type="1">A类</view>
+      <view class="type {{ info.type==2?'active':'' }}" bindtap="changeType" data-type="2">B类</view>
+      <view class="type {{ info.type==3?'active':'' }}" bindtap="changeType" data-type="3">C类</view>
+      <view class="type {{ info.type==4?'active':'' }}" bindtap="changeType" data-type="4">D类</view>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">责任单位</view>
+    <view class="input-text">
+      <input type="text" placeholder="请输入责任单位" value="{{info.responsibleCompany}}" data-key="responsibleCompany" bindinput="inputSetDataDefault"></input>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">责任人</view>
+    <view class="input-text">
+      <input type="text" placeholder="请输入责任人" value="{{info.responsiblePeople}}" data-key="responsiblePeople" bindinput="inputSetDataDefault"></input>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">对象客户</view>
+    <view class="input-text" bindtap="showCustomerPopover">    
+      <view wx:if="{{info.relCustTenantName}}">
+        {{info.relCustTenantName}}
+      </view>
+      <view style="color:#c8c9cc;" wx:else>请选择对象客户</view>
+      <van-icon name="arrow-down" class="arrow-down" />
+      <!-- <picker mode="selector" range="{{relCustTenantList}}" bindchange="relCustTenantChange" range-key="name"
+        value="{{relCustTenantIndex}}" disabled="{{relCustTenantDisabled}}">
+        <view wx:if="{{relCustTenantList.length !=0 && relCustTenantIndex!=null}}">
+          {{relCustTenantList[relCustTenantIndex].name}}
+        </view>
+        <view style="color:#c8c9cc;" wx:else>请输入对象客户</view>
+        <van-icon name="arrow-down" class="arrow-down" />
+      </picker> -->
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">有无人员伤害</view>
+    <view class="input-text">
+      <van-switch checked="{{ info.peopleInjurySts==1 }}" bind:change="switchChange" data-key="peopleInjurySts" size="20px" style="vertical-align: sub;" />
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">人员伤害情况</view>
+    <view class="input-text">
+      <input type="text" placeholder="请输入人员伤害情况" value="{{info.peopleInjuryStr}}" data-key="peopleInjuryStr" bindinput="inputSetDataDefault"></input>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">预估损失金额（元）</view>
+    <view class="input-text">
+      <input type="text" placeholder="请输入预估损失金额（元）" value="{{info.lossFee}}" data-key="lossFee" bindinput="inputSetDataDefault"></input>
+    </view>
+  </view>
+</view>
+</view>
+
+<view class="footerBtn btns">
+  <button bindtap="submit">提交</button>
+</view>
+</block>
+
+<!-- 播放视频 -->
+<view class="videoView" wx:if="{{isshoVideoView}}">
+  <van-icon class="close" bindtap="closeVideoView" name="clear" />
+  <video class="video" src="{{videoSrc}}"></video>
+  <button bindtap="downVideo">下载视频</button>  
+</view>
+
+<!-- 异常类型提示 -->
+<view class="popup_bj" bindtap="hideTip" wx:if="{{isshowTip}}">
+  <view class="tipView">
+    <view>A类异常：指客户原因造成的运输车辆或货物出现异常。</view>
+    <view>B类异常：ETE 自身操作问题或资源异常，可能或已经造成一定损失的异常。</view>
+    <view>C类异常：ETE 自身操作，被客户或最终客户投诉。</view>
+    <view>D类异常：发生人员、财产、火灾等安全事故或自然灾害、群体性等重大异常。</view>
+  </view>
+</view>
+
+<!-- 选择客户 -->
+<popover is-show="{{isShowCustomerPopover}}">
+  <view class="filter-container">
+    <input type="text" placeholder="请输入客户名称" bindinput='searchCustomerList' value="{{customerSearch}}"></input>
+    <scroll-view class="scrollList" scroll-y="{{true}}">
+      <view class="item" wx:for="{{relCustTenantList}}" wx:key="{{index}}" bindtap="selectCustomer" data-item="{{item}}">{{item.name}}</view>
+    </scroll-view>
+  </view>
+</popover>

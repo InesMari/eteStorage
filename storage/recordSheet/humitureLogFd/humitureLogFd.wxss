@@ -1,0 +1,110 @@
+  page{
+    height: 100%;
+  }
+  .humitureLogPrintFdPage {
+    box-sizing: border-box;
+    height: 100%;
+    overflow: auto;
+    padding-bottom: 100rpx;
+  }
+  .scanView {
+    width: 60%;
+    margin:30vh auto;
+  }
+
+  .codeView {
+    display: flex;
+    margin-bottom: 50rpx;
+  }
+
+  .codeView input {
+    flex: 1;
+    border: 1rpx solid #999;
+    line-height: 90rpx;
+    height: 90rpx;
+    padding: 0 20rpx;
+  }
+
+  .codeView button {
+    width: 150rpx;
+  }
+
+  .common-info {
+    min-height: 100%;
+    box-sizing: border-box;
+  }
+
+  .tableBox {
+    overflow: auto;
+  }
+
+  .tableTitle {
+    position: relative;
+    padding-bottom: 20px;
+  }
+
+  .tableTitle image {
+    position: absolute;
+    height: 40px;
+    left: 10px;
+    top: 10px;
+  }
+
+  .title-h3 {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 40px;
+    text-align: center;
+    color: #000;
+  }
+
+  .title-p {
+    text-align: center;
+    line-height: 36rpx;
+  }
+
+  /* 表格样式 */
+  .table {
+    border: 1px solid #e5e5e5;
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+  }
+
+  .tr {
+    width: 100%;
+    display: table-row;
+  }
+
+  .thead-tr {
+    background-color: #f5f5f5;
+  }
+
+  .th,
+  .td {
+    border-right: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 8px 5px;
+    text-align: center;
+    box-sizing: border-box;
+    display: table-cell;
+    font-size: 24rpx;
+  }
+
+  .th:last-child,
+  .td:last-child {
+    border-right: none;
+  }
+
+  .index-loop {}
+
+  .tip {
+    margin-top: 20px;
+    padding: 0 20rpx;
+  }
+
+  .tip-p {
+    line-height: 40rpx;
+    margin: 5px 0;
+    font-size: 24rpx;
+  }

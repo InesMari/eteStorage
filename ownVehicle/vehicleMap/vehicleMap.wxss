@@ -1,0 +1,150 @@
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 1rpx solid #eee;
+  background: #fff;
+}
+
+.status-picker {
+  border: 1rpx solid #ddd;
+  border-radius: 4rpx;
+  padding: 0 16rpx;
+  font-size: 24rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  position: relative;
+  box-sizing: border-box;
+  width: 170rpx;
+}
+
+.status-picker .arrow-down {
+  position: absolute;
+  right: 20rpx;
+  top: 18rpx;
+  color: #999;
+}
+
+.search-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  margin-right: 20rpx;
+}
+
+.search-input {
+  flex: 1;
+  height: 60rpx;
+  border: 1rpx solid #ddd;
+  border-radius: 4rpx;
+  padding: 0 16rpx;
+  font-size: 24rpx;
+  box-sizing: border-box;
+}
+
+.search-btn {
+  width: 60rpx;
+  height: 60rpx;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+.mode-btn {
+  font-size: 28rpx;
+  padding: 8rpx 16rpx;
+  border-radius: 4rpx;
+  border: 1rpx solid #333;
+}
+
+.map {
+  width: 100%;
+  flex: 1;
+}
+
+.list-container {
+  flex: 1;
+  overflow-y: auto;
+  background: #f9f9f9;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 1rpx solid #eee;
+  background: #fff;
+}
+
+.vehicle-icon {
+  width: 100rpx;
+  margin-right: 20rpx;
+}
+
+.vehicle-info {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.plate {
+  font-size: 26rpx;
+  text-align: center;
+  flex: 1;
+}
+
+.driver {
+  font-size: 26rpx;
+  text-align: center;
+  flex: 1;
+}
+
+
+.customCallout {
+  box-sizing: border-box;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10rpx;
+  width: 500rpx;
+  padding: 20rpx;
+}
+
+.customCallout .plateNumber {
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.customCallout .tip {
+  font-size: 24rpx;
+  font-weight: bold;
+  color: red;
+  margin-bottom: 20rpx;
+}
+
+.customCallout .item {
+  display: flex;
+}
+
+.customCallout .label {
+  width: 110rpx;
+  font-size: 22rpx;
+  line-height: 40rpx;
+  text-align: right;
+}
+
+.customCallout .text {
+  flex: 1;
+  font-size: 22rpx;
+  line-height: 40rpx;
+}

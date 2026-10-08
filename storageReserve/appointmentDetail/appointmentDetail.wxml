@@ -1,0 +1,212 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<block wx:if="{{!showFinish && isLogin}}">
+  <view class="fieldView">
+    <view class="fieldList">
+      <view class="item clearfix">
+        <view class="label">
+          <view class="cang">仓</view>
+        </view>
+        <view class="input-text">
+          {{info.workName}}
+        </view>
+      </view>
+      <view class="item clearfix">
+        <view class="label">
+          <view class="qi">起</view>
+        </view>
+        <view class="input-text">
+          <input type="text" disabled="{{disabled}}" value="{{info.beginAddress}}" placeholder="出发地" data-key="beginAddress" bindinput="inputSetDataDefault"></input>
+        </view>
+      </view>
+      <view class="item clearfix">
+        <view class="label">
+          <van-icon name="wap-home-o" />
+        </view>
+        <view class="input-text">
+          <input disabled="{{disabled}}" value="{{info.fromTenantName}}" type="text" placeholder="请输入到货厂商" bindfocus="filterHisList" bindinput="filterHisList" bindblur="hideHisList"></input>
+          <view class="hisList" wx:if="{{fromTenantsShow.length>0}}">
+            <view class="hisItem" wx:for="{{fromTenantsShow}}" bindtap="selTenant" data-tenant="{{item.fromTenantName}}">
+              {{item.fromTenantName}}
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="item clearfix">
+        <view class="label">
+          <image src="/common/images/car2.png" mode="widthFix"></image>
+        </view>
+        <view class="input-text">
+          <input disabled="{{disabled}}" value="{{info.plateNumber}}" type="text" placeholder="请输入车牌号" bindfocus="filterHisPlates" bindinput="filterHisPlates" bindblur="hideHisPlates"></input>
+          <view class="hisList" wx:if="{{platesShow.length>0}}">
+            <view class="hisItem" wx:for="{{platesShow}}" bindtap="selPlate" data-plate="{{item.plateNumber}}">
+              {{item.plateNumber}}
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="item clearfix">
+        <view class="label">
+          <van-icon name="phone-circle-o" />
+        </view>
+        <view class="input-text">
+          <input disabled="{{disabled}}" value="{{info.billId}}" type="number" placeholder="请输入预约手机号" data-key="billId" bindinput="inputSetDataDefault"></input>
+        </view>
+      </view>
+      <view class="item item-cols2 clearfix">
+        <view class="label">
+          <van-icon name="clock-o" />
+        </view>
+        <view class="input-text">
+          <view class="col2">
+            <view class="innerItem">
+              <view class="innerLabel">预约报到：</view>
+              <datetimepicker disabled="{{disabled}}" placeholder="预计到达时间" bind:change="changeDate" isInit="{{info.expectArriveDate?true:false}}" initValue="{{info.expectArriveDate}}"></datetimepicker>
+              <van-icon class="unit" name="arrow" />
+            </view>
+            <view class="innerItem" wx:if="{{info.checkInDate}}">
+              <view class="innerLabel">实际报到：</view>
+              <input disabled="{{true}}" value="{{info.checkInDate}}" type="text" placeholder="实际报到时间"></input>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="item item-cols2 clearfix">
+        <view class="label">
+          <image src="/common/images/goodsType.png" mode="widthFix"></image>
+        </view>
+        <view class="input-text">
+          <view class="col">
+            <picker disabled="{{disabled}}" mode="selector" range="{{opTypeList}}" bindchange="opTypeChange" range-key="codeName" value="{{opTypeIndex}}">
+              <view wx:if="{{opTypeList.length !=0 && opTypeIndex!=null}}">
+                {{opTypeList[opTypeIndex].codeName}}
+              </view>
+              <van-icon name="arrow" class="arrow" />
+            </picker>
+          </view>
+          <view class="col">
+            <picker disabled="{{disabled}}" mode="selector" range="{{vehicleLengthList}}" bindchange="vehicleLengthChange" range-key="codeName" value="{{vehicleLengthIndex}}">
+              <view wx:if="{{vehicleLengthList.length !=0 && vehicleLengthIndex!=null}}">
+                {{vehicleLengthList[vehicleLengthIndex].codeName}}
+              </view>
+              <view style="color:#c8c9cc;" wx:else>车长</view>
+              <van-icon name="arrow" class="arrow" />
+            </picker>
+          </view>
+          <view class="col">
+            <input disabled="{{disabled}}" value="{{info.goodsType}}" type="text" placeholder="请输入货物类型" data-key="goodsType" bindinput="inputSetDataDefault"></input>
+          </view>
+          <view class="col2 clearfix">            
+            <view class="innerItem">
+              <view class="innerLabel">货物托数：</view>
+              <input disabled="{{disabled}}" value="{{info.goodsCount}}" type="number" placeholder="货物托数" data-key="goodsCount" bindinput="inputSetDataDefault"></input>
+            </view>
+            <view class="innerItem">
+              <view class="innerLabel">货物数量：</view>
+              <input disabled="{{disabled}}" value="{{info.goodsWeight}}" type="digit" placeholder="吨,箱,包" data-key="goodsWeight" bindinput="inputSetDataDefault"></input>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="item clearfix">
+        <view class="label">到货单</view>
+        <view class="input-text">
+          <van-uploader 
+            file-list="{{imgList}}"
+            bind:after-read="afterRead" bind:delete="deleteImg" upload-text="上传图片" 
+            show-upload="{{imgList.length<1}}"
+          />
+        </view>    
+      </view>
+    </view>
+    <view class="storageInfo">
+      <view class="item">
+        <view class="label">仓库联系人：</view>
+        <view class="input-text">
+          {{format.formatTo_(info.serviceName)}}
+        </view>
+      </view>
+      <view class="item">
+        <view class="label">仓库联系手机：</view>
+        <view class="input-text" bindtap="callPhone" style="color: blue;">
+          {{format.formatTo_(info.servicePhone)}}
+        </view>
+      </view>
+      <view class="item" wx:if="{{info.state==2}}">
+        <view class="label">您前边还有：</view>
+        <view class="input-text">
+          <text class="red">{{info.nums}}</text>台车待卸货
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="footerBtn appointFooter btns" wx:if="{{info.state==2}}">
+    <button bindtap="showReport" class="success">廉洁举报</button>
+    <button bindtap="updatePhone" class="default">修改手机号</button>
+    <button disabled="{{true}}">已报到</button>
+  </view>
+  <view class="footerBtn appointFooter btns" wx:if="{{info.state==1}}">
+    <button bindtap="showReport" class="success">廉洁举报</button>
+    <button bindtap="edit" class="default">修改预约</button>
+    <button bindtap="submit" disabled="{{submitDisabled}}" wx:if="{{!onlyAppoint}}">报到</button>
+  </view>
+</block>
+
+<block wx:if="{{showFinish}}">
+  <view class="finishPage">
+    <van-icon name="checked" />
+    <view class="tipText">修改预约成功</view>
+    <button bindtap="toNext" wx:if="{{!onlyAppoint}}">立即报到</button>
+  </view>
+</block>
+
+<van-dialog
+  use-slot
+  title="修改手机号"
+  show="{{ show }}"
+  show-cancel-button
+  confirm-button-open-type="getUserInfo"
+  bind:close="onClose"
+  bind:getuserinfo="savePhone"
+>    <view class="storageInfo">
+      <view class="item">
+        <view class="label">原手机号：</view>
+        <view class="input-text">
+          {{info.billId}}
+        </view>
+      </view>
+      <view class="item">
+        <view class="label">新手机号：</view>
+        <view class="input-text">
+          <input value="{{info.newBillId}}" type="number" placeholder="请输入新的预约手机号" data-key="newBillId" bindinput="inputSetDataDefault"></input>
+        </view>
+      </view>
+    </view>
+</van-dialog>
+
+<!-- 廉洁举报弹窗 -->
+<view class="report-mask" wx:if="{{showReportModal}}" bindtap="closeReport">
+  <view class="report-dialog" catchtap="stopPropagation">
+    <view class="report-header">
+      <text class="report-title">文明公约</text>
+      <view class="report-close" bindtap="closeReport">×</view>
+    </view>
+    <view class="report-body">
+      <image class="report-logo" src="/common/images/logo2.png" mode="widthFix"></image>
+      <view class="report-content">
+        禁止任何员工向送货司机索要、收受钱财、礼品及各类好处费，一经发现严肃处理。全体人员将严守职业底线，规范作业流程，公平公正对待所有送货司机，共建合规有序工作环境。如遇现场人员故意刁难，请举报！
+        <view style="text-indent: 0;">总部举报电话：<text class="report-phone" data-phone="020-32633382" bindtap="callReportPhone">020-32633382</text></view>
+        <view style="text-indent: 0;" wx:if="{{info.servicePhone}}"><text>仓库举报电话：<text class="report-phone" data-phone="{{info.servicePhone}}" bindtap="callReportPhone">{{info.servicePhone}}</text></text></view>
+      </view>
+      <button class="report-btn" bindtap="closeReport">返回</button>
+    </view>
+  </view>
+</view>
+
+<block wx:if="{{!isLogin}}">
+  <image mode="widthFix" src="/common/images/v2_qxjt3z.jpg"></image>
+  <view class="footerBtn footerBtn2">
+    <button bindtap="getPhoneNumber">一键登录</button>
+    <view class="tip">请登录，登录后可查看预约仓库</view>
+  </view>
+</block>
+

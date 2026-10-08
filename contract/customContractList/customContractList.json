@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "客户合同评审",
+  "usingComponents": {
+    "alert":"/common/components/alert/alert"    
+  }
+}

@@ -1,0 +1,157 @@
+
+page{
+  background: #f1f2f5;
+  box-sizing: border-box;
+  padding: 20rpx 20rpx 120rpx;
+}
+.headInfo{
+  width: 100%;
+  position: relative;
+  margin-bottom: 30rpx;
+}
+.headInfo .bg{
+  width: 100%;
+  height: 80rpx;
+}
+.headInfo .number{
+  color: #fff;
+  position: absolute;
+  top: 24rpx;
+  left: 26rpx;
+  font-size: 26rpx;
+  z-index: 9;
+}
+.headInfo .workName{
+  position: absolute;
+  top: 24rpx;
+  right: 26rpx;
+  z-index: 9;
+  color: #fff;
+}
+.titleTab {
+  padding: 20rpx 30rpx;
+  background: #fff;
+  font-size: 30rpx;
+  border-bottom: 1rpx dashed #ebedf0;
+  margin-top: 30rpx;
+}
+.uploadImg{
+  padding:20rpx 30rpx 0;
+  background: #fff;
+}
+.uploadImg .imgItem{
+  float: left;
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 6rpx;
+  margin:0 20rpx 20rpx 0;
+}
+.uploadImg .imgItem image{
+  width: 100%;
+  height: 100%;
+  border-radius: 6rpx;
+}
+.myField .item .label{
+  margin:0;
+}
+
+/* 采购信息 */
+.detailView .pagelist{
+  padding:0;
+  border-radius: none;
+}
+.detailView .pagelist .item{
+  border-radius: 0;
+  margin:0;
+}
+.detailView .pagelist .item .info .w50{
+  float: left;
+  width: 50%;
+}
+
+/* 流程 */
+.stepView{
+  background: #fff;
+  padding: 0 20rpx 0 80rpx;
+  margin-bottom: 20rpx;
+}
+.stepView .item{
+  line-height: 40rpx;
+  font-size: 24rpx;
+  position: relative;
+  border-bottom: 1rpx dashed #f5f5f5;
+  padding: 20rpx 0;
+}
+.stepView .item:last-child{
+  border-bottom: none;
+}
+.stepView .item::after{
+  content: "";
+  position: absolute;
+  top:26rpx;
+  left: -36rpx;
+  border-left: 1rpx dashed #1990ff;
+  height: 100%;
+}
+
+.stepView .item.ispass::after{
+  border-left: 1rpx solid #1990ff;
+}
+.stepView .item:last-child:after{
+  display: none;
+}
+.stepView .icon{
+  display: inline-block;
+  height: 32rpx;
+  font-size: 28rpx;
+  background-color: #fff;
+  position: relative;
+  top: 26rpx;
+  left: -50rpx;
+  z-index: 99;
+  position: absolute;
+}
+.stepView .date{
+  color: #999;
+}
+
+.footerBtn{
+  z-index: 99;
+  display: flex;
+}
+.footerBtn.btns button{
+  flex: 1;
+  margin:0 20rpx
+}
+
+
+.showAlert .content {
+  padding: 40rpx 30rpx;
+}
+
+.showAlert .content input {
+  height: 64rpx;
+  padding: 10rpx 12rpx;
+  box-sizing: border-box;
+  border: 1rpx solid #3894ff;
+  border-radius: 6rpx;
+  margin-top: 20rpx;
+}
+
+.showAlert .bottom {
+  border-top: 1rpx solid #f6f6f6;
+}
+
+.showAlert .bottom button {
+  width: 50%;
+  font-size: 24rpx;
+  float: left;
+  line-height: 80rpx;
+  border-right: 1rpx solid #f6f6f6;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.showAlert .bottom button:last-child {
+  border: none;
+}

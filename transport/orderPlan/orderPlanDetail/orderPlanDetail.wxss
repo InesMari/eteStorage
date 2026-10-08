@@ -1,0 +1,329 @@
+page{
+  background:#F1F2F5;
+  padding-bottom: 120rpx;
+}
+.pageTitle{
+  margin: 30rpx;
+  border-radius: 18rpx;
+  overflow: hidden;
+  position: relative;
+}
+.pageTitle .bg{
+  height: 88rpx;
+  width: 100%;
+}
+.pageTitle .info{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding:28rpx;
+  box-sizing: border-box;
+}
+.pageTitle .info .route>view{
+  font-size: 32rpx;
+  color:#fff;
+  line-height: 1;
+}
+.pageTitle .info .waybillNum{
+  font-size:24rpx;
+  color: #fff;
+  line-height: 1;
+  margin-top: 22rpx;
+}
+/* 线路信息 */
+.wayTitle{
+  font-size: 32rpx;
+  line-height: 1;
+  margin-bottom: 38rpx;
+  padding: 30rpx 30rpx 0;
+  font-weight: bold;
+}
+.wayTitle .tip{
+  font-size: 24rpx;
+  vertical-align: bottom;
+  color: #999;
+  font-weight: normal;
+  margin-left: 15rpx;
+}
+.wayTitle .waySort{
+  float: right;
+  border-radius: 50rpx;
+  color: #666;
+  font-size: 26rpx;
+  line-height: 48rpx;
+  width: 148rpx;
+  text-align: center;
+  border:1rpx solid #C5C5C5;
+  padding:0;
+}
+.wayInfo{
+  margin-bottom: 30rpx;
+  border-radius: 36rpx;
+  background: #fff;
+}
+.wayInfo .list{
+  padding:0 30rpx;
+  border-bottom:1rpx solid #F6F6F6;
+  position: relative;
+}
+.wayInfo .list .item{
+  position: relative;
+  margin-bottom:30rpx;
+}
+.wayInfo .list .item::before{
+  content: "";
+  position: absolute;
+  left: 96rpx;
+  border-left: 1rpx solid #999;
+  height: calc(100% + 5rpx);
+  top: 27rpx;
+}
+.wayInfo .list .item:last-child::before{
+  display: none;
+}
+.state-img{
+  position: absolute;
+  height: 34rpx;
+  width: 34rpx;
+  left: 80rpx;
+  top: 0;
+}
+.wayInfo .list .item .van-icon-arrow{
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 32rpx;
+  color: #C5C5C5;
+}
+.wayInfo .list .item .content{
+  float: right;
+  width: calc(100% - 136rpx);
+  padding-right: 30rpx;
+  box-sizing: border-box;
+}
+.wayInfo .list .item .content .name{
+  font-size: 28rpx;
+}
+.wayInfo .list .item .content .site{
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 20rpx;
+  word-break: break-all;
+  line-height: 1.5;
+}
+.wayInfo .list .item .state{
+  float:left;
+  width: 72rpx;
+  line-height: 28rpx;
+  font-size:24rpx;
+  text-align: right;
+  margin-right: 12rpx;
+} 
+.wayInfo .remark{
+  display: flex;
+  padding: 0 30rpx;
+  border-bottom:1rpx solid #F6F6F6;
+  line-height: 74rpx;
+  color: #666;
+  font-size: 26rpx;
+}
+.wayInfo .remark .label{
+  width: 80rpx;
+}
+.wayInfo .remark .text{
+  flex:1;
+  -webkit-flex: 1;
+}
+.wayInfo .phone{
+  display: flex;
+  vertical-align: middle;
+  align-items:center;
+  justify-content: center;
+  height: 100rpx;
+  position: relative;
+}
+.wayInfo .phone::before{
+  content: "";
+  position: absolute;
+  left: 50%;
+  top:0;
+  height: 100%;
+  width: 0;
+  border-left: 1rpx solid #f6f6ff;
+}
+.wayInfo .phone>view{
+  flex:1;
+  -webkit-flex: 1;
+  align-items:center;
+  justify-content: center;
+  display: flex;
+}
+.wayInfo .phone image{
+  width: 48rpx;
+  height: 48rpx;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10rpx;
+}
+/* 货物信息 */
+.goods {
+  background: #fff;
+  border-radius: 36rpx;
+  margin-bottom: 20rpx;
+}
+.detail_common .total{
+  display: flex;
+  border-bottom:1rpx solid #F6F6F6;
+  padding-bottom:30rpx;
+}
+.detail_common .total .item{
+  flex: 1;
+  -webkit-flex:1;
+  text-align: center;
+}
+.detail_common .total .item>view{
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1;
+}
+.detail_common .total .item>view:first-child{
+  margin-bottom: 32rpx;
+}
+.goods .detail{
+  
+}
+.goods .detail .item{
+  border-bottom:1rpx solid #F6F6F6;
+}
+.goods .detail .item:last-child{
+  border:none;
+}
+.goods .detail .title{
+  margin:24rpx 0;
+  padding:0 30rpx;
+}
+.goods .detail .inner{
+  padding:0 30rpx;
+}
+.goods .detail .inner>view{
+  float: left;
+  width: 40%;
+  margin-bottom: 20rpx;
+  font-size:28rpx;
+  color: #666;
+}
+.goods .detail .inner>view:nth-child(odd){
+  width: 60%;
+}
+/* 费用信息 */
+.fee{
+  border-radius: 36rpx;
+  background: #fff;  
+  margin-bottom: 20rpx;
+}
+.fee .detail{
+  padding:0 30rpx 15rpx;
+  margin-top: 20rpx;
+  border-bottom:1rpx solid #F6F6F6;
+}
+.fee .detail .item{
+  line-height: 56rpx;
+  font-size: 28rpx;
+}
+.fee .detail .item .label{
+  float: left;
+  color: #666;
+}
+.fee .detail .item .text{
+  float: right;
+  color: #999;
+}
+.fee .totalSum{
+  display: block;
+  text-align: right;
+  font-size: 32rpx;
+  padding: 0 30rpx;
+  line-height: 90rpx;
+  border-bottom:1rpx solid #F6F6F6;
+  color: #E12006;
+}
+.fee .feeList{
+  display: flex;
+  padding: 30rpx 0;
+  margin-bottom:20rpx;
+}
+.fee .feeList .item{
+  flex: 1;
+  -webkit-flex:1;
+  text-align: center;
+  color: #666;
+}
+.fee .feeList .item>view:first-child{
+  margin-bottom: 10rpx;
+}
+/* 配送信息 */
+.delivery{
+  margin:0 15rpx;
+  border-radius: 6rpx;
+  background: #fff;  
+  margin-bottom: 20rpx;
+}
+.delivery .detail{
+  padding:15rpx;
+  border-bottom:1rpx solid #e8e8e8;
+}
+.delivery .detail .item{
+  line-height: 40rpx;
+}
+.delivery .detail .item .label{
+  float: left;
+}
+.delivery .detail .item .text{
+  float: right;
+}
+
+/* 单据信息 */
+.ticket{
+  border-radius: 36rpx;
+  background: #fff;  
+}
+.ticket .titleTip{
+  font-size: 24rpx;
+  vertical-align: bottom;
+  color: #999;
+  font-weight: normal;
+  margin-top: 8rpx;
+}
+.ticket .content{
+  margin-top: 10rpx;
+  padding: 0 30rpx 20rpx;
+  overflow: hidden;
+}
+.ticket scroll-view{
+  white-space: nowrap;
+}
+.ticket .item{
+  margin-right: 20rpx;  
+  display: inline-block;
+  text-align: center;  
+  line-height: 48rpx;
+}
+.ticket image{
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 6rpx;
+}
+
+.showmore{
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #E60012;
+}
+.showmore .arrow{
+  vertical-align: middle;
+  margin-left: 6rpx;
+}

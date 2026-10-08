@@ -1,0 +1,265 @@
+page{
+  background: #f5f5f5;
+  padding-bottom: 50rpx;
+}
+/* 定义容器大小 */
+.container {
+  width: 100%;
+  height: 400rpx;
+  background-color: #fff;
+  margin-top: 20rpx;
+  padding-bottom: 30rpx;
+  position: relative;
+}
+.container .pieTitle{
+  text-align: center;
+  font-weight: bold;
+  font-size: 28rpx;
+  position: relative;
+  top: 40rpx;
+}
+.pieList{
+  display: flex;
+  height: 450rpx;
+}
+.pieList .pieItem{
+  flex: 1;
+}
+
+.dataList{
+  background: #fff;
+  margin:20rpx 0;
+  padding:20rpx 0;
+}
+.dataList .item{
+  display: flex;
+}
+.dataList .item .text{
+  flex: 1;
+  display: flex;
+  height: 60rpx;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+}
+
+
+.dataList .dataView {
+  display: flex;
+  padding:0 30rpx;
+  margin-top: 20rpx;
+  justify-content: center;
+}
+
+.dataList .dataView .item {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  margin: 0 2%;
+  border-radius: 12rpx;
+  background: #4262bb;
+  aspect-ratio: 1 / 0.7;
+  flex-direction: column;
+}
+
+.dataList .dataView .item:nth-child(2) {
+  background: #409a29;
+}
+
+.dataList .dataView .item:nth-child(3) {
+  background: #f36d0f;
+}
+.dataList .dataView:nth-child(3) .item {
+  background: #f36d0f;
+}
+
+.dataList .dataView .item .num,
+.dataList .dataView .item .name {
+  color: #fff;
+  font-size: 26rpx;
+  margin: 10rpx 0;
+  font-weight: bold;
+}
+.dataList .dataView .item .num{
+  font-size: 28rpx;
+}
+
+/* ec-canvas 组件宽高与父元素一致即可 */
+ec-canvas {
+  width: 100%;
+  height: 500rpx;
+}
+.expire{
+  background-color: #fff;
+  margin-top: 20rpx;
+  padding: 20rpx 0;
+}
+.paramView {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.paramView input,
+.paramView picker {
+  width: 200rpx;
+  margin-left: 20rpx;
+  border: 1px solid #efefef;
+  border-radius: 6rpx;
+  height: 50rpx;
+  text-align: center;
+  line-height: 50rpx;
+  position: relative;
+}
+
+.paramView picker {
+  padding-right: 30rpx;
+}
+.paramView .arrow-down {
+  position: absolute;
+  right: 20rpx;
+  top: 15rpx;
+  color: #999;
+}
+.paramView  button{
+  margin: 30rpx;
+}
+
+.expire .dataView {
+  display: flex;
+  padding:0 30rpx;
+  margin-top: 20rpx;
+}
+
+.expire .dataView .item {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  margin: 0 2%;
+  border-radius: 50%;
+  background: #04887e;
+  aspect-ratio: 1 / 1;
+  flex-direction: column;
+}
+
+.expire .dataView .item:nth-child(2) {
+  background: #dca632;
+}
+
+.expire .dataView .item:nth-child(3) {
+  background: #ff3a30;
+}
+
+.expire .dataView .item .num,
+.expire .dataView .item .name {
+  color: #fff;
+  font-size: 28rpx;
+  margin: 10rpx 0;
+  font-weight: bold;
+}
+.mileageChart{
+  height: 430rpx;
+}
+.mileageChart .paramView{
+  position: relative;
+  top: 30rpx;
+  z-index: 99;
+}
+.mileageTitle{
+  text-align: center;
+  font-weight: bold;
+  font-size: 28rpx;
+  margin: 10rpx 0 30rpx;
+}
+.mileage .dataView .item:nth-child(1) {
+  background: #5756d7;
+}
+.mileage .dataView .item:nth-child(2) {
+  background: #34c758;
+}
+.mileage .dataView .item:nth-child(3) {
+  background: #ff2d55;
+}
+
+.payInfo{
+  display: flex;
+  padding:30rpx;
+  background-color: #fff;
+  margin-top: 20rpx;
+  padding-top: 20rpx;
+}
+  
+.payInfo .item {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  margin: 0 2%;
+  border-radius: 6rpx;
+  background: #d8b8b8;
+  aspect-ratio: 1 / 1;
+  flex-direction: column;
+  font-weight: bold;
+}
+.payInfo .item:nth-child(2) {
+  background: #3db06e;
+}
+.payInfo .item:nth-child(3) {
+  background: #007aff;
+}
+.payInfo .item>view{
+  color: #fff;
+  font-size: 28rpx;
+  margin: 10rpx 0;
+  font-weight: bold;
+}
+
+.msgView{
+  display: flex;
+  padding: 30rpx 80rpx;
+  background-color: #fff;
+  margin-top: 20rpx;
+}
+.msgView .item{
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.msgView .item .iconView{
+  display: flex;
+  border:4rpx solid #1296db;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  width: 150rpx;
+  height: 150rpx;
+  position: relative;
+}
+.msgView .item:last-child .iconView{
+  border-color:#d81e06;
+}
+.msgView .item .iconView image{
+  width: 100rpx;
+}
+.msgView .item .name{
+  margin-top: 20rpx;
+  text-align: center;
+}
+.msgView .item .iconView .tip{
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 50%;
+  background: #d81e06;
+  width: 40rpx;
+  height: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}

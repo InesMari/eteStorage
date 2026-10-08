@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "到仓预约",
+  "usingComponents": {
+    "datetimepicker": "/common/components/datetimepicker/datetimepicker",
+    "popover": "/common/components/popover/popover"
+  }
+}

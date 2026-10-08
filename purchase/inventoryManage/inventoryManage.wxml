@@ -1,0 +1,22 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<van-search value="{{ value }}" bind:change="search" placeholder="搜索物品种类、品名" />
+<image mode="widthFix" wx:if="{{isRefresh}}" class="loading-icon" src="/common/images/loading.gif"></image>
+<scroll-view class="scorll" scroll-y="{{true}}" bindscrolltoupper="toupper" upper-threshold="1" bindscrolltolower="scrolltolowerHandler">
+  <view class="pagelist">
+    <view class="item" wx:for="{{list}}">
+      <view class="inner">
+        <view class="info">
+          <view>库存地：<text class="text">{{item.workName}}</text></view>
+          <view>物品种类：<text class="text">{{item.feeSubTypeName}}</text></view>
+          <view>品名：<text class="text">{{item.projectName}}</text></view>
+          <view>规格型号：<text class="text">{{item.specification}}</text></view>
+          <view>数量单位：<text class="text">{{item.unit}}</text></view>
+          <view>在库数量：<text class="text">{{item.nums}}</text></view>
+        </view>
+      </view>
+      <view class="operate clearfix">
+        <button style="width:200rpx;" class="btn fr" catchtap="receiveApply" data-item="{{item}}" wx:if="{{entitys[1014031]}}">领用</button>
+      </view>
+    </view>
+  </view>
+</scroll-view>

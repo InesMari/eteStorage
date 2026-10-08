@@ -1,0 +1,53 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<van-search value="{{ value }}" bind:change="search" placeholder="输入关键字模糊搜索" />
+<van-tabs active="{{active}}" bind:change="onChange">
+  <van-tab title="待我处理"></van-tab>
+  <van-tab title="全部"></van-tab>
+  <van-tab title="未审核"></van-tab>
+  <van-tab title="审核中"></van-tab>
+  <van-tab title="审核完毕"></van-tab>
+  <van-tab title="已完结"></van-tab>
+  <van-tab title="已付款"></van-tab>
+  <van-tab title="审核不通过"></van-tab>
+</van-tabs>
+<image mode="widthFix" wx:if="{{isRefresh}}" class="loading-icon" src="/common/images/loading.gif"></image>
+<scroll-view class="scorll" scroll-y="{{true}}" bindscrolltoupper="toupper" upper-threshold="1" bindscrolltolower="scrolltolowerHandler">
+  <view class="list mt_20">
+    <view class="item" wx:for="{{list}}" bindtap="toDetail" data-item="{{item}}">
+      <view class="inner">
+        <view class="title clearfix"> 
+          <view class="router fl">{{item.payNum}}</view>
+          <view class="state {{item.state==0?'state0':''}} {{item.state==1?'state1':''}} {{item.state==2?'state2':''}} {{item.state==3?'state3':''}} {{item.state==5?'state5':''}}" >
+          {{item.stateName}}</view>
+        </view>
+        <view class="info">
+          <text class="price">{{item.payFee}} 元</text>
+          <view>报销部门：<text class="text">{{item.orgName}}</text></view>
+          <view>报销内容：<text class="text">{{item.payProjectsName}}</text></view>
+          <view>填写日期：<text class="text">{{item.createDate}}</text></view>
+          <view>部门制成：<text class="text">{{item.createUserName}}</text></view>
+          <view>付款日期：<text class="text">{{item.expectDate}}</text></view>
+        </view>
+      </view>
+      <view class="operate clearfix">
+        <!-- <button class="btn fr" wx:if="{{item.verifyFlag && entitys[1006122]}}" catchtap="showUnPassAlertMethod" data-type="2" data-id="{{item.id}}">审核不通过</button> -->
+        <!-- <button class="btn fr" wx:if="{{item.showPassAndFinish && entitys[1006122]}}" catchtap="audit" data-type="2" data-id="{{item.id}}">审核通过并完结</button> -->
+        <!-- <button class="btn fr" wx:if="{{item.verifyFlag && entitys[1006122]}}" catchtap="audit" data-type="1" data-id="{{item.id}}">审核通过</button> -->
+        <!-- <button class="btn fr" wx:if="{{entitys[1006156] && (item.state==2 || item.state==3) && item.hasCancelVerify}}" catchtap="cancelPayOrder" data-item="{{item}}">取消审核</button>  -->
+        <button class="btn fr" wx:if="{{(item.verifyFlag && entitys[1006122]) || (entitys[1006156] && (item.state==2 || item.state==3) && item.hasCancelVerify)}}">审核</button>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+
+<!-- 审核不通过原因 -->
+<alert isshow="{{showUnPassAlert}}" title="提示" class="showUnPassAlert" bind:closealert="cancelAlert" aStyle="width:500rpx;">  
+  <view class="content">
+    <view class="label">请输入审核不通过原因：</view>
+    <input type="text" value="{{remark}}" bindinput="inputSetRemark" placeholder=""></input>
+  </view>
+  <view class="bottom clearfix">
+    <button bindtap="cancelAlert">取消</button>
+    <button bindtap="sureAlert">确定</button>  
+  </view>
+</alert>

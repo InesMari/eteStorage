@@ -1,0 +1,162 @@
+page{
+  background: #f5f5f5;
+  height: 100%;
+}
+.scorll{
+  height: calc(100% - 211rpx);
+}
+.list{
+  padding: 24rpx 30rpx;
+  border-radius: 4rpx;
+}
+.list .item{
+  background: #fff;
+  border-radius: 18rpx;
+  margin-bottom: 24rpx;
+}
+.list .item .inner{
+  padding:28rpx 24rpx 0;
+  border-bottom: 1rpx solid #F6F6F6;
+}
+.item .title{
+  margin-bottom: 32rpx;
+  font-weight: bold;
+}
+.item .title .router{
+  font-size: 32rpx;
+  line-height: 40rpx;
+  float: left;
+}
+.item .title .state{
+  float: right;
+  line-height: 40rpx;
+  font-size: 24rpx;
+  min-width: 100rpx;
+  padding:0 20rpx;
+  height: 40rpx;
+  background: #FFCDCD;
+  border-radius: 50rpx;
+  color: #E60012;
+  text-align: center;
+}
+.item .title .state.state1{
+  color: #0CCBF8;
+  background: #E6F4F9;
+}
+.item .title .state.state2{
+  color: #05D188;
+  background: #E6F7F0;
+}
+.item .title .state.state3{
+  color: #C5C5C5;
+  background: #F1F2F5;
+}
+.item .title .state.state5{
+  color: #FF7C1C;
+  background: #FFDDCB;
+}
+.item .info{
+  line-height: 40rpx;
+  position: relative;
+}
+.item .info>view{
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 26rpx;
+  line-height: 40rpx;
+  margin-bottom: 14rpx;
+  display: flex;
+}
+.item .info .text{
+  color: #666;
+  color: #666;
+  flex: 1;
+  white-space: normal;
+  word-break: break-all;
+}
+.item .info .price{
+  font-size: 34rpx;
+  position: absolute;
+  right: 0;
+  top: 0;
+  line-height: 1;
+}
+.item .isUrgent{
+  border-radius: 50rpx;
+  height: 30rpx;
+  width: 60rpx;
+  line-height: 30rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #fff;
+  background: #E12006;
+  margin: 8rpx 16rpx 0;
+}
+.operate{
+  padding:18rpx 24rpx;
+}
+.operate .time{
+  line-height: 56rpx;
+  font-size: 26rpx;
+}
+.operate .btn{
+  background: #fff;
+  line-height: 54rpx;
+  height: 56rpx;
+  border-radius: 50rpx;
+  color: #E60012;
+  font-size: 25rpx;
+  box-sizing: border-box;
+  margin-left: 20rpx;
+  padding: 0 20rpx;
+}
+.operate .btn::after{
+  border: 1rpx solid #E60012;
+}
+
+.showUnPassAlert .content{
+  padding: 40rpx 30rpx;
+}
+.showUnPassAlert .content input{
+  height: 64rpx;
+  padding: 10rpx 12rpx;
+  box-sizing: border-box;
+  border:1rpx solid #3894ff;
+  border-radius: 6rpx;
+  margin-top: 20rpx;
+}
+.showUnPassAlert .bottom{
+  border-top:1rpx solid #f6f6f6;
+}
+.showUnPassAlert .bottom button{
+  width: 50%;
+  font-size: 24rpx;
+  float: left;
+  line-height: 80rpx;
+  border-right:1rpx solid #f6f6f6;
+  background: #fff;
+  box-sizing: border-box;
+}
+.showUnPassAlert .bottom button:last-child{
+  border:none;
+}
+
+.scanView{
+  position: fixed;
+  bottom: 200rpx;
+  right: 30rpx;
+  width: 100rpx;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:rgba(16,137,219,0.8) ;
+  z-index: 9;
+  border-radius: 50%;
+}
+.scanView .van-icon{
+  color: #fff;
+  font-size: 50rpx;
+}

@@ -1,0 +1,24 @@
+<wxs src="../../../common/wxs/format.wxs" module="format"></wxs>
+<van-search value="{{ value }}" bind:change="search" placeholder="输入料号、批次号、登记人" />
+<image mode="widthFix" wx:if="{{isRefresh}}" class="loading-icon" src="/common/images/loading.gif"></image>
+<scroll-view class="scorll" scroll-y="{{true}}" bindscrolltoupper="toupper" upper-threshold="1" bindscrolltolower="scrolltolowerHandler">
+  <view class="pagelist mt_20">
+    <view class="item" wx:for="{{list}}" bindtap="toDetail" data-item="{{item}}">
+      <view class="inner">
+        <view class="imgView">
+          <image src="/common/images/loading.gif"></image>
+          <view class="text">异常品存放区域图片</view>
+        </view>
+        <view class="info">
+          <view>客户名称：<text class="text">{{item.customerName}}</text></view>
+          <view>料号：<text class="text">{{item.materialNum}}</text></view>
+          <view>数量：<text class="text">{{item.count}}</text></view>
+          <view>计划处理时间：<text class="text">{{item.planDealDate}}</text></view>
+          <view>异常品存放区域图片：<text class="text link" catchtap="seeBigImg" data-index="{{index}}">查看图片</text></view>
+          <view>登记人：<text class="text">{{item.createUserName}}</text></view>
+          <view>登记时间：<text class="text">{{item.createDate}}</text></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

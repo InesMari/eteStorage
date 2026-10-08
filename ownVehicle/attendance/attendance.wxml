@@ -1,0 +1,24 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<van-tabs active="{{active}}" bind:change="onChange">
+  <van-tab title="全部"></van-tab>
+  <van-tab title="已出勤"></van-tab>
+  <van-tab title="未出勤"></van-tab>
+</van-tabs>
+<image mode="widthFix" wx:if="{{isRefresh}}" class="loading-icon" src="/common/images/loading.gif"></image>
+<view class="table-wrapper">
+  <view class="thead">
+    <view class="td" style="width:60rpx;">序号</view>
+    <view class="td" wx:for="{{head}}">{{item.name}}</view>
+  </view>
+  <scroll-view class="scorll" scroll-y="{{true}}" bindscrolltoupper="toupper" upper-threshold="1" bindscrolltolower="scrolltolowerHandler">
+    <view class="tbody-wrapper">
+      <view class="tbody" wx:for="{{list}}">
+        <view class="td" style="width:60rpx;">{{index+1}}</view>
+        <view class="td" wx:for="{{head}}" wx:for-item="hd">
+          <text wx:if="{{item.codeValue == 0}}" class="red">{{format.formatTo_(item[hd.code])}}</text>
+          <text wx:else>{{format.formatTo_(item[hd.code])}}</text>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

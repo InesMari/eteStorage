@@ -1,0 +1,94 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<view class="headInfo">
+  <image wx:if="{{info.state<0||info.state>3}}" class="bg" src="../../common/images/detail_bg3.png"></image>
+  <image wx:if="{{info.state==2}}" class="bg" src="../../common/images/detail_bg0.png"></image>
+  <image wx:if="{{info.state==0}}" class="bg" src="../../common/images/detail_bg1.png"></image>
+  <image wx:if="{{info.state==1}}" class="bg" src="../../common/images/detail_bg2.png"></image>
+  <image wx:if="{{info.state==3}}" class="bg" src="../../common/images/detail_bg3.png"></image>
+  <view class="number">费用申请号：{{info.applyNum}}</view>
+  <view class="workName">{{info.stateName}}</view>
+</view>
+
+<view class="titleTab fw" id="base">基本信息</view>
+<view class="myField">
+  <view class="item clearfix">
+    <view class="label">申请部门：</view>
+    <view class="input-text">{{info.orgName}}</view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">申请人：</view>
+    <view class="input-text">{{info.applyUserName}}</view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">紧急程度：</view>
+    <view class="input-text">{{info.urgentLevelName}}</view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">申请理由：</view>
+    <view class="input-text">{{info.applyRemark}}</view>
+  </view>
+</view>
+
+<view class="detailView">
+  <view class="titleTab fw">采购信息</view>
+  <view class="pagelist">
+    <view class="item" wx:for="{{info.dtls}}">
+      <view class="inner">
+        <view class="info clearfix">
+          <view>费用类型：<text class="text">{{item.feeNames}}</text></view>
+          <view>品名/项目：<text class="text">{{item.projectName}}</text></view>
+          <view>规格型号：<text class="text">{{item.specification}}</text></view>
+          <view>供应商：<text class="text">{{format.formatTo_(item.tenantName)}}</text></view>
+          <view class="w50">数量单位：<text class="text">{{item.unit}}</text></view>
+          <view class="w50">现有库存：<text class="text">{{item.stockNums}}</text></view>
+          <view class="w50">上月使用数量：<text class="text">{{item.lastMonthUseNums}}</text></view>
+          <view class="w50">需求数量：<text class="text">{{item.demandNums}}</text></view>
+          <view class="w50">付款类型：<text class="text">{{item.payTypeName}}</text></view>
+          <!-- <view class="w50">采购类型：<text class="text">{{format.formatTo_(item.purchaseTypeName)}}</text></view> -->
+          <view class="w50">参考含税金额：<text class="text">{{item.referTotalFee}}</text></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<block wx:if="{{info.files.length>0}}">
+<view class="titleTab fw">附件信息</view>
+<view class="uploadImg clearfix">
+  <view class="imgItem" wx:for="{{info.files}}">
+    <fileviewer url="{{item.fileUrl}}"></fileviewer>
+  </view>
+</view>
+</block>
+
+<view class="titleTab fw">审核信息</view>
+<view class="stepView">
+  <view wx:for="{{info.userList}}" class="item {{item.verifyState==2?'ispass':''}}">
+    <view class="icon">
+      <van-icon name="underway-o" wx:if="{{item.verifyState == 1}}" style="color: #999;"/>
+      <van-icon name="passed" wx:if="{{item.verifyState == 2}}" style="color: green;" />
+      <van-icon name="close" wx:if="{{item.verifyState == 3}}" style="color: red;" />
+    </view>
+    <view class="staff">审核部门：{{format.formatTo_(item.orgName)}}</view>
+    <view class="org">审核人：{{format.formatTo_(item.verifyUser)}} {{format.formatEmpty(item.verifyDate)}}</view>
+    <view class="org">审核意见：{{format.formatTo_(item.verifyRemark)}}</view>
+  </view>
+</view>
+
+
+<view class="footerBtn btns" wx:if="{{info.showPass}}">
+  <button class="default" bindtap="showAlertMethod" data-type="1">审核通过</button>
+  <button bindtap="showAlertMethod" data-type="2">审核不通过</button>
+</view>
+
+<!-- 审核不通过原因 -->
+<alert isshow="{{showAlert}}" title="提示" class="showAlert" bind:closealert="cancelAlert" aStyle="width:500rpx;">  
+  <view class="content">
+    <view class="label">请输入审核意见：</view>
+    <input type="text" value="{{remark}}" bindinput="inputSetRemark" placeholder=""></input>
+  </view>
+  <view class="bottom clearfix">
+    <button bindtap="cancelAlert">取消</button>
+    <button bindtap="sureAlert">确定</button>  
+  </view>
+</alert>

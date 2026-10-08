@@ -1,0 +1,6 @@
+<button bindtap="drawCode" type="primary">点击生成二维码</button>
+
+<view class="codeView">
+  <canvas type="2d" style="width: 260px; height: 260px;" id="myQrcode" bindtap="shareCode"></canvas>
+</view>
+  <view class="tip" wx:if="{{showTip}}">点击保存/分享按钮</view>

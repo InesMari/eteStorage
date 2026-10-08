@@ -1,0 +1,44 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<van-search value="{{ value }}" bind:change="search" placeholder="输入关键字模糊搜索运单" />
+<van-tabs active="{{active}}" bind:change="onChange">
+  <van-tab title="全部"></van-tab>
+  <van-tab title="待确认"></van-tab>
+  <van-tab title="已确认"></van-tab>
+  <van-tab title="确认不通过"></van-tab>
+</van-tabs>
+<image mode="widthFix" wx:if="{{isRefresh}}" class="loading-icon" src="/common/images/loading.gif"></image>
+<scroll-view class="scorll" scroll-y="{{true}}" bindscrolltoupper="toupper" upper-threshold="1" bindscrolltolower="scrolltolowerHandler">
+  <view class="list mt_20">
+    <view class="item" wx:for="{{list}}" bindtap="toDetail" data-item="{{item}}">
+      <view class="inner">
+        <view class="title clearfix"> 
+          <view class="router fl">{{item.routeName}}</view>
+          <view class="state {{item.confirmState==0?'state0':''}} {{item.confirmState==1?'state1':''}} {{item.confirmState==2?'state2':''}} {{item.confirmState==3?'state3':''}} {{item.confirmState==5?'state5':''}}" >
+          {{item.confirmStateName}}</view>
+        </view>
+        <view class="info">
+          <view>所属车队：<text class="text">{{item.tenantName}}</text></view>
+          <view>车头号码：<text class="text">{{item.plateNumber}}</text></view>
+          <view>挂车号码：<text class="text">{{item.trailerNumber}}</text></view>
+          <view>提交日期：<text class="text">{{item.submitDate}}</text></view>
+        </view>
+      </view>
+      <view class="operate clearfix" wx:if="{{item.confirmState==0}}">
+        <button type="warn" class="btn fr" catchtap="showUnPassAlertMethod" data-id="{{item.id}}">不通过</button>
+        <button type="primary" class="btn fr" catchtap="audit" data-id="{{item.id}}">确认通过</button>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+
+<!-- 评审不通过原因 -->
+<alert isshow="{{showUnPassAlert}}" title="提示" class="showUnPassAlert" bind:closealert="cancelAlert" aStyle="width:500rpx;">  
+  <view class="content">
+    <view class="label">请输入车辆点检不通过原因：</view>
+    <input type="text" value="{{remark}}" bindinput="inputSetRemark" placeholder=""></input>
+  </view>
+  <view class="bottom clearfix">
+    <button bindtap="cancelAlert">取消</button>
+    <button bindtap="sureAlert">确定</button>  
+  </view>
+</alert>

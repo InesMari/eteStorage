@@ -1,0 +1,40 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<van-search value="{{ value }}" bind:change="search" placeholder="输入关键字模糊搜索运单" />
+<van-tabs active="{{active}}" bind:change="onChange">
+  <van-tab title="全部"></van-tab>
+  <van-tab title="待派车"></van-tab>
+  <van-tab title="待出车"></van-tab>
+  <van-tab title="运作中"></van-tab>
+  <van-tab title="已完成"></van-tab>
+  <van-tab title="异常终止"></van-tab><!-- 阿涛说的 -->  
+</van-tabs>
+<image mode="widthFix" wx:if="{{isRefresh}}" class="loading-icon" src="/common/images/loading.gif"></image>
+<scroll-view class="scorll" scroll-y="{{true}}" bindscrolltoupper="toupper" upper-threshold="1" bindscrolltolower="scrolltolowerHandler">
+  <view class="list mt_20">
+    <view class="item" wx:for="{{list}}" bindtap="toDetail" data-item="{{item}}">
+      <view class="inner">
+        <view class="title clearfix"> 
+          <view class="router fl">{{item.routeName}}</view>
+          <view wx:if="{{item.isUrgent}}" class="isUrgent fl">急</view>
+          <view class="state {{item.waybillState==0?'state0':''}} {{item.waybillState==1?'state1':''}} {{item.waybillState==2?'state2':''}} {{item.waybillState==3?'state3':''}} {{item.waybillState==5?'state5':''}}" >
+          {{item.waybillStateName}}</view>
+        </view>
+        <view class="info">
+          <text class="price">{{format.formatToZero(item.totalFee)}} 元</text>
+          <view>派车单号：<text class="text">{{item.waybillNum}}</text></view>
+          <view>供应商：<text class="text">{{item.tenantName}}</text></view>
+          <view>调度类型：<text class="text">{{item.dispatchTypeName}}</text></view>
+          <view>
+          运输车辆：<text class="text">{{format.formatEmpty(item.plateNumber)}} {{format.formatEmpty(item.vehicleTypeName)}} {{format.formatEmpty(item.vehicleLengthName)}}</text></view>
+          <view>派车备注：<text class="text">{{format.formatTo_(item.remark)}}</text></view>
+        </view>
+      </view>
+      <view class="operate clearfix">
+        <view class="time fl">要求运作时间：{{format.formatTo_(item.startWorkDate)}}</view>
+        <button class="btn fr" wx:if="{{item.waybillState==0&&item.dispatchType!=2&&entitys[1003037]}}" catchtap="toDispatch" data-item="{{item}}">派车</button>
+        <!-- <button class="btn fr" wx:if="{{item.waybillState==1&&item.dispatchType!=2&&entitys[1003037]}}" catchtap="toDispatch" data-item="{{item}}">重新派车</button> -->
+        <button class="btn fr" wx:if="{{item.waybillState==3&&entitys[1003038]}}" catchtap="toUploadBill" data-item="{{item}}">上传单据</button>
+      </view>
+    </view>
+  </view>
+</scroll-view>

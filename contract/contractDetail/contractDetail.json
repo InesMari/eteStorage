@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "供应商合同评审详情",
+  "usingComponents": {
+    "alert":"/common/components/alert/alert",
+    "fileviewer":"/common/components/fileviewer/fileviewer"    
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "请款单管理",
+  "usingComponents": {
+    "alert":"/common/components/alert/alert"    
+  }
+}

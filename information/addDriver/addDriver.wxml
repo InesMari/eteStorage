@@ -1,0 +1,187 @@
+<view class="myField" style="margin-bottom:30rpx;">
+ <view class="field-title">身份证</view>
+ <view class="item-upload clearfix">
+   <view class="upload-box fl">
+     <van-uploader 
+       file-list="{{idCardFrontList}}" 
+       show-upload="{{idCardFrontList.length<1 || !idCardFrontList}}"
+       data-id="idCardFront"
+       bind:after-read="afterRead" bind:delete="deleteImg" upload-text="上传正面" >
+        <view class="upload-show" wx:if="{{idCardFrontList.length<1 || !idCardFrontList}}">
+          <image class="bg" src="../../common/images/sfz_bg1.png" alt=""></image>
+          <image class="icon" src="../../common/images/upload_icon.png" alt=""></image>
+          <text>上传身份证人像面</text>
+        </view>
+      </van-uploader >
+   </view>
+   <view class="upload-box fr">
+    <van-uploader 
+      file-list="{{idCardBackList}}" 
+      show-upload="{{idCardBackList.length<1 || !idCardBackList}}"
+      data-id="idCardBack"
+      bind:after-read="afterRead" bind:delete="deleteImg" upload-text="上传反面" >
+      <view class="upload-show" wx:if="{{idCardBackList.length<1 || !idCardBackList}}">
+          <image class="bg" src="../../common/images/sfz_bg2.png" alt=""></image>
+          <image class="icon" src="../../common/images/upload_icon.png" alt=""></image>
+          <text>上传身份证国徽面</text>
+        </view>
+    </van-uploader>
+   </view>
+ </view>
+ <view class="field-title">驾驶证</view>
+ <view class="item-upload clearfix" style="border:none;padding-bottom:40rpx;">
+   <view class="upload-box fl">
+    <van-uploader 
+      file-list="{{driverLicenceFrontList}}" 
+      show-upload="{{driverLicenceFrontList.length<1 || !driverLicenceFrontList}}"
+      data-id="driverLicenceFront" 
+      bind:after-read="afterRead" bind:delete="deleteImg" upload-text="上传正面">
+        <view class="upload-show" wx:if="{{driverLicenceFrontList.length<1 || !driverLicenceFrontList}}">
+          <image class="bg" src="../../common/images/jsz_bg1.png" alt=""></image>
+          <image class="icon" src="../../common/images/upload_icon.png" alt=""></image>
+          <text>上传驾驶证正面</text>
+        </view>
+    </van-uploader>
+   </view>
+   <view class="upload-box fr">
+    <van-uploader 
+      file-list="{{driverLicenceBackList}}" 
+      show-upload="{{driverLicenceBackList.length<1 || !driverLicenceBackList}}"
+      data-id="driverLicenceBack"
+      bind:after-read="afterRead" bind:delete="deleteImg" upload-text="上传反面">
+        <view class="upload-show" wx:if="{{driverLicenceBackList.length<1 || !driverLicenceBackList}}">
+          <image class="bg" src="../../common/images/jsz_bg2.png" alt=""></image>
+          <image class="icon" src="../../common/images/upload_icon.png" alt=""></image>
+          <text>上传驾驶证反面</text>
+        </view>
+    </van-uploader>
+  </view>
+ </view>
+ <view class="field-title">从业资格证</view>
+ <view class="item-upload clearfix" style="border:none;padding-bottom:40rpx;">
+   <view class="upload-box fl">
+    <van-uploader 
+      file-list="{{qualifyCertList}}" 
+      show-upload="{{qualifyCertList.length<1 || !qualifyCertList}}"
+      data-id="qualifyCert" 
+      bind:after-read="afterRead" bind:delete="deleteImg" upload-text="上传正面">
+        <view class="upload-show" wx:if="{{qualifyCertList.length<1 || !qualifyCertList}}">
+          <image class="bg" src="../../common/images/jsz_bg1.png" alt=""></image>
+          <image class="icon" src="../../common/images/upload_icon.png" alt=""></image>
+          <text>上传从业资格证</text>
+        </view>
+    </van-uploader>
+   </view>
+ </view>
+</view>
+<van-cell-group>
+  <van-field
+    placeholder=""
+    label="审核状态"
+    disabled="true"
+    value="{{info.authStateInternalText}}"
+    class="disabled-red"
+    wx:if="{{isUpdate}}"
+  />  
+  <van-field
+    placeholder=""
+    label="审核备注"
+    disabled="true"
+    value="{{info.authRemarkInternal}}"
+    wx:if="{{isUpdate}}"
+  />  
+  <van-field
+    value="{{ value }}"
+    placeholder="司机姓名"
+    label="司机姓名"    
+    disabled="{{isUpdate}}"
+    value="{{info.driverName}}" data-key="driverName" bindinput="inputSetData"
+  />
+  <van-field
+    value="{{ value }}"
+    placeholder="手机号"
+    label="手机号"
+    value="{{info.driverPhone}}" data-key="driverPhone" bindinput="inputSetData"
+  />
+  <van-field
+    value="{{ value }}"
+    placeholder="身份证号"
+    label="身份证号"
+    value="{{info.idCard}}" data-key="idCard" bindinput="inputSetData"
+  />
+  <van-field
+    value="{{ value }}"
+    placeholder="驾驶证号"
+    label="驾驶证号"
+    value="{{info.driverLicence}}" data-key="driverLicence" bindinput="inputSetData"
+  />
+  <van-field
+    value="{{ value }}"
+    placeholder="准驾车型"
+    label="准驾车型"
+    value="{{info.driverClass}}" data-key="driverClass" bindinput="inputSetData"
+  />
+  <van-field
+    value="{{ value }}"
+    placeholder="发证机关"
+    label="发证机关"
+    value="{{info.licenseIssuingAuthority}}" data-key="licenseIssuingAuthority" bindinput="inputSetData"
+  />
+  <van-field
+    value="{{ value }}"
+    placeholder="从业资格证号"
+    label="从业资格证号"
+    value="{{info.qualifyCertId}}" data-key="qualifyCertId" bindinput="inputSetData"
+  />
+</van-cell-group>
+<view class="myField">
+ <view class="item clearfix">
+  <view class="label">有效期限</view>
+  <view class="input-text">
+    <picker mode="date" value="{{info.effectiveDate}}" bindchange="bindDateChange" data-key="effectiveDate">
+      <view wx:if="{{info.effectiveDate}}">
+        {{info.effectiveDate}}
+      </view>
+      <view style="color:#c8c9cc;" wx:else>有效期开始</view>
+    </picker>
+  </view>
+ </view>
+ <view class="item clearfix">
+  <view class="label">至</view>
+  <view class="input-text">
+    <picker mode="date" value="{{info.expireDate}}" bindchange="bindDateChange" data-key="expireDate">
+      <view wx:if="{{info.expireDate}}">
+        {{info.expireDate}}
+      </view>
+      <view style="color:#c8c9cc;" wx:else>有效期结束</view>
+    </picker>
+  </view>
+ </view>
+ <view class="item clearfix">
+  <view class="label">绑定供应商</view>
+  <view class="input-text overflow" bind:tap="showSupplierPopover">
+    <text wx:if="{{info.supplierList}}">{{info.suppliersName}}</text>
+    <text style="color:#c8c9cc;" wx:else>选择供应商</text>
+  </view>
+ </view>
+</view>
+<view class="footerBtn" bindtap="submit">
+  <button>提交</button>
+</view>
+
+
+<!-- 选择供应商 -->
+<popover is-show="{{isShowSupplierPopover}}">
+  <view class="filter-container">
+    <input type="text" placeholder="请输入供应商" bindinput='searchSupplierList'
+      value="{{supplierListSearch}}"></input>
+    <scroll-view class="scrollList" scroll-y="{{true}}">
+      <view class="item {{item.select?'active':''}}" wx:for="{{supplierList}}" wx:key="{{index}}"
+        bindtap="selectSupplier" data-item="{{item}}" data-index="{{index}}">{{item.label}}</view>
+    </scroll-view>
+    <view class="botBtn clearfix">
+      <button type="warn" class="btn" catchtap="clearSupplier">清空</button>
+      <button type="primary" class="btn" catchtap="sureSupplier">确定</button>
+    </view>
+  </view>
+</popover>

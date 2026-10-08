@@ -1,0 +1,5 @@
+@import '/pages/index/index.wxss';
+
+.headInfo .bg{
+  height: 80rpx;
+}

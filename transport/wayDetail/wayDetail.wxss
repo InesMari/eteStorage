@@ -1,0 +1,8 @@
+.van-cell__title{
+  width: 250rpx;
+  flex:initial!important;
+  -webkit-flex:initial!important;
+}
+.van-cell__value{
+  text-align: right;
+}

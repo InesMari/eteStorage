@@ -1,0 +1,69 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<view class="headInfo">
+  <image wx:if="{{info.state<0||info.state>3}}" class="bg" src="../../common/images/detail_bg3.png"></image>
+  <image wx:if="{{info.confirmState==0}}" class="bg" src="../../common/images/detail_bg0.png"></image>
+  <image wx:if="{{info.confirmState==1}}" class="bg" src="../../common/images/detail_bg2.png"></image>
+  <image wx:if="{{info.confirmState==2}}" class="bg" src="../../common/images/detail_bg1.png"></image>
+  <image wx:if="{{info.confirmState==3}}" class="bg" src="../../common/images/detail_bg3.png"></image>
+  <view class="number">采购入库单号：{{info.purchaseNum}}</view>
+  <view class="workName">{{info.confirmStateName}}</view>
+</view>
+
+<view class="detailView">
+  <view class="titleTab fw">采购信息</view>
+  <view class="pagelist">
+    <view class="item">
+      <view class="inner">
+        <view class="info clearfix">
+          <view>采购方：<text class="text">{{info.settleBodyName}}</text></view>
+          <view>采购单单号：<text class="text">{{info.deliveryNum}}</text></view>
+          <view>入库地：<text class="text">{{info.workName}}</text></view>
+          <view>入库日期：<text class="text">{{info.inDate}}</text></view>
+          <view>供应商名称：<text class="text">{{info.tenantName}}</text></view>
+          <view>备注：<text class="text">{{format.formatTo_(info.remark)}}</text></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<block wx:if="{{file}}">
+<view class="titleTab fw">交货单：</view>
+<view class="uploadImg clearfix">
+  <view class="imgItem">
+    <fileviewer url="{{file}}"></fileviewer>
+  </view>
+</view>
+</block>
+
+
+<block wx:if="{{realFile}}">
+<view class="titleTab fw">实物图：</view>
+<view class="uploadImg clearfix">
+  <view class="imgItem">
+    <fileviewer url="{{realFile}}"></fileviewer>
+  </view>
+</view>
+</block>
+
+<view class="detailView">
+  <view class="titleTab fw">入库明细</view>
+  <view class="pagelist">
+    <view class="item" wx:for="{{dtlList}}">
+      <view class="inner">
+        <view class="info clearfix">
+          <view>费用类型：<text class="text">{{item.feeSubTypeName}}</text></view>
+          <view>品名/项目：<text class="text">{{item.projectName}}</text></view>
+          <view>规格型号：<text class="text">{{item.specification}}</text></view>
+          <view class="w50">数量单位：<text class="text">{{item.unit}}</text></view>
+          <view class="w50">采购数量：<text class="text">{{item.purchaseNum}}</text></view>
+          <view class="w50">已入库数量：<text class="text">{{item.deliveryNums}}</text></view>
+          <view class="w50">付款类型：<text class="text">{{item.payTypeName}}</text></view>
+          <view>开始计费日期：<text class="text">{{item.chargeDate}}</text></view>
+          <view>入库数量：<text class="text">{{item.purchaseNum}}</text></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

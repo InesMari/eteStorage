@@ -1,0 +1,25 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<!-- 货主 -->
+<view class="contain">
+  <view class="headInfo">
+    <image class="bg" src="/common/images/info_bg.png"></image>
+    <view class="userInfo" bindtap="goback">
+      <image class="back" src="/common/images/back.png" mode="widthFix"></image>
+    </view>
+    <view class="workName">合同评审</view>
+  </view>
+  <view class="list clearfix">
+    <view  class="item" bindtap="toCustomContractList" wx:if="{{entitys[1011046]}}">
+      <image src="/common/images/i_2.png"></image>
+      <view class="name">客户合同评审</view>
+      <view class="explain">用于客户合同的评审管理</view>
+      <view class="tip" wx:if="{{counts.customerContractReviewSum > 0}}">{{counts.customerContractReviewSum}}</view>
+    </view>
+    <view  class="item" bindtap="toContractList" wx:if="{{entitys[1011047]}}">
+      <image src="/common/images/i_28.png"></image>
+      <view class="name">供应商合同评审</view>
+      <view class="explain">用于供应商合同的评审管理</view>
+      <view class="tip" wx:if="{{counts.supplierContractReviewSum > 0}}">{{counts.supplierContractReviewSum}}</view>
+    </view>
+  </view>
+</view>

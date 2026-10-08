@@ -1,0 +1,54 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<form bindsubmit="doQuery">
+    <view class="searchform">
+        <view class="searchbox">
+            <view class="searchbtn">    
+                <image src="../../common/images/u651.png"></image>
+                <input class="searchinput" name="" value="{{licensePlate}}" placeholder="请输入指定车牌号" bindinput="bindKeyInput"></input>
+            </view>
+        </view>
+        <button form-type="submit">查询</button>
+        <image bindtap="showList" class="list_icon" src="../../common/images/list_icon.png"></image>        
+    </view>
+</form>
+<map id="myMap" class="myMap" scale='16' latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}"
+        show-location>
+
+<!-- 车辆信息 -->
+<cover-view class="expected" wx:if="{{showInfo}}">
+  <cover-view>
+      <cover-view class="fl">车牌号：{{format.formatTo_(licensePlate)}}</cover-view>
+      <cover-view class="fr">运作状态：{{format.formatTo_(isLockName)}}</cover-view>
+      <cover-view class="fl">车型：{{format.formatTo_(vehicleType)}}</cover-view>
+      <cover-view class="fr">车长：{{format.formatTo_(vehicleLength)}}</cover-view>
+      <cover-view class="fl">司机姓名：{{format.formatTo_(vehicleOwnname)}}</cover-view>
+      <cover-view class="fr">联系方式：{{format.formatTo_(vehicleBill)}}</cover-view>
+      <cover-view class="fl" style="width: 100%;">派车单号：{{format.formatTo_(waybillNum)}}</cover-view>
+      <cover-view class="fl" style="width: 100%;">订单编号：{{format.formatTo_(orderNum)}}</cover-view>
+  </cover-view>
+</cover-view>
+<!-- 无法查询弹窗 -->
+<cover-view class="pop" wx:if="{{showDialog}}">
+    <cover-view class="title">无法查询</cover-view>
+    <cover-view class="text">本次查询结果为空，请确定该车辆是否为易迁易平台自有车车辆。</cover-view>
+    <cover-view class="btngroup">
+			<cover-view class="confirm" bindtap="Calcel">确定</cover-view>
+		</cover-view>
+</cover-view>
+
+<!-- 自有车列表 -->
+<cover-view class="vehicleList" wx:if="{{isshowList}}">
+  <cover-image bindtap="hideList" class="close" src="../../common/images/close.png"></cover-image>
+  <cover-view class="clearfix">  
+    <cover-view class="item" wx:for="{{vehicleList}}" bindtap="findCar" data-plate="{{item.plateNumber}}">
+      <cover-view class="num">{{item.plateNumber}}</cover-view>
+      <cover-view class="state {{item.runTypeName=='空闲中'?'state1':''}}">{{item.runTypeName}}</cover-view>
+    </cover-view>
+  </cover-view>
+</cover-view>
+
+</map>
+
+
+
+

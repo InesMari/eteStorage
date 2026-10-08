@@ -1,0 +1,56 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<van-search value="{{ value }}" bind:change="search" placeholder="输入关键字模糊搜索" />
+<van-tabs active="{{active}}" bind:change="onChange">
+  <van-tab title="全部"></van-tab>
+  <van-tab title="待处理"></van-tab>
+  <van-tab title="处理中"></van-tab>
+  <van-tab title="待审核"></van-tab>
+  <van-tab title="审核中"></van-tab>
+  <van-tab title="已完成"></van-tab>
+  <van-tab title="审核不通过"></van-tab>
+</van-tabs>
+<image mode="widthFix" wx:if="{{isRefresh}}" class="loading-icon" src="/common/images/loading.gif"></image>
+<scroll-view class="scorll" scroll-y="{{true}}" bindscrolltoupper="toupper" upper-threshold="1" bindscrolltolower="scrolltolowerHandler">
+  <view class="pagelist mt_20">
+    <view class="item" wx:for="{{list}}" bindtap="toDetail" data-id="{{item.id}}">
+      <view class="inner">
+        <view class="title clearfix"> 
+          <view class="router fl">{{item.exceptionNum}}</view>
+          <view class="state {{item.state==0?'state0':''}} {{item.state==1?'state1':''}} {{item.state==2?'state2':''}} {{item.state==3?'state5':''}} {{item.state==4?'state3':''}}" >
+          {{item.stateName}}</view>
+        </view>
+        <view class="info">
+          <view>异常类型：<text class="text">{{item.typeName}}</text></view>
+          <view>预估损失金额：<text class="text">{{format.formatTo_(item.lossFee)}}</text></view>
+          <view>实际损失金额：<text class="text">{{format.formatTo_(item.actualLossFee)}}</text></view>
+          <view>责任单位：<text class="text">{{item.responsibleCompany}}</text></view>
+          <view>责任人：<text class="text">{{item.responsiblePeople}}</text></view>
+          <view>发生地点/线路：<text class="text">{{item.incidentAddress}}</text></view>
+          <view>事发时间：<text class="text">{{item.incidentDate}}</text></view>
+        </view>
+      </view>
+      <view class="operate clearfix">
+        <button class="btn fr" wx:if="{{item.showButton && entitys[1013007]}}" catchtap="showUnPassAlertMethod" data-id="{{item.id}}">审核不通过</button>
+        <button class="btn fr" wx:if="{{item.showButton && entitys[1013007]}}" catchtap="audit" data-id="{{item.id}}">审核通过</button>
+        <button class="btn fr" wx:if="{{(item.state==0 || item.state==1) && entitys[1013006]}}" catchtap="toExam" data-id="{{item.id}}">处理异常</button>
+        <button class="btn fr" wx:if="{{item.state==0 && entitys[1013004] && item.isMyExc}}" catchtap="toHandel" data-id="{{item.id}}">再次提报</button>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+<view class="footerBtn">
+  <button bindtap="toHandel" wx:if="{{entitys[1013003]}}">异常上报</button>
+</view>
+
+
+<!-- 评审不通过原因 -->
+<alert isshow="{{showUnPassAlert}}" title="提示" class="showUnPassAlert" bind:closealert="cancelAlert" aStyle="width:500rpx;">  
+  <view class="content">
+    <view class="label">请输入审核不通过原因：</view>
+    <input type="text" value="{{verifyRemark}}" bindinput="inputSetRemark" placeholder=""></input>
+  </view>
+  <view class="bottom clearfix">
+    <button bindtap="cancelAlert">取消</button>
+    <button bindtap="sureAlert">确定</button>  
+  </view>
+</alert>

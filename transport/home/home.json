@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "运输管理",
+  "usingComponents": {
+    "alert":"/common/components/alert/alert"
+  }
+}

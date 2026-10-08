@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "包材登记",
+  "usingComponents": {
+    "datetimepicker": "/common/components/datetimepicker/datetimepicker"    
+  }
+}

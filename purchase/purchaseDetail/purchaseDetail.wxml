@@ -1,0 +1,108 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<view class="headInfo">
+  <image wx:if="{{info.state<0||info.state>3}}" class="bg" src="../../common/images/detail_bg3.png"></image>
+  <image wx:if="{{info.state==2}}" class="bg" src="../../common/images/detail_bg0.png"></image>
+  <image wx:if="{{info.state==0}}" class="bg" src="../../common/images/detail_bg1.png"></image>
+  <image wx:if="{{info.state==1}}" class="bg" src="../../common/images/detail_bg2.png"></image>
+  <image wx:if="{{info.state==3}}" class="bg" src="../../common/images/detail_bg3.png"></image>
+  <view class="number">采购单单号：{{info.purchaseNum}}</view>
+  <view class="workName">{{info.verifyStateName}}</view>
+</view>
+
+<view class="detailView">
+  <view class="titleTab fw">采购方信息</view>
+  <view class="pagelist">
+    <view class="item">
+      <view class="inner">
+        <view class="info clearfix">
+          <view>采购方名称：<text class="text">{{info.settleBodyName}}</text></view>
+          <view>采购员名称：<text class="text">{{info.purchaseLinkman}}</text></view>
+          <view>采购类型：<text class="text">{{info.purchaseTypeName}}</text></view>
+          <view>采购时间：<text class="text">{{info.purchaseDate}}</text></view>
+          <view>备注：<text class="text">{{info.remark}}</text></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="detailView">
+  <view class="titleTab fw">供应商&其它信息</view>
+  <view class="pagelist">
+    <view class="item">
+      <view class="inner">
+        <view class="info clearfix">
+          <view>供应商名称：<text class="text">{{info.tenantName}}</text></view>
+          <view>联系人：<text class="text">{{info.tenantLinkman}}</text></view>
+          <view>联系电话：<text class="text">{{info.tenantLinkPhone}}</text></view>
+          <view>收货信息：<text class="text">{{info.receiptInfo}}</text></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="detailView">
+  <view class="titleTab fw">采购明细</view>
+  <view class="pagelist">
+    <view class="item" wx:for="{{dtlList}}">
+      <view class="inner">
+        <view class="info clearfix">
+          <view>费用类型：<text class="text">{{item.feeSubTypeName}}</text></view>
+          <view>品名/项目：<text class="text">{{item.projectName}}</text></view>
+          <view>规格型号：<text class="text">{{item.specification}}</text></view>
+          <view>需求部门：<text class="text">{{item.applyUserOrgName}}</text></view>
+          <view class="w50">数量单位：<text class="text">{{item.unit}}</text></view>
+          <view class="w50">需求数量：<text class="text">{{item.stockNums}}</text></view>
+          <view class="w50">付款类型：<text class="text">{{item.payTypeName}}</text></view>
+          <view class="w50">采购类型：<text class="text">{{item.demandNums}}</text></view>
+          <view class="w50">实际含税单价：<text class="text">{{item.actualPrice}}</text></view>
+          <view class="w50">实际含税金额：<text class="text">{{item.totalFee}}</text></view>
+          <view>备注：<text class="text">{{format.formatTo_(item.remark)}}</text></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<block wx:if="{{fileList.length>0}}">
+<view class="titleTab fw">附件信息</view>
+<view class="uploadImg clearfix">
+  <view class="imgItem" wx:for="{{fileList}}">
+    <fileviewer url="{{item.fullPath}}"></fileviewer>
+  </view>
+</view>
+</block>
+
+<view class="titleTab fw">审核信息</view>
+<view class="stepView">
+  <view wx:for="{{userList}}" class="item {{item.verifyState==2?'ispass':''}}">
+    <view class="icon">
+      <van-icon name="underway-o" wx:if="{{item.verifyState == 0}}" style="color: #999;"/>
+      <van-icon name="passed" wx:if="{{item.verifyState == 1}}" style="color: green;" />
+      <van-icon name="close" wx:if="{{item.verifyState == 2}}" style="color: red;" />
+    </view>
+    <view class="staff">审核部门：{{format.formatTo_(item.orgName)}}</view>
+    <view class="org">审核人：{{item.verifyUserName}}</view>
+    <view class="org">审核意见：{{format.formatTo_(item.verifyRemark)}}</view>
+    <view class="org">审核时间：{{format.formatTo_(item.verifyDate)}}</view>
+  </view>
+</view>
+
+
+<view class="footerBtn btns" wx:if="{{info.showPass}}">
+  <button class="default" bindtap="showAlertMethod" data-type="1">审核通过</button>
+  <button bindtap="showAlertMethod" data-type="2">审核不通过</button>
+</view>
+
+<!-- 审核不通过原因 -->
+<alert isshow="{{showAlert}}" title="提示" class="showAlert" bind:closealert="cancelAlert" aStyle="width:500rpx;">  
+  <view class="content">
+    <view class="label">请输入审核意见：</view>
+    <input type="text" value="{{remark}}" bindinput="inputSetRemark" placeholder=""></input>
+  </view>
+  <view class="bottom clearfix">
+    <button bindtap="cancelAlert">取消</button>
+    <button bindtap="sureAlert">确定</button>  
+  </view>
+</alert>

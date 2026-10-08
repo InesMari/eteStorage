@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "新增订单包",
+  "usingComponents": {
+    "datetimepicker": "/common/components/datetimepicker/datetimepicker",
+    "popover": "/common/components/popover/popover"
+  }
+}

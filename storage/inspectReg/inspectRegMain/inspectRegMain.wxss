@@ -1,0 +1,44 @@
+page {
+  background-color: #bd3124;
+}
+
+.content {
+  padding-top: 250rpx;
+}
+
+.list{
+  animation: anim 1s;
+}
+.title {
+  color: #fff;
+  text-align: center;
+  font-size: 40rpx;
+  font-weight: bold;
+  margin-bottom: 80rpx;
+}
+
+.item {
+  width: 400rpx;
+  margin: 0 auto 30rpx;
+  border: 4rpx solid #fff;
+  border-radius: 20rpx;
+  line-height: 70rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: #fff;
+}
+
+@keyframes anim{
+  0%{
+    transform: translateX(-200%);
+  }
+  50%{
+    transform: translateX(2%);
+  }
+  75%{
+    transform: translateX(-5%);
+  }
+  100%{
+    transform: translateX(0);
+  }
+}

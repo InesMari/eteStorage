@@ -1,0 +1,49 @@
+<view class="myField">
+  <view class="item clearfix">
+    <view class="label"><text class="red">*</text>客户名称</view>
+    <view class="input-text">
+      <input type="text" placeholder="客户名称" value="{{info.customerName}}" data-key="customerName" data-index="{{index}}" bindinput="inputSetDataDefault" disabled="{{disabled}}"></input>
+    </view>
+  </view>
+  <view class="item area clearfix">
+    <view class="label"><text class="red">*</text>来料异常描述</view>
+    <view class="input-text">
+      <textarea type="textarea" placeholder="请输入来料异常描述" value="{{info.exceptionDescribe}}" data-key="exceptionDescribe" data-index="{{index}}" bindinput="inputSetDataDefault" disabled="{{disabled}}"></textarea>
+    </view>
+  </view>
+  <view class="item area clearfix">
+    <view class="label"><text class="red">*</text>临时处理措施</view>
+    <view class="input-text">
+      <textarea type="textarea" placeholder="请输入临时处理措施" value="{{info.tempDealMeasure}}" data-key="tempDealMeasure" data-index="{{index}}" bindinput="inputSetDataDefault" disabled="{{disabled}}"></textarea>
+    </view>
+  </view>
+  <view class="item area clearfix">
+    <view class="label"><text class="red">*</text>原因分析</view>
+    <view class="input-text">
+      <textarea type="textarea" placeholder="请输入发生原因、流出原因、系统原因" value="{{info.causeAnalysis}}" data-key="causeAnalysis" data-index="{{index}}" bindinput="inputSetDataDefault" disabled="{{disabled}}"></textarea>
+    </view>
+  </view>
+  <view class="item area clearfix">
+    <view class="label"><text class="red">*</text>改善对策</view>
+    <view class="input-text">
+      <textarea type="textarea" placeholder="请输入发生改善对策、流出改善对策、系统改善对策" value="{{info.improveCounterplan}}" data-key="improveCounterplan" data-index="{{index}}" bindinput="inputSetDataDefault" disabled="{{disabled}}"></textarea>
+    </view>
+  </view>
+  <view class="uploadImg">
+    <view class="title">上传图片<text>最多上传5张，已经上传<text class="zt_333">{{ticketList.length}}</text>张</text></view>
+    <view class="tip">只能上传jpg/png文件，单张图片不超过20mb</view>
+    <view class="list">
+      <view class="item" style="padding: 0;">
+        <van-uploader 
+          file-list="{{info.imgList}}" disabled="{{disabled}}" deletable="{{!disabled}}"
+          bind:after-read="afterRead" bind:delete="deleteImg" upload-text="上传图片" 
+          show-upload="{{info.imgList.length<5}}"
+        />
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="footerBtn" wx:if="{{!disabled}}">
+  <button bindtap="submit">提交</button>
+</view>

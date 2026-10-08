@@ -1,0 +1,46 @@
+<view class="pageTitle">
+  <image wx:if="{{info.waybillState<0||info.waybillState>3}}" class="bg" src="../../common/images/detail_bg3.png"></image>
+  <image wx:if="{{info.waybillState==0}}" class="bg" src="../../common/images/detail_bg0.png"></image>
+  <image wx:if="{{info.waybillState==1}}" class="bg" src="../../common/images/detail_bg1.png"></image>
+  <image wx:if="{{info.waybillState==2}}" class="bg" src="../../common/images/detail_bg2.png"></image>
+  <image wx:if="{{info.waybillState==3}}" class="bg" src="../../common/images/detail_bg3.png"></image>
+  <view class="info">
+    <view class="route clearfix">
+      <view class="fl">{{info.routeName}}</view>
+    </view>
+    <view class="waybillNum">
+      派车单号：{{info.waybillNum}}
+    </view>
+  </view>
+</view>
+
+<view class="myField">
+    <view class="item clearfix">
+      <view class="label">订单号</view>
+      <view class="input-text" bindtap="showVehiclePopover">
+        <picker mode="selector" range="{{vehicleTypeList}}" bindchange="vehicleTypeChange" range-key="codeName" value="{{PICKVehicleTypeIndex}}" data-key="PICK">
+          <view wx:if="{{vehicleTypeList.length !=0 &&PICKVehicleTypeIndex!=null}}">
+            {{vehicleTypeList[PICKVehicleTypeIndex].codeName}}
+          </view>
+          <view style="color:#c8c9cc;" wx:else>请选择订单号</view>
+          <van-icon name="arrow-down" class="arrow-down" />
+        </picker>
+      </view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">提货司机</view>
+      <view class="input-text" bindtap="showDriverPopover">
+          <view wx:if="{{info.PICK_DRIVER_NAME}}">
+            {{info.PICK_DRIVER_NAME}}
+          </view>
+          <view style="color:#c8c9cc;" wx:else>请选择或输入提货司机</view>
+          <van-icon name="arrow-down" class="arrow-down" />
+      </view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">司机手机号</view>
+      <view class="input-text">
+        <input type="number" placeholder="请输入提货司机手机号码" value="{{info.PICK_LINK_PHONE}}" data-key="PICK_LINK_PHONE" bindinput="inputSetDataDefault"></input>
+      </view>
+    </view>
+</view>

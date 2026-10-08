@@ -1,0 +1,9 @@
+<view class="content">
+  <view class="title">巡检登记</view>
+  <view class="list">
+    <view class="item" wx:if="{{entitys[1005182]}}" bindtap="toMaterialAbnormal">仓库来料异常登记</view>
+    <view class="item" wx:if="{{entitys[1005180]}}" bindtap="toMaterialAbnormalList">仓库来料异常登记历史记录</view>
+    <view class="item" wx:if="{{entitys[1005185]}}" bindtap="toGoodsAbnormal">仓库异常品登记</view>
+    <view class="item" wx:if="{{entitys[1005181]}}" bindtap="toGoodsAbnormalList">仓库异常品登记历史记录</view>
+  </view>
+</view>

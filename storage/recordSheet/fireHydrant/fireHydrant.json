@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "消防设施点检记录表",
+  "usingComponents": {
+    "alert":"/common/components/alert/alert"
+  }
+}

@@ -1,0 +1,32 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<van-search value="{{ value }}" bind:change="search" placeholder="搜索申请单号、申请部门" />
+<van-tabs active="{{active}}" bind:change="onChange">
+  <van-tab title="待我处理"></van-tab>
+  <van-tab title="全部"></van-tab>
+  <van-tab title="未审核"></van-tab>
+  <van-tab title="审核中"></van-tab>
+  <van-tab title="审核不通过"></van-tab>
+  <van-tab title="审核完"></van-tab>
+</van-tabs>
+<image mode="widthFix" wx:if="{{isRefresh}}" class="loading-icon" src="/common/images/loading.gif"></image>
+<scroll-view class="scorll" scroll-y="{{true}}" bindscrolltoupper="toupper" upper-threshold="1" bindscrolltolower="scrolltolowerHandler">
+  <view class="pagelist mt_20">
+    <view class="item" wx:for="{{list}}" bindtap="toDetail" data-item="{{item}}">
+      <view class="inner">
+        <view class="title clearfix"> 
+          <view class="router fl">{{item.purchaseNum}}</view>
+          <view class="state {{item.verifyState==0?'state1':''}} {{item.verifyState==1?'state2':''}} {{item.verifyState==2?'state':''}} {{item.verifyState==4?'state3':''}} {{item.verifyState==3?'state5':''}}" >
+          {{item.verifyStateName}}</view>
+        </view>
+        <view class="info">
+          <view>采购类型：<text class="text">{{item.purchaseTypeName}}</text></view>
+          <view>采购人：<text class="text">{{item.purchaseLinkman}}</text></view>
+          <view>采购方名称：<text class="text">{{item.settleBodyName}}</text></view>
+          <view>需求总数：<text class="text">{{item.totalDemandNums}}</text></view>
+          <view>类型费用：<text class="text">{{item.feeSubTypeName}}</text></view>
+          <view>创建时间：<text class="text">{{item.createDate}}</text></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

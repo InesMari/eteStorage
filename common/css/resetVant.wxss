@@ -1,0 +1,73 @@
+/* field模块 */
+.van-field__input{
+  padding-left: 20rpx!important;
+  height: 52rpx!important;
+}
+.van-field__label,.van-field__input{
+  font-size: 28rpx;
+  color: #333!important;
+  line-height: 52rpx!important;
+}
+.van-cell{
+  padding:18rpx 30rpx!important;
+  line-height: 52rpx!important;
+}
+.van-cell:after{
+  border-color: #f6f6f6!important;
+}
+.van-cell__title{
+  min-width: 146rpx!important;
+  max-width: 146rpx!important;
+  margin-right: 24rpx!important;
+}
+.van-cell__title, .van-cell__value{
+  font-size: 28rpx;
+}
+.van-cell__value{
+  color: #666;
+}
+.van-field__input--disabled{
+  background: #F1F2F5!important;
+  color: #666;
+}
+.disabled-red .van-field__input{
+  background: #FFCDCD!important;
+  color: #E60012!important;
+}
+/* 滑动模块 */
+.van-swipe-cell__left,
+.van-swipe-cell__right {
+  display: inline-block;
+  width: 65px;
+  height: 77px;
+  font-size: 15px;
+  line-height: 77px;
+  color: #fff;
+  text-align: center;
+  background-color: #f44;
+  position: relative;
+}
+/* 图片上传模块 */
+.van-uploader__preview{
+  margin:0!important;
+}
+.van-uploader__preview-image{
+  border-radius: 4rpx;
+}
+/* 搜索模块 */
+.van-search__content {
+  border-radius: 100rpx!important;
+}
+.van-search__field .van-cell{
+  padding: 10rpx 14rpx!important;
+}
+.van-search__field .van-field__input {
+  padding-left: 0!important;
+  color: #C5C5C5;
+}
+.van-search__field .van-cell__left-icon-wrap{
+  height: 52rpx!important;
+}
+.van-search__field .van-icon{
+  color: #C5C5C5;
+}

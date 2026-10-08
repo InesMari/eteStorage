@@ -1,0 +1,230 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<van-tabs active="{{active}}" bind:click="toScroll" style="z-index: 999;">
+  <van-tab title="异常基础信息"></van-tab>
+  <van-tab title="异常评定信息"></van-tab>
+</van-tabs>
+<view class="stepView" wx:if="{{disabled}}">
+  <view wx:for="{{info.userList}}" class="item {{item.verifySts==2?'ispass':''}}">
+    <view class="icon">
+      <van-icon name="underway-o" wx:if="{{item.verifySts == 1}}" style="color: #999;"/>
+      <van-icon name="passed" wx:if="{{item.verifySts == 2}}" style="color: green;" />
+      <van-icon name="close" wx:if="{{item.verifySts == 3}}" style="color: red;" />
+    </view>
+    <view class="staff">{{item.userName}}</view>
+    <view class="date">{{format.formatEmpty(item.verifyDate)}}</view>
+  </view>
+</view>
+<view class="mb_20">
+<view class="titleTab fw" id="base">异常基础信息</view>
+<view class="myField">
+  <view class="item clearfix">
+    <view class="label">事发时间</view>
+    <view class="input-text">{{info.incidentDate}}</view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">发生地点/线路</view>
+    <view class="input-text">{{info.incidentAddress}}</view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">当事人</view>
+    <view class="input-text">{{info.discoverer}}</view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">问题描述</view>
+    <view class="input-text">{{info.problemDescribe}}</view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">事件经过</view>
+    <view class="input-text">{{info.incidentProcess}}</view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">现场照片/视频</view>
+    <view class="input-text">
+      <view class="uploadList">
+        <view class="uploadItem" wx:for="{{info.files}}" bindtap="visitFile" data-item="{{item}}">
+          <image src="{{item.fileUrl}}" wx:if="{{item.fileType == 0}}"></image>
+          <view class="videoIcon" wx:if="{{item.fileType == 1}}">          
+            <van-icon class="icon" name="play-circle-o" />
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">现场应急处理措施</view>
+    <view class="input-text">{{info.emergencyTreatment}}</view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">请求协助内容</view>
+    <view class="input-text">{{info.assistContent}}</view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">产生后果</view>
+    <view class="input-text">{{info.party}}</view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">提报部门</view>
+    <view class="input-text">{{info.orgName}}</view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">提报人</view>
+    <view class="input-text">{{info.createUserName}}</view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">提报时间</view>
+    <view class="input-text">{{info.createDate}}</view>
+  </view>
+</view>
+
+<view class="titleTab fw mt_20" id="constract">异常评定信息</view>
+<view class="myField">
+  <view class="item clearfix">
+    <view class="label">异常事件编号</view>
+    <view class="input-text">{{info.exceptionNum}}</view>
+  </view>
+  <view class="item clearfix">
+    <view class="label"><em>*</em>处理状态</view>
+    <view class="input-text {{disabled?'':'input'}}" wx:if="{{!disabled}}">
+      <picker mode="selector" range="{{exceptionStateList}}" bindchange="exceptionStateChange" range-key="codeName"
+        value="{{rexceptionStateIndex}}" disabled="{{disabled}}">
+        <view wx:if="{{exceptionStateList.length !=0 && exceptionStateIndex!=null}}">
+          {{exceptionStateList[exceptionStateIndex].codeName}}
+        </view>
+        <view style="color:#c8c9cc;" wx:else>请选择处理状态</view>
+        <van-icon name="arrow-down" class="arrow-down" />
+      </picker>
+    </view>
+    <view class="input-text" wx:else>{{info.stateName}}</view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">异常类型</view>
+    <view class="input-text">
+      <view class="type {{ info.type==1?'active':'' }}" bindtap="changeType" data-type="1">A类</view>
+      <view class="type {{ info.type==2?'active':'' }}" bindtap="changeType" data-type="2">B类</view>
+      <view class="type {{ info.type==3?'active':'' }}" bindtap="changeType" data-type="3">C类</view>
+      <view class="type {{ info.type==4?'active':'' }}" bindtap="changeType" data-type="4">D类</view>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">责任单位</view>
+    <view class="input-text {{disabled?'':'input'}}" wx:if="{{!disabled}}">
+      <input type="text" placeholder="请输入责任单位" value="{{info.responsibleCompany}}" data-key="responsibleCompany" bindinput="inputSetDataDefault" disabled="{{disabled}}"></input>
+    </view>
+    <view class="input-text" wx:else>{{info.responsibleCompany}}</view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">责任人</view>
+    <view class="input-text {{disabled?'':'input'}}" wx:if="{{!disabled}}">
+      <input type="text" placeholder="请输入责任人" value="{{info.responsiblePeople}}" data-key="responsiblePeople" bindinput="inputSetDataDefault" disabled="{{disabled}}"></input>
+    </view>
+    <view class="input-text" wx:else>{{info.responsiblePeople}}</view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">对象客户</view>
+    <view class="input-text {{disabled?'':'input'}}" wx:if="{{!disabled}}">    
+      <picker mode="selector" range="{{relCustTenantList}}" bindchange="relCustTenantChange" range-key="name"
+        value="{{relCustTenantIndex}}" disabled="{{disabled}}">
+        <view wx:if="{{relCustTenantList.length !=0 && relCustTenantIndex!=null}}">
+          {{relCustTenantList[relCustTenantIndex].name}}
+        </view>
+        <view style="color:#c8c9cc;" wx:else>请输入对象客户</view>
+        <van-icon name="arrow-down" class="arrow-down" />
+      </picker>
+    </view>
+    <view class="input-text" wx:else>{{info.custName}}</view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">有无人员伤害</view>
+    <view class="input-text" wx:if="{{!disabled}}">
+      <van-switch checked="{{ info.peopleInjurySts==1 }}" disabled="{{disabled}}" bind:change="switchChange" data-key="peopleInjurySts" size="20px" style="vertical-align: sub;" />
+    </view>
+    <view class="input-text" wx:else>{{info.peopleInjuryStsName}}</view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">人员伤害情况</view>
+    <view class="input-text {{disabled?'':'input'}}" wx:if="{{!disabled}}">
+      <input type="text" placeholder="请输入人员伤害情况" disabled="{{disabled}}" value="{{info.peopleInjuryStr}}" data-key="peopleInjuryStr" bindinput="inputSetDataDefault"></input>
+    </view>
+    <view class="input-text" wx:else>{{info.peopleInjuryStr}}</view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">预估损失金额（元）</view>
+    <view class="input-text">{{format.formatTo_(info.lossFee)}}</view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">实际损失金额（元）</view>
+    <view class="input-text {{disabled?'':'input'}}" wx:if="{{!disabled}}">
+      <input type="digit" placeholder="请输入实际损失金额（元）" disabled="{{disabled}}" value="{{info.actualLossFee}}" data-key="actualLossFee" bindinput="inputSetDataFee"></input>
+    </view>
+    <view class="input-text" wx:else>{{format.formatTo_(info.actualLossFee)}}</view>
+  </view>
+  <!-- 待审核状态之后或者有权限处理异常的可见 -->
+  <block  wx:if="{{info.state>1 || entitys[1013006]}}">
+  <view class="item clearfix">
+    <view class="label">处理结果</view>
+    <view class="input-text" wx:if="{{!disabled}}">
+      <textarea placeholder="请输入异常最后的处理结果" value="{{info.result}}" disabled="{{disabled}}" data-key="result" bindinput="inputSetDataDefault" style="background: #f8f8f8;padding: 10px;line-height: 1;"></textarea>
+    </view>
+    <view class="input-text" wx:else>{{info.result}}</view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">附件</view>
+    <view class="input-text" wx:if="{{!disabled}}">
+      <van-uploader 
+        file-list="{{annex}}"
+        bind:after-read="afterRead" bind:delete="deleteImg" upload-text="上传图片" 
+        show-upload="{{annex.length<1}}" disabled="{{disabled}}"
+      />
+    </view>    
+    <view class="input-text" wx:else>      
+      <view class="uploadList" wx:if="{{info.fileUrl}}">
+        <view class="uploadItem" bindtap="seeBigImg">
+          <image src="{{info.fileUrl}}"></image>
+        </view>
+      </view>
+      <view wx:else>--</view>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label" style="width: auto;">是否纳入月考核评定</view>
+    <view class="input-text" wx:if="{{!disabled}}">
+      <van-switch checked="{{ info.isExamine==1 }}" disabled="{{disabled}}" bind:change="switchChange" data-key="isExamine" size="20px" style="vertical-align: -webkit-baseline-middle;" />
+    </view>
+    <view class="input-text" wx:else>{{info.isExamineName}}</view>
+  </view>  
+  </block>
+</view>
+</view>
+
+<view class="footerBtn btns" wx:if="{{!disabled && entitys[1013006]}}">
+  <button bindtap="submit">处理异常</button>
+</view>
+
+<view class="footerBtn btns" wx:if="{{info.showButton && entitys[1013007]}}">
+  <button class="default" bindtap="audit">审核通过</button>
+  <button bindtap="showUnPassAlertMethod">审核不通过</button>
+</view>
+
+
+<!-- 评审不通过原因 -->
+<alert isshow="{{showUnPassAlert}}" title="提示" class="showUnPassAlert" bind:closealert="cancelAlert" aStyle="width:500rpx;">  
+  <view class="content">
+    <view class="label">请输入审核不通过原因：</view>
+    <input type="text" value="{{verifyRemark}}" bindinput="inputSetRemark" placeholder=""></input>
+  </view>
+  <view class="bottom clearfix">
+    <button bindtap="cancelAlert">取消</button>
+    <button bindtap="sureAlert">确定</button>  
+  </view>
+</alert>
+
+
+<!-- 播放视频 -->
+<view class="videoView" wx:if="{{isshoVideoView}}">
+  <van-icon class="close" bindtap="closeVideoView" name="clear" />
+  <video class="video" src="{{videoSrc}}"></video>
+  <view class="btns">
+    <button bindtap="downVideo">下载视频</button>  
+    <button bindtap="copyLink">复制视频链接</button>
+  </view>
+</view>

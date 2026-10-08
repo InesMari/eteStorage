@@ -1,0 +1,135 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<block wx:if="{{!showFinish}}">
+<van-cell-group>
+  <van-cell title="结算主体" value="{{info.payTitleName}}" />
+  <van-cell title="付款单号" value="{{info.payNum}}" />
+  <van-cell title="合同评审编号" value="{{format.formatTo_(info.contractName)}}" />
+  <van-cell title="付款条件" value="{{format.formatTo_(info.accountPeriodAllName)}}" />
+</van-cell-group>
+<view class="myField">
+  <view class="item clearfix" wx:for="{{info.applyArray}}">
+    <view class="label">采购申请单号{{index+1}}</view>
+    <view class="input-text right link" bindtap="toDetail" data-id="{{item.applyId}}">
+      {{item.applyNum}}
+    </view>
+  </view>
+</view>
+<van-cell-group>
+  <van-cell title="报销部门" value="{{info.orgName}}" />
+  <block wx:for="{{info.projectList}}" wx:for-index="index">
+    <van-cell title="报销内容{{index+1}}" value="{{item.payContent}}" />
+    <van-cell class="mylink" title="采购费用申请{{index+1}}-{{innerIdx+1}}" wx:for="{{item.applyArray}}" wx:for-index="innerIdx" value="{{item.applyNum}}" data-id="{{item.applyId}}" bindtap="toDetail" />
+  </block>
+  <van-cell title="填写日期" value="{{info.createDate}}" />
+  <van-cell title="付款日期" value="{{info.expectDate}}" />
+  <van-cell title="部门制成" value="{{info.createUserName}}" />
+  <van-cell title="审核状态" value="{{info.stateName}}" />
+  <van-cell title="应付金额" value="{{format.formatToZero(info.mustPayFee)}}" />
+  <van-cell title="扣款金额" value="{{format.formatToZero(info.deduction)}}" />
+  <van-cell title="实付金额" value="{{format.formatToZero(info.payFee)}}" />
+  <van-cell title="支付方式">
+    <van-radio-group value="{{ info.payType }}">
+      <block wx:for="{{applyPayType}}">
+        <van-radio name="{{item.codeId}}" shape="square">{{item.codeName}}</van-radio>
+      </block>
+    </van-radio-group>
+  </van-cell>
+  <van-cell title="暂借（付）款" value="{{info.borrowFee}}" />
+  <van-cell title="应补（退）余额" value="{{info.actualPayFee}}" />
+</van-cell-group>
+
+
+<van-cell-group>
+  <van-cell title="收款方全称" value="{{info.bankAccountName}}" />
+  <van-cell title="开户行" value="{{info.bankDeposit}}" />
+  <van-cell title="账号" value="{{info.bankCard}}" />
+  <van-cell title="联系人" value="{{info.bankLinkman}}" />
+  <van-cell title="电话" value="{{info.bankPhone}}" />
+</van-cell-group>
+
+<view class="uploadImg" wx:if="{{info.invoiceNumList.length>0}}">
+  <view class="title">发票附件</view>
+  <view class="list clearfix">
+    <view class="item" wx:for="{{info.invoiceNumList}}">
+      <fileviewer url="{{item.imgPath}}"></fileviewer>
+    </view>
+  </view>
+</view>
+
+<view class="uploadImg" wx:if="{{info.otherList.length>0}}">
+  <view class="title">其他附件<text class="red">（此处不能为发票）</text></view>
+  <view class="list clearfix">
+    <view class="item" wx:for="{{info.otherList}}">
+      <fileviewer url="{{item.imgPath}}"></fileviewer>
+    </view>
+  </view>
+</view>
+
+<view class="footerBtn btns">
+  <!-- <button wx:if="{{info.showPassAndCirculate && entitys[1006122]}}" class="default" bindtap="audit" data-type="1">审核通过并流转</button> -->
+  <button wx:if="{{info.verifyFlag && entitys[1006122]}}" class="default" bindtap="audit" data-type="1">审核通过</button>
+  <button wx:if="{{info.verifyFlag && entitys[1006122]}}" bindtap="showUnPassAlertMethod" data-type="2">审核不通过</button>
+  <!-- <button wx:if="{{entitys[1006125]}}" bindtap="delPayOrder">取消</button> -->
+  <button wx:if="{{entitys[1006156] && (info.state==2 || info.state==3) && info.hasCancelVerify}}" bindtap="cancelPayOrder">取消审核</button>  
+</view>
+</block>
+
+<!-- 审核不通过原因 -->
+<alert isshow="{{showUnPassAlert}}" title="提示" class="showUnPassAlert" bind:closealert="cancelAlert" aStyle="width:500rpx;">  
+  <view class="content">
+    <view class="label">请输入审核不通过原因：</view>
+    <input type="text" value="{{remark}}" bindinput="inputSetRemark" placeholder=""></input>
+  </view>
+  <view class="bottom clearfix">
+    <button bindtap="cancelAlert">取消</button>
+    <button bindtap="sureAlert">确定</button>  
+  </view>
+</alert>
+
+
+<!-- 调度完成 -->
+<block wx:if="{{showFinish}}">
+  <view class="finishPage">
+    <van-icon name="checked" />
+    <view class="tipText">审核完成，系统会对应提示申请人</view>
+    <view class="numTip">付款单：{{info.payNum}}</view>
+    <view class="con">
+      <view class="item clearfix">
+        <text class="label fl">报销部门</text>
+        <text class="fr">{{info.orgName}}</text>
+      </view>
+      <view class="item clearfix">
+        <text class="label fl">支付金额</text>
+        <text class="fr">{{info.payFee}}</text>
+      </view>
+      <view class="item clearfix">
+        <text class="label fl">填写日期</text>
+        <text class="fr">{{info.createDate}}</text>
+      </view>
+      <view class="item clearfix">
+        <text class="label fl">付款日期</text>
+        <text class="fr">{{info.expectDate}}</text>
+      </view>
+    </view>
+    <view class="finishView">
+      <button bindtap="back">完成</button>
+    </view>
+  </view>
+</block>
+
+<!-- 审核信息 -->
+<block wx:if="{{!showFinish}}">
+<view class="titleTab fw">审核信息</view>
+<view class="stepView">
+  <view wx:for="{{info.verifyUsers}}" class="item {{item.verifySts==2?'ispass':''}}">
+    <view class="icon">
+      <van-icon name="underway-o" wx:if="{{item.verifySts == 1}}" style="color: #999;"/>
+      <van-icon name="passed" wx:if="{{item.verifySts == 2}}" style="color: green;" />
+      <van-icon name="close" wx:if="{{item.verifySts == 3}}" style="color: red;" />
+    </view>
+    <view class="staff">审核部门：{{format.formatTo_(item.verifyTitle)}}</view>
+    <view class="org">审核人：{{format.formatTo_(item.verifyUserName)}} {{format.formatEmpty(item.verifyDate)}}</view>
+    <view class="org">审核意见：{{format.formatTo_(item.verifyRemark)}}</view>
+  </view>
+</view>
+</block>

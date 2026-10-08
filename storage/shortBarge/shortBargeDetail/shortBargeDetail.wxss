@@ -1,0 +1,26 @@
+@import '../shortBargeList/shortBargeList.wxss'
+page {
+  background: #F1F2F5;
+}
+
+.wayTitle{
+  line-height: 1;
+  padding: 30rpx 24rpx 0;
+  font-weight: bold;
+  position: relative;
+}
+.wayTitle::after{
+  content: '';
+  border-bottom: 4rpx solid #333;
+  position: absolute;
+  bottom:-10rpx;
+  left: 24rpx;
+  width: 112rpx;
+}
+.wayTitle.long::after{
+  width: 170rpx;
+}
+
+.list{
+  padding: 0 30rpx;
+}

@@ -1,0 +1,59 @@
+@import '../warehousing/warehousing.wxss';
+
+.baseInfo .detail .innerInfo {
+  padding: 20rpx 30rpx;
+}
+
+.baseInfo .detail .innerInfo .innerItem {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10rpx;
+  float: left;
+}
+
+.baseInfo .detail .innerInfo .label {
+  width: 120rpx;
+  font-size: 24rpx;
+  text-align: right;
+}
+
+.baseInfo .detail .innerInfo .input {
+  flex: 1;
+}
+
+.baseInfo .detail .innerInfo input {
+  width: 80%;
+  border: 1rpx solid #eee;
+  padding: 4rpx 10rpx;
+  font-size: 24rpx;
+}
+
+.mScanBtn {
+  line-height: 50rpx;
+  font-size: 26rpx;
+  font-weight: normal;
+  position: absolute;
+  right: 20rpx;
+  color: #1990ff;
+  top: 16rpx;
+  border: 1rpx solid #1990ff;
+}
+
+.mScanBtn .mScan {
+  font-size: 32rpx;
+  vertical-align: text-bottom;
+  margin-right: 6rpx;
+}
+
+.footerBtn .total {
+  float: left;
+  line-height: 76rpx;
+  padding-left: 30rpx;
+}
+
+.noScan {
+  text-align: center;
+  line-height: 120rpx;
+  color: #999;
+}

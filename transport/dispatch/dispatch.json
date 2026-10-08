@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "订单调度",
+  "usingComponents": {
+    "popover": "/common/components/popover/popover"
+  }
+}

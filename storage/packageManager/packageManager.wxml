@@ -1,0 +1,22 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<van-search value="{{ value }}" bind:change="search" placeholder="输入关键字模糊搜索" />
+<image mode="widthFix" wx:if="{{isRefresh}}" class="loading-icon" src="/common/images/loading.gif"></image>
+<scroll-view class="scorll" scroll-y="{{true}}" bindscrolltoupper="toupper" upper-threshold="1" bindscrolltolower="scrolltolowerHandler">
+  <view class="list mt_20">
+    <view class="item" wx:for="{{list}}" bindtap="toDetail" data-item="{{item}}">
+      <view class="info">
+        <view>包材名称：<text class="text">{{item.name}}</text></view>
+        <view>包材类型：<text class="text">{{item.typeName}}</text></view>
+        <view>所属用户：<text class="text">{{item.tenantName}}</text></view>
+        <view>管理单位：<text class="text">{{item.unitName}}</text></view>
+        <view>在库数量：<text class="text">{{item.storagedNums}}</text></view>
+        <view>未回收数量：<text class="text">{{item.noRecoverNums}}</text></view>
+        <view>备注：<text class="text">{{format.formatTo_(item.remark)}}</text></view>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+
+<view class="footerBtn">
+  <button bindtap="toRegister">包材登记</button>
+</view>

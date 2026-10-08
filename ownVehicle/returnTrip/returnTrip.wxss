@@ -1,0 +1,36 @@
+page{
+  background: #f5f5f5;
+  height: 100%;
+}
+.scorll{
+  height: 100%;
+}
+.table {
+  display: table;
+  width: 100%;
+  border-left: 1rpx solid #eee;
+  border-top: 1rpx solid #eee;
+  background: #fff;
+  table-layout: fixed;
+  margin-bottom: 20rpx;
+}
+
+.table .thead {
+  background: #eef1f6;
+  display: table-row;
+}
+
+.table .tbody {
+  display: table-row;
+}
+
+.table .td {
+  display: table-cell;
+  text-align: center;
+  border-right: 1rpx solid #eee;
+  border-bottom: 1rpx solid #eee;
+  padding: 16rpx 0;
+  line-height: 32rpx;
+  font-size: 24rpx;
+  vertical-align: middle;
+}

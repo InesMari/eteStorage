@@ -1,0 +1,392 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<block wx:if="{{step==1}}">
+<view class="myField">
+  <view class="item clearfix">
+    <view class="label"><text class="red">*</text>客户名称</view>
+    <view class="input-text" bindtap="showCustomerPopover">
+        <view wx:if="{{info.customerName}}">
+          {{info.customerName}}
+        </view>
+        <view style="color:#c8c9cc;" wx:else>请输入查询或直接选择客户名称</view>
+        <van-icon name="arrow-down" class="arrow-down" />
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label"><text class="red">*</text>线路名称</view>
+    <view class="input-text" bindtap="showRouterPopover">
+        <view wx:if="{{info.routeName}}">
+          {{info.routeName}}
+        </view>
+        <view style="color:#c8c9cc;" wx:else>请输入查询或直接选择线路名称</view>
+        <van-icon name="arrow-down" class="arrow-down" />
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label"><text class="red">*</text>业务类型</view>
+    <view class="input-text">
+      <picker mode="selector" range="{{bizTypeList}}" bindchange="bizTypeChange" range-key="codeName" value="{{bizTypeIndex}}">
+        <view wx:if="{{bizTypeList.length !=0 && bizTypeIndex!=null}}">
+          {{bizTypeList[bizTypeIndex].codeName}}
+        </view>
+        <view style="color:#c8c9cc;" wx:else>请选择业务类型</view>
+        <van-icon name="arrow-down" class="arrow-down" />
+      </picker>
+    </view>
+  </view>
+</view>
+<view class="history-title">历史记录</view>
+<view class="history-list clearfix">
+  <view class="item" wx:for="{{routerHistoryList}}" bindtap="selectHis" data-item="{{item}}">{{item.routeName}}</view>
+</view>
+
+<view class="footerBtn">
+  <button bindtap="toNext" data-step="1" disabled="{{!info.routeId}}">下一步</button>
+</view>
+</block>
+
+<!-- 基础信息 -->
+<block wx:if="{{step==2}}">
+<view class="myField">
+  <view class="item clearfix">
+    <view class="label"><text class="red">*</text>线路名称</view>
+    <view class="input-text">
+      {{info.routeName}}
+    </view>
+  </view>
+  <block wx:for="{{info.workList}}">
+  <view class="item spec clearfix">
+    <view class="label"><text class="red">*</text>作业点</view>
+    <view class="input-text">
+        {{item.workName}}
+    </view>
+    <view class="input-text input-text-right">
+      <picker mode="selector" range="{{workTypeList}}" range-key="codeName" value="{{item.workTypeIndex}}">
+        <view wx:if="{{workTypeList.length !=0 && item.workTypeIndex!=null}}">
+          {{workTypeList[item.workTypeIndex].codeName}}
+        </view>
+        <van-icon name="arrow-down" class="arrow-down" />
+      </picker>
+    </view>
+    <view class="disabled-bg"></view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">要求时间</view>
+    <view class="input-text">
+      <datetimepicker placeholder="选择时间" initValue="{{item.workDate}}" bind:change="changeDate" data-index="{{index}}" type="minute"></datetimepicker>
+    </view>
+  </view>
+  </block>
+  <view class="item clearfix">
+    <view class="fl" style="width:50%;">
+      <view class="label">是否加急</view>
+      <view class="input-text">
+        <van-switch checked="{{ info.isUrgent==1 }}" bind:change="switchChange" data-key="isUrgent" size="20px" style="vertical-align: sub;" />
+      </view>
+    </view>
+    <view class="fl" style="width:50%;">
+      <view class="label">是否回单</view>
+      <view class="input-text">
+        <van-switch checked="{{ info.haveReceipt==1 }}" bind:change="switchChange" data-key="haveReceipt" size="20px" style="vertical-align: sub;" />
+      </view>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">订单类型</view>
+    <view class="input-text">
+      <van-radio-group value="{{ info.orderType }}" bind:change="orderTypeChange">
+        <van-radio class="fl" name="1" icon-size="16px">整车</van-radio>
+        <van-radio class="fl" name="3" icon-size="16px">零担</van-radio>
+        <van-radio class="fl" name="2" icon-size="16px">整车-双程</van-radio>
+      </van-radio-group>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">订单备注</view>
+    <view class="input-text">
+      <input type="text" placeholder="请输入内容" value="{{info.remark}}" data-key="remark" bindinput="inputSetDataDefault"></input>
+    </view>
+  </view>
+</view>
+<view class="footerBtn">
+  <button bindtap="toPre" class="preBtn" data-step="2">上一步</button>
+  <button bindtap="toNext" data-step="2" disabled="{{!info.orderType}}">下一步</button>
+</view>
+</block>
+
+<!-- 货物信息 -->
+<block wx:if="{{step==3}}">
+<view class="myFieldList" wx:for="{{info.goodsList}}">
+<view class="myField">
+  <view class="item clearfix">
+    <view class="label"><text class="red">*</text>货物名称</view>
+    <view class="input-text" bindtap="showGoodsPopover" data-index="{{index}}">
+        <view wx:if="{{item.goodsName}}">
+          {{item.goodsName}}
+        </view>
+        <view style="color:#c8c9cc;" wx:else>请输入选择货物名称</view>
+        <van-icon name="arrow-down" class="arrow-down" />
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">货物类别</view>
+    <view class="input-text">
+      <picker mode="selector" range="{{goodsClassTypeList}}" bindchange="goodsClassChange" range-key="codeName" value="{{item.goodsClassIndex}}" data-index="{{index}}">
+        <view wx:if="{{goodsClassTypeList.length !=0 && item.goodsClassIndex!=null}}">
+          {{goodsClassTypeList[item.goodsClassIndex].codeName}}
+        </view>
+        <view style="color:#c8c9cc;" wx:else>货物类别</view>
+        <van-icon name="arrow-down" class="arrow-down" />
+      </picker>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">货物包装</view>
+    <view class="input-text">
+      <picker mode="selector" range="{{goodsPackingTypeList}}" bindchange="packingTypeChange" range-key="codeName" value="{{item.packingTypeIndex}}">
+        <view wx:if="{{goodsPackingTypeList.length !=0 && item.packingTypeIndex!=null}}">
+          {{goodsPackingTypeList[item.packingTypeIndex].codeName}}
+        </view>
+        <view style="color:#c8c9cc;" wx:else>货物包装</view>
+        <van-icon name="arrow-down" class="arrow-down" />
+      </picker>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">货物规格</view>
+    <view class="input-text">
+      <input type="text" placeholder="货物规格" value="{{item.goodsModel}}" data-key="goodsModel" data-index="{{index}}" bindinput="inputSetDataGoodsList"></input>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label"><text class="red">*</text>提货点</view>
+    <view class="input-text">
+      <picker mode="selector" range="{{pickWorkList}}" bindchange="pickWorkChange" range-key="workName" value="{{item.pickWorkIndex}}" data-index="{{index}}">
+        <view wx:if="{{pickWorkList.length !=0 && item.pickWorkIndex!=null}}">
+          {{pickWorkList[item.pickWorkIndex].workName}}
+        </view>
+        <view style="color:#c8c9cc;" wx:else>提货点</view>
+        <van-icon name="arrow-down" class="arrow-down" />
+      </picker>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label"><text class="red">*</text>卸货点</view>
+    <view class="input-text">
+      <picker mode="selector" range="{{dischargeWorkList}}" bindchange="dischargeWorkChange" range-key="workName" value="{{item.dischargeWorkIndex}}" data-index="{{index}}">
+        <view wx:if="{{dischargeWorkList.length !=0 && item.dischargeWorkIndex!=null}}">
+          {{dischargeWorkList[item.dischargeWorkIndex].workName}}
+        </view>
+        <view style="color:#c8c9cc;" wx:else>卸货点</view>
+        <van-icon name="arrow-down" class="arrow-down" />
+      </picker>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">实际件数</view>
+    <view class="input-text">
+      <input type="text" placeholder="实际件数" value="{{item.actualGoodsCount}}" data-key="actualGoodsCount" data-index="{{index}}" bindinput="inputSetDataGoodsList"></input>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="flex">
+      <view class="flex-label fl">件数</view>
+      <view class="flex-input-text fl">
+        <input type="number" placeholder="件" value="{{item.goodsCount}}" data-key="goodsCount" data-index="{{index}}" bindinput="inputSetDataGoodsList"></input>
+      </view>
+    </view>
+    <view class="flex">
+      <view class="flex-label fl">重量</view>
+      <view class="flex-input-text fl">
+        <input type="number" placeholder="kg" value="{{item.goodsWeight}}" data-key="goodsWeight" data-index="{{index}}" bindinput="inputSetDataGoodsList"></input>
+      </view>
+    </view>
+    <view class="flex">
+      <view class="flex-label fl">体积</view>
+      <view class="flex-input-text fl">
+        <input type="number" placeholder="m³" value="{{item.goodsVolume}}" data-key="goodsVolume" data-index="{{index}}" bindinput="inputSetDataGoodsList"></input>
+      </view>
+    </view>
+  </view>
+</view>
+</view>
+<view class="addGood">
+  <image class="add" src="/common/images/add.png" mode="widthFix" bindtap="addGood"></image>
+  <image class="del" src="/common/images/del.png" mode="widthFix" bindtap="delGood"></image>
+</view>
+<view class="footerBtn">
+  <button bindtap="toPre" class="preBtn" data-step="3">上一步</button>
+  <button bindtap="toNext" data-step="3">下一步</button>
+</view>
+</block>
+
+<!-- 费用信息 -->
+<block wx:if="{{step==4}}">
+<view class="myField">
+  <view class="item clearfix">
+    <view class="label">计费方式</view>
+    <view class="input-text">
+      <picker mode="selector" range="{{billingTypeOrderList}}" bindchange="billingTypeChange" range-key="codeName" value="{{billingTypeIndex}}">
+        <view wx:if="{{billingTypeOrderList.length !=0 && billingTypeIndex!=null}}">
+          {{billingTypeOrderList[billingTypeIndex].codeName}}
+        </view>
+        <view style="color:#c8c9cc;" wx:else>计费方式</view>
+        <van-icon name="arrow-down" class="arrow-down" />
+      </picker>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">报价车型</view>
+    <view class="input-text">
+      <picker mode="selector" range="{{vehicleTypeQuoteList}}" bindchange="vehicleTypeQuoteChange" range-key="codeName" value="{{vehicleTypeQuoteIndex}}" data-key="PICK">
+        <view wx:if="{{vehicleTypeQuoteList.length !=0 && vehicleTypeQuoteIndex!=null}}">
+          {{vehicleTypeQuoteList[vehicleTypeQuoteIndex].codeName}}
+        </view>
+        <view style="color:#c8c9cc;" wx:else>报价车型</view>
+        <van-icon name="arrow-down" class="arrow-down" />
+      </picker>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">车型</view>
+    <view class="input-text">
+      <picker mode="selector" range="{{vehicleTypeList}}" bindchange="vehicleTypeChange" range-key="codeName" value="{{vehicleTypeIndex}}">
+        <view wx:if="{{vehicleTypeList.length !=0 && vehicleTypeIndex!=null}}">
+          {{vehicleTypeList[vehicleTypeIndex].codeName}}
+        </view>
+        <view style="color:#c8c9cc;" wx:else>车型</view>
+        <van-icon name="arrow-down" class="arrow-down" />
+      </picker>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">车长</view>
+    <view class="input-text">
+      <picker mode="selector" range="{{vehicleLengthList}}" bindchange="vehicleLengthChange" range-key="codeName" value="{{vehicleLengthIndex}}">
+        <view wx:if="{{vehicleLengthList.length !=0 && vehicleLengthIndex!=null}}">
+          {{vehicleLengthList[vehicleLengthIndex].codeName}}
+        </view>
+        <view style="color:#c8c9cc;" wx:else>车长</view>
+        <van-icon name="arrow-down" class="arrow-down" />
+      </picker>
+    </view>
+  </view>
+  <!-- <view class="item clearfix">
+    <view class="label">结算方式</view>
+    <view class="input-text">
+      <picker mode="selector" range="{{payModeList}}" bindchange="payModeChange" range-key="codeName" value="{{payModeIndex}}">
+        <view wx:if="{{payModeList.length !=0 && payModeIndex!=null}}">
+          {{payModeList[payModeIndex].codeName}}
+        </view>
+        <view style="color:#c8c9cc;" wx:else>车长</view>
+        <van-icon name="arrow-down" class="arrow-down" />
+      </picker>
+    </view>
+  </view> -->
+  <view class="item clearfix">
+    <view class="label">净重(KG)</view>
+    <view class="input-text">
+      <input type="number" placeholder="请输入净重(KG)" value="{{info.fee.netWeight}}" data-key="netWeight" bindinput="inputSetDataFee"></input>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">毛重(KG)</view>
+    <view class="input-text">
+      <input type="number" placeholder="请输入毛重(KG)" value="{{info.fee.grossWeight}}" data-key="grossWeight" bindinput="inputSetDataFee"></input>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">体积(m³)</view>
+    <view class="input-text">
+      <input type="number" placeholder="请输入体积(m³)" value="{{info.fee.volume}}" data-key="volume" bindinput="inputSetDataFee"></input>
+    </view>
+  </view>
+</view>
+<view class="footerBtn">
+  <button bindtap="toPre" class="preBtn" data-step="4">上一步</button>
+  <button bindtap="toNext" data-step="4">下一步</button>
+</view>
+</block>
+
+<block wx:if="{{step==5}}">
+<view class="myField">
+  <view class="item clearfix">
+    <view class="label">计费单价</view>
+    <view class="input-text">
+      {{format.formatToZero(info.fee.freightPrice)}}
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">点位费</view>
+    <view class="input-text">
+      {{format.formatToZero(info.fee.pointFee)}}
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">点位费合计</view>
+    <view class="input-text">
+      {{format.formatToZero(info.fee.totalPointFee)}}
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">运费</view>
+    <view class="input-text">
+      {{format.formatToZero(info.fee.freight)}}
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">提货费</view>
+    <view class="input-text">
+      {{format.formatToZero(info.fee.pickupFee)}}
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">送货费</view>
+    <view class="input-text">
+      {{format.formatToZero(info.fee.deliveryFee)}}
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">费用合计</view>
+    <view class="input-text">
+      {{format.formatToZero(info.fee.totalFee)}}
+    </view>
+  </view>
+</view>
+<view class="footerBtn">
+  <button bindtap="toPre" class="preBtn" data-step="5">上一步</button>
+  <button bindtap="submit" data-step="5">确认新增</button>
+</view>
+</block>
+
+<!-- 选择客户 -->
+<popover is-show="{{isShowCustomerPopover}}">
+  <view class="filter-container">
+    <input type="text" placeholder="请输入客户名称" bindinput='searchCustomerList' value="{{customerSearch}}"></input>
+    <scroll-view class="scrollList" scroll-y="{{true}}">
+      <view class="item" wx:for="{{customerList}}" wx:key="{{index}}" bindtap="selectCustomer" data-item="{{item}}">{{item.name}}</view>
+    </scroll-view>
+  </view>
+</popover>
+<!-- 选择线路 -->
+<popover is-show="{{isShowRouterPopover}}">
+  <view class="filter-container">
+    <input type="text" placeholder="请输入线路名称" bindinput='searchRouterList' value="{{routerSearch}}"></input>
+    <scroll-view class="scrollList" scroll-y="{{true}}">
+      <view class="item" wx:for="{{routerList}}" wx:key="{{index}}" bindtap="selectRouter" data-item="{{item}}">{{item.routeName}}</view>
+    </scroll-view>
+  </view>
+</popover>
+<!-- 选择货物 -->
+<popover is-show="{{isShowGoodsPopover}}">
+  <view class="filter-container">
+    <!-- <input type="text" placeholder="请输入线路名称" bindinput='searchGoodsList' value="{{goodsSearch}}"></input> -->
+    <scroll-view class="scrollList" scroll-y="{{true}}">
+      <view class="title" wx:if="{{goodList1.length>0}}">线路货物：</view>
+      <view class="item" wx:for="{{goodList1}}" wx:key="{{index}}" bindtap="selectGoods" data-item="{{item}}">{{item.goodsName}}</view>
+      <view class="title" wx:if="{{goodList2.length>0}}">常规货物：</view>
+      <view class="item" wx:for="{{goodList2}}" wx:key="{{index}}" bindtap="selectGoods" data-item="{{item}}">{{item.goodsName}}</view>
+      <view class="title" wx:if="{{goodList3.length>0}}">包装货物：</view>
+      <view class="item" wx:for="{{goodList3}}" wx:key="{{index}}" bindtap="selectGoods" data-item="{{item}}">{{item.goodsName}}</view>
+    </scroll-view>
+  </view>
+</popover>

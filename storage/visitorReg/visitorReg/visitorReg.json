@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "来访登记",
+  "usingComponents": {
+    "datetimepicker": "/common/components/datetimepicker/datetimepicker",
+    "mp-license-plate":"/common/components/mp-license-plate/index"    
+  }
+}

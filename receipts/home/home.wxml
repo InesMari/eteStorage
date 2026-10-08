@@ -1,0 +1,25 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<!-- 货主 -->
+<view class="contain">
+  <view class="headInfo">
+    <image class="bg" src="/common/images/info_bg.png"></image>
+    <view class="userInfo" bindtap="goback">
+      <image class="back" src="/common/images/back.png" mode="widthFix"></image>
+    </view>
+    <view class="workName">单据管理</view>
+  </view>
+  <view class="list clearfix">
+    <view  class="item" bindtap="toCashOut" wx:if="{{entitys[1006115]}}">
+      <image src="/common/images/i_14.png"></image>
+      <view class="name">请款单管理</view>
+      <view class="explain">用于请款单的管理</view>
+      <view class="tip" wx:if="{{counts.requestFeeSum > 0}}">{{counts.requestFeeSum}}</view>
+    </view>
+    <view  class="item" bindtap="toWarehousing" wx:if="{{entitys[1006116]}}">
+      <image src="/common/images/i_15.png"></image>
+      <view class="name">付款单管理</view>
+      <view class="explain">用于付款单的管理</view>
+      <view class="tip" wx:if="{{counts.payFeeSum > 0}}">{{counts.payFeeSum}}</view>
+    </view>
+  </view>
+</view>

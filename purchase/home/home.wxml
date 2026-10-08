@@ -1,0 +1,40 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+
+<view class="contain">
+  <view class="headInfo">
+    <image class="bg" src="/common/images/info_bg.png"></image>
+    <view class="userInfo" bindtap="goback">
+      <image class="back" src="/common/images/back.png" mode="widthFix"></image>
+    </view>
+    <view class="workName">采购管理</view>
+  </view>
+  <view class="list clearfix">
+    <view  class="item" bindtap="toFeeApply" wx:if="{{entitys[1014003]}}">
+      <image src="/common/images/i_14.png"></image>
+      <view class="name">费用申请</view>
+      <view class="explain">采购费用申请列表、审核</view>
+      <view class="tip" wx:if="{{counts.feeApplySum > 0}}">{{counts.feeApplySum}}</view>
+    </view>
+    <view  class="item" bindtap="toPurchaseManage" wx:if="{{entitys[1014013]}}">
+      <image src="/common/images/i_30.png"></image>
+      <view class="name">采购单</view>
+      <view class="explain">采购单列表、审核</view>
+      <view class="tip" wx:if="{{counts.purchaseSum > 0}}">{{counts.purchaseSum}}</view>
+    </view>
+    <view  class="item" bindtap="toTakeDeliveryManage" wx:if="{{entitys[1014014]}}">
+      <image src="/common/images/i_9.png"></image>
+      <view class="name">收货入库</view>
+      <view class="explain">采购收货入库管理</view>
+    </view>
+    <view  class="item" bindtap="toReceiveManage" wx:if="{{entitys[1014038]}}">
+      <image src="/common/images/i_31.png"></image>
+      <view class="name">领用管理</view>
+      <view class="explain">领用列表、审核</view>
+    </view>
+    <view  class="item" bindtap="toInventoryManage" wx:if="{{entitys[1014029]}}">
+      <image src="/common/images/i_32.png"></image>
+      <view class="name">库存管理</view>
+      <view class="explain">查看库存、领用物品</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,98 @@
+<wxs src="../../../common/wxs/format.wxs" module="format"></wxs>
+<view class="list mt_20">
+  <view class="item">
+    <view class="wayTitle">
+      <text>基础信息</text>
+    </view>
+    <view class="inner">
+      <view class="info clearfix">
+        <view>配送单号：<text class="text">{{info.waybillInfo.waybillNum}}</text></view>
+        <view>要求出库时间：<text class="text">{{info.waybillInfo.requireDate}}</text></view>
+        <view>配送时间：<text class="text">{{info.waybillInfo.deliveryDate}}</text></view>
+        <view style="width: 50%;float: left;">配送托数：<text class="text">{{info.waybillInfo.palletNums}}</text></view>
+        <view style="width: 50%;float: left;">是否加急：<text class="text">{{info.waybillInfo.isUrgentName}}</text></view>
+        <view style="width: 50%;float: left;">配送状态：<text class="text">{{info.waybillInfo.waybillStateName}}</text></view>
+        <view style="width: 50%;float: left;">是否回单：<text class="text">{{info.waybillInfo.haveReceiptName}}</text></view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="list mt_20">
+  <view class="item">
+    <view class="wayTitle">
+      <text>出库信息</text>
+    </view>
+    <view class="inner" wx:for="{{info.list}}">
+      <view class="info clearfix">
+        <view>出库单号：<text class="text">{{item.outOrderNum}}</text></view>
+        <view>物料编码：<text class="text">{{item.materialNum}}</text></view>
+        <view>物料名称：<text class="text">{{item.materialDesc}}</text></view>
+        <view>送货地址：<text class="text">{{item.workNameDetail}}</text></view>
+        <view style="width: 50%;float: left;">出库托数：<text class="text">{{item.palletNums}}</text></view>
+        <view style="width: 50%;float: left;">配送托数：<text class="text">{{item.palletNums2}}</text></view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="list mt_20">
+  <view class="item">
+    <view class="wayTitle">
+      <text>运输信息</text>
+    </view>
+    <view class="inner">
+      <view class="info clearfix">
+        <view>供应商：<text class="text">{{info.waybillInfo.tenantName}}</text></view>
+        <view>联系人：<text class="text">{{info.waybillInfo.linkman}}</text></view>
+        <view>联系电话：<text class="text">{{info.waybillInfo.linkPhone}}</text></view>
+        <view>运输车辆：<text class="text">{{info.waybillInfo.plateNumber}}</text></view>
+        <view>备注：<text class="text">{{info.waybillInfo.remark}}</text></view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="list mt_20">
+  <view class="item">
+    <view class="wayTitle">
+      <text>运输成本</text>
+    </view>
+    <view class="inner">
+      <view class="info clearfix">
+        <view>计费方式：<text class="text">{{info.costInfo.billingTypeName}}</text></view>
+        <view>报价车型：<text class="text">{{info.costInfo.quoteVehicleTypeName}}</text></view>
+        <view>计费件数：<text class="text">{{info.costInfo.goodsCount}}</text></view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="list mt_20">
+  <view class="item">
+    <view class="wayTitle long">
+      <text>仓配项目成本</text>
+    </view>
+    <view class="inner" wx:for="{{info.costList}}">
+      <view class="info clearfix">
+        <view>供应商：<text class="text">{{item.tenantName}}</text></view>
+        <view>仓配项目：<text class="text">{{item.itemTypeName}}</text></view>
+        <view>数量：<text class="text">{{item.sums}}</text></view>
+        <view>金额：<text class="text">{{item.totalFee}}</text></view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="list mt_20" wx:if="{{info.feeList}}">
+  <view class="item">
+    <view class="wayTitle">
+      <text>运输收入</text>
+    </view>
+    <view class="inner" wx:for="{{info.feeList}}">
+      <view class="info clearfix">
+        <view>货主：<text class="text">{{item.srcTenantName}}</text></view>
+        <view>费用名称：<text class="text">{{item.itemName}}</text></view>
+        <view>单位：<text class="text">{{item.unit}}</text></view>
+        <view>数量：<text class="text">{{item.num}}</text></view>
+      </view>
+    </view>
+  </view>
+</view>

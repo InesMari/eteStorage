@@ -1,0 +1,86 @@
+<wxs src="../../../common/wxs/format.wxs" module="format"></wxs>
+<view id="inspectionDetail" class="inspectionDetailPage" bindtouchstart="handleTouchStart" bindtouchmove="handleTouchMove" bindtouchend="handleTouchEnd">
+  <view class="scanView" wx:if="{{scancodeType == 1}}">
+    <view class="codeView">
+      <input type="text" placeholder="请输入设备号" value="{{equipmentNum}}" bindinput="inputSetDataDefault"></input>
+    </view>
+    <button type="warn" bind:tap="scancode">扫描设备</button>
+    <view class="footerBtn">
+      <button type="success" bind:tap="queryDeviceTask">确定</button>
+    </view>
+  </view>
+  <view class="taskList" wx:if="{{scancodeType == 2}}">
+    <view class="taskTitle">选择巡检任务</view>
+    <view class="taskHead">
+      <view class="taskItem">巡检任务编号</view>
+      <view class="taskItem">规定巡检时间</view>
+    </view>
+    <view class="taskBody" wx:for="{{taskList}}" bind:tap="doQuery" data-item="{{item}}">
+      <view class="taskItem">{{item.taskNum}}</view>
+      <view class="taskItem">
+        <view>{{item.stipulateBeginDate}}</view>
+        <view>至</view>
+        <view>{{item.stipulateEndDate}}</view>
+      </view>
+    </view>
+  </view>
+  <!-- 缩放容器：所有页面内容放这里 -->
+  <view class="zoom-container" wx:if="{{scancodeType == 3}}" style="transform: scale({{gestureState.scaleRatio}}) translate({{gestureState.translateX}}px, {{gestureState.translateY}}px);transform-origin: 0 0;transition: transform 0.1s ease-out;width:{{100/gestureState.scaleRatio}}vw">
+    <view id="inspectionDetailPrint">
+      <view class="tableTitle">
+        <view class="title-p">{{info.title}}</view>
+      </view>
+      <view class="tableBox">
+        <view class="tableCommon">
+          <view class="tr tableTop">
+            <view class="td" colspan="4" style="width: 680rpx;">适用范围</view>
+            <view class="td" style="flex: 1;display: flex;justify-content: space-between;padding: 0 20rpx;">
+              <text>设备编号：{{ info.equipmentNum }}</text>
+              <text>巡检年份：{{ info.inspectYear }}</text>
+            </view>
+          </view>
+          <view class="tr thead">
+            <view class="th" style="width: 80rpx;">序号</view>
+            <view class="th" wx:for="{{head}}" wx:key="index" style="{{'width: ' + item.width + 'rpx;'}}">{{ item.name }}</view>
+          </view>
+          <view class="tr" wx:for="{{tableData}}" wx:key="index">
+            <view class="td" style="width: 80rpx;">{{ index + 1 }}</view>
+            <view class="td" wx:for="{{head}}" wx:for-item="hd" wx:for-index="hdIndex" wx:key="hdIndex" width="{{hd.width}}" style="{{ (item[hd.code] == 'NG' ? 'color: red; ' : '') + 'width: ' + hd.width + 'rpx;' }}">
+              {{ item[hd.code] }}
+            </view>
+          </view>
+          <view class="tr" style="height:70px;">
+            <view class="td" colspan="4" style="width: 680rpx;">点检人姓名：</view>
+            <view class="td lr" wx:for="{{monthsArr}}" style="width:80rpx" wx:key="index">{{ format.formatEmpty(info['name' + (index + 1)]) }}</view>
+          </view>
+          <view class="tr">
+            <view class="td" colspan="4" style="width: 80rpx;">月份</view>
+            <view class="td" style="flex: 1;">巡检备注内容</view>
+          </view>
+          <view class="tr" wx:for="{{monthsArr}}">
+            <view class="td" colspan="4" style="width: 80rpx;">{{index+1}}月</view>
+            <view class="td left" style="flex: 1;">{{info['exceContent' + (index + 1)]}}</view>
+          </view>
+          <view class="tr">
+            <view class="td flex" colspan="4" style="width: 680rpx;">
+              <view>无异常：OK,</view>
+              <view>有异常：NG,</view>
+              <view>待巡检：待,</view>
+              <view>超时未巡检：漏</view>
+            </view>
+            <view class="td" style="flex: 1;">{{ info.principalTips }}：{{ info.principalName }}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<page-container
+  show="{{scancodeType == 2 || scancodeType == 3}}"  
+  overlay="{{false}}"          
+  position="right"              
+  bindbeforeleave="handleBeforeLeave"  
+  style="display: none;"
+>
+</page-container>

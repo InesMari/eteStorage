@@ -1,0 +1,27 @@
+page{
+  height: 100%;
+}
+.mapView{
+  height: calc(100% - 116rpx);
+}
+.van-search__action{
+  padding: 0 22rpx!important;
+  font-size: 28rpx!important;
+}
+.customCallout {
+  box-sizing: border-box;
+  background-color: #fff; 
+  border: 1px solid #efefef;
+  border-radius: 10rpx;
+  width: 250px;
+  display: inline-flex;
+  padding: 6rpx 20rpx;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10rpx rgba(0,0,0,0.15);
+}
+cover-view{
+  word-break: break-all;
+  word-wrap:break-word;
+  white-space:pre-line;
+}

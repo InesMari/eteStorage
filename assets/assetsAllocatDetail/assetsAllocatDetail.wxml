@@ -1,0 +1,128 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<block wx:if="{{!showFinish}}">
+<view class="mb_20">
+<van-cell-group>
+  <van-cell title="标题" value="{{info.title}}" />
+  <van-cell title="调拨编号" value="{{info.allocatNum}}" />
+  <van-cell title="紧急程度" value="{{info.urgentLevelName}}" />
+  <van-cell title="申请人" value="{{info.applyUser}}" />
+  <van-cell title="申请人部门" value="{{info.applyUserOrg}}" />
+  <van-cell title="申请日期" value="{{info.applyDate}}" />
+  <van-cell title="调出部门" value="{{info.allocatSrcOrgName}}" />
+  <van-cell title="调入部门" value="{{info.allocatDestOrgName}}" />
+  <van-cell title="调拨日期" value="{{info.allocatDate}}" />
+  <van-cell title="调出部门审核人" value="{{info.allocatSrcVerifyName}}" />
+  <van-cell title="调出部门审核时间" value="{{info.allocatSrcVerifyDate}}" />
+  <van-cell title="调入部门审核人" value="{{info.allocatDestVerifyName}}" />
+  <van-cell title="调入部门审核时间" value="{{info.allocatDestVerifyDate}}" />
+  <van-cell title="人事审核人" value="{{info.hrVerifyUserName}}" />
+  <van-cell title="人事审时间" value="{{info.hrVerifyDate}}" />
+  <van-cell title="当前审核人" value="{{info.currentVerifyUserName}}" />
+  <van-cell title="调拨原因" value="{{info.allocatReason}}" />
+</van-cell-group>
+</view>
+
+<view class="myField">
+  <view class="goodsInfo clearfix" wx:for="{{info.list}}">
+    <view class="leftIndex">{{index+1}}</view>
+    <view>
+      <view class="item clearfix">
+        <view class="label">资产型号</view>
+        <view class="input-text">
+          {{item.assetsType}}
+        </view>
+      </view>
+      <view class="item clearfix">
+        <view class="label">资产名称</view>
+        <view class="input-text">
+          {{item.assetsName}}
+        </view>
+      </view>
+      <view class="item clearfix">
+        <view class="label">资产描述</view>
+        <view class="input-text">
+          {{item.assetsDescribe}}
+        </view>
+      </view>
+      <view class="item clearfix">
+        <view class="label">数量</view>
+        <view class="input-text">
+          {{item.assetsCount}}
+        </view>
+      </view>
+      <view class="item clearfix">
+        <view class="label">资产原价值</view>
+        <view class="input-text">
+          {{item.assetsOriginal}}
+        </view>
+      </view>
+      <view class="item clearfix">
+        <view class="label">资产折旧价值</view>
+        <view class="input-text">
+          {{item.assetsDepreciation}}
+        </view>
+      </view>
+      <view class="item clearfix">
+        <view class="label">资产编号</view>
+        <view class="input-text">
+          {{item.assetsNum}}
+        </view>
+      </view>
+      <view class="item clearfix">
+        <view class="label">备注</view>
+        <view class="input-text">
+          {{item.assetsRemark}}
+        </view>
+      </view>
+    </view>
+  </view>    
+</view>
+
+<view class="footerBtn btns" wx:if="{{info.showVerify && entitys[1009015]}}">
+  <button class="default" bindtap="audit" data-type="1">审核通过</button>
+  <button bindtap="showUnPassAlertMethod" data-type="2">审核不通过</button>
+</view>
+</block>
+
+<!-- 审核不通过原因 -->
+<alert isshow="{{showUnPassAlert}}" title="提示" class="showUnPassAlert" bind:closealert="cancelAlert" aStyle="width:500rpx;">  
+  <view class="content">
+    <view class="label">请输入审核不通过原因：</view>
+    <input type="text" value="{{remark}}" bindinput="inputSetRemark" placeholder=""></input>
+  </view>
+  <view class="bottom clearfix">
+    <button bindtap="cancelAlert">取消</button>
+    <button bindtap="sureAlert">确定</button>  
+  </view>
+</alert>
+
+
+<!-- 调度完成 -->
+<block wx:if="{{showFinish}}">
+  <view class="finishPage">
+    <van-icon name="checked" />
+    <view class="tipText">审核完成，系统会对应提示申请人</view>
+    <!-- <view class="numTip">请款单：{{info.payNum}}</view>
+    <view class="con">
+      <view class="item clearfix">
+        <text class="label fl">请款部门</text>
+        <text class="fr">{{info.orgName}}</text>
+      </view>
+      <view class="item clearfix">
+        <text class="label fl">请款人</text>
+        <text class="fr">{{info.createUserName}}</text>
+      </view>
+      <view class="item clearfix">
+        <text class="label fl">请款金额</text>
+        <text class="fr">{{info.payFee}}</text>
+      </view>
+      <view class="item clearfix">
+        <text class="label fl">请款日期</text>
+        <text class="fr">{{info.createDate}}</text>
+      </view>
+    </view> -->
+    <view class="finishView">
+      <button bindtap="back">完成</button>
+    </view>
+  </view>
+</block>

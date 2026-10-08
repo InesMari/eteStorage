@@ -1,0 +1,33 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<van-search value="{{ value }}" bind:change="search" placeholder="搜索申请单号、申请部门" />
+<van-tabs active="{{active}}" bind:change="onChange">
+  <van-tab title="待我处理"></van-tab>
+  <van-tab title="全部"></van-tab>
+  <van-tab title="未审核"></van-tab>
+  <van-tab title="审核中"></van-tab>
+  <van-tab title="审核不通过"></van-tab>
+  <van-tab title="审核完"></van-tab>
+  <van-tab title="已处理"></van-tab>
+</van-tabs>
+<image mode="widthFix" wx:if="{{isRefresh}}" class="loading-icon" src="/common/images/loading.gif"></image>
+<scroll-view class="scorll" scroll-y="{{true}}" bindscrolltoupper="toupper" upper-threshold="1" bindscrolltolower="scrolltolowerHandler">
+  <view class="pagelist mt_20">
+    <view class="item" wx:for="{{list}}" bindtap="toDetail" data-item="{{item}}">
+      <view class="inner">
+        <view class="title clearfix"> 
+          <view class="router fl">{{item.applyNum}}</view>
+          <view class="state {{item.state==0?'state1':''}} {{item.state==1?'state2':''}} {{item.state==2?'state':''}} {{item.state==4?'state3':''}} {{item.state==3?'state5':''}}" >
+          {{item.stateName}}</view>
+        </view>
+        <view class="info">
+          <view>申请部门：<text class="text">{{item.orgName}}</text></view>
+          <view>申请人：<text class="text">{{item.applyUserName}}</text></view>
+          <view>费用类型：<text class="text">{{item.feeNames}}</text></view>
+          <view>需求总数：<text class="text">{{item.demandNums}}</text></view>
+          <view>品名/项目：<text class="text">{{item.projectNames}}</text></view>
+          <view>申请日期：<text class="text">{{item.applyDate}}</text></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

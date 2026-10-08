@@ -1,0 +1,96 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<!-- 任务列表 -->
+<view wx:if="{{taskSelect}}">
+  <view wx:if="{{taskList.length<1}}">
+    <view class="noTask">该设备没有待巡检任务。</view>
+  </view>
+  <view wx:else="">
+    <view class="taskList">
+      <view class="taskTitle">选择巡检任务</view>
+      <view class="taskHead">
+        <view class="taskItem">巡检任务编号</view>
+        <view class="taskItem">规定巡检时间</view>
+      </view>
+      <view class="taskBody" wx:for="{{taskList}}" bind:tap="selectTask" data-item="{{item}}">
+        <view class="taskItem">{{item.taskNum}}</view>
+        <view class="taskItem">
+          <view>{{item.stipulateBeginDate}}</view>
+          <view>至</view>
+          <view>{{item.stipulateEndDate}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="contentView" wx:else>
+<view class="topTitle">{{info.info.equipment?info.info.equipment:'设备：'}}:{{format.formatTo_(info.info.equipmentNum)}}</view>
+<van-collapse value="{{ activeNames }}" bind:change="onChangeCollapse">
+  <van-collapse-item title="基本信息" name="1">
+    <van-cell-group class="myCell">
+      <van-cell title="巡检任务" value="{{info.info.taskNum}}" />
+      <van-cell title="任务状态" value="{{info.info.taskStateName}}" />
+      <van-cell title="巡检事项" value="{{format.formatTo_(info.info.inspectionItem)}}" />
+      <van-cell title="执行人" value="{{format.formatTo_(info.info.executorStr)}}" />
+      <van-cell title="规定巡检时间" value="{{format.formatTo_(info.info.stipulateDate)}}" />
+      <van-cell title="备注" value="{{format.formatTo_(info.info.remark)}}" />
+    </van-cell-group>
+  </van-collapse-item>
+</van-collapse>
+<view class="titleTab mt_20" id="constract">点检信息</view>
+<van-cell-group class="breakCell">
+  <van-cell title="{{index+1}}.{{item.inspectItem?(item.inspectItem+'：'):''}}{{item.content}}" wx:for="{{info.standardDtlList}}">
+    <!-- 车辆 -->    
+    <block wx:if="{{item.type==1}}">
+    <view style="color: #333;">巡查要求：{{format.formatTo_(item.inspectRequire)}}</view>
+    <view style="color: #333;" wx:if="{{item.inspectMethodName}}">巡查方法：{{format.formatTo_(item.inspectMethodName)}}</view>
+    <checkbox-group data-index="{{index}}" bind:change="changeAnswer" disabled="{{disabled}}">    
+      <label class="cheboxLabel">
+        <checkbox value="1" checked="{{ item.contentAnswer == 1 }}"/>正常
+      </label>
+      <label class="cheboxLabel">
+        <checkbox value="0" checked="{{ item.contentAnswer == 0 }}"/>异常
+      </label>
+    </checkbox-group>
+    </block>
+    <!-- 温度湿度 -->
+    <block wx:if="{{item.type==2}}">
+      <van-field disabled="{{disabled}}" type="digit" data-index="{{index}}" value="{{ item.contentAnswer }}" placeholder="请输入" bind:change="inputSetData"/>
+    </block>
+    <!-- 异常备注和图片 -->
+    <block wx:if="{{item.contentAnswer==0}}">
+      <view class="inspectContent clearfix">
+        <view class="areaView {{disabled?'disabled':''}}">        
+          <textarea class="remarkArea" placeholder="请输入异常巡检情况" disabled="{{disabled}}" value="{{item.exceContent}}" data-key="exceContent"  data-index="{{index}}"bindinput="inputSetDataDefault"></textarea>
+        </view>
+        <view class="imgView">
+          <van-uploader 
+            file-list="{{item.urls}}" data-index="{{index}}" disabled="{{disabled}}" deletable="{{!disabled}}"
+            bind:after-read="afterReadItem" bind:delete="deleteImgItem" upload-text="上传图片" 
+            show-upload="{{item.urls.length<1}}"
+          />
+        </view>
+      </view>
+    </block>
+  </van-cell>
+  <van-cell title="点检备注">
+    <van-field type="text" disabled="{{disabled}}" value="{{ info.info.submitRemark }}" placeholder="请输入" bind:change="inputSetRemark"/>
+  </van-cell>
+</van-cell-group>
+
+<view class="uploadImg">
+  <view class="list">
+    <view class="item" wx:for="{{info.imgList}}">
+      <view class="title">{{item.imgName}}</view>
+      <van-uploader 
+        file-list="{{item.urls}}" data-index="{{index}}" disabled="{{disabled}}" deletable="{{!disabled}}"
+        bind:after-read="afterRead" bind:delete="deleteImg" upload-text="上传图片" 
+        show-upload="{{item.urls.length<1}}"
+      />
+    </view>
+  </view>
+</view>
+
+<view class="footerBtn" wx:if="{{!disabled && entitys[1005265]}}">
+  <button bindtap="submit">提交</button>
+</view>
+</view>

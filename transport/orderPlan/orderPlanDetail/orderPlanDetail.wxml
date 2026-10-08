@@ -1,0 +1,197 @@
+<wxs src="../../../common/wxs/format.wxs" module="format"></wxs>
+<view class="pageTitle">
+  <image class="bg" src="../../../common/images/detail_bg0.png"></image>
+  <view class="info">
+    <view class="route clearfix">
+      <view class="fl">{{info.orderPlan.routeName}}</view>
+      <view class="fr">{{info.orderPlan.orderTypeName}}</view>
+    </view>
+  </view>
+</view>
+
+<!-- 基本信息 -->
+<view class="fee">
+  <view class="wayTitle">
+    <text>基本信息</text>
+  </view>
+  <view class="detail">
+    <view class="item clearfix">
+      <view class="label">客户</view><view class="text">{{info.orderPlan.orderCustName}}</view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">是否回单</view><view class="text">{{info.orderPlan.isReceiptName}}</view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">起始日期</view><view class="text">{{info.orderPlan.startDate}}</view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">结束日期</view><view class="text">{{info.orderPlan.endDate}}</view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">计划数</view><view class="text">{{info.orderPlan.planCount}}{{info.orderPlan.planCompanyName}}</view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">平台计划编号</view><view class="text">{{format.formatTo_(info.orderPlan.thrdPlanNum)}}</view>
+    </view>
+  </view>
+</view>
+<!-- 作业点信息 -->
+<view class="wayInfo">
+  <view class="wayTitle clearfix">
+    <text>作业点信息</text> 
+  </view>
+  <view class="list">
+      <view class="item clearfix" bindtap="toWayDetail" wx:for="{{info.workData}}" data-item="{{item}}">
+        <view class="state">{{item.workTypeName}}货</view>
+        <image class="state-img" wx:if="{{item.workType==1}}" src="../../../common/images/ti.png"></image>
+        <image class="state-img" wx:if="{{item.workType==2}}" src="../../../common/images/xie.png"></image>
+        <image class="state-img" wx:if="{{item.workType==3}}" src="../../../common/images/tixie.png"></image>
+        <view class="content">
+          <view class="name">{{item.workName}}</view>
+          <view class="site">{{item.workAddressStr}}</view>
+        </view>
+        <van-icon class="arrow" name="arrow" />
+      </view>
+  </view>
+  <!-- <view class="phone">
+    <view bindtap="callService"><image src="/common/images/kefu.png"></image> 致电客服</view>
+    <view bindtap="callDriver"><image src="/common/images/phone.png"></image>致电司机</view>
+  </view> -->
+</view>
+<!-- 单趟收入计费 -->
+<view class="fee detail_common">
+  <view class="wayTitle">
+    <text>单趟收入计费</text>
+  </view>
+  <view class="total">
+    <view class="item">
+      <view>计费方式</view>
+      <view>{{format.formatTo_(info.incomeFee.billingTypeName)}}</view>
+    </view>
+    <view class="item">
+      <view>车型车长</view>
+      <view>{{format.formatTo_(info.incomeFee.quoteVehicleTypeName)}}/{{format.formatTo_(info.incomeFee.vehicleLengthName)}}</view>
+    </view>
+    <view class="item">
+      <view>收入合计</view>
+      <view>￥{{formatToZero(info.incomeFee.totalFee)}}</view>
+    </view>
+  </view>
+  <view class="detail" wx:if="{{isshowIncomeDetail}}">
+    <view class="item clearfix">
+      <view class="label">结算方式</view><view class="text">{{format.formatTo_(info.incomeFee.payModeName)}}</view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">计费单价</view><view class="text">{{format.formatToZero(info.incomeFee.freightPrice)}}</view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">中途点数</view><view class="text">{{format.formatToZero(info.incomeFee.midwayPointNum)}}</view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">点位费</view><view class="text">{{format.formatToZero(info.incomeFee.pointFee)}}</view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">点位费合计（单价 * 中途点数）</view><view class="text">{{format.formatToZero(info.incomeFee.totalPointFee)}}</view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">运费</view><view class="text">{{format.formatToZero(info.incomeFee.freight)}}</view>
+    </view>
+  </view>
+  <view class="showmore" bindtap="showIncomeDetail">单趟收入计费明细
+      <van-icon class="arrow" name="arrow-down" wx:if="{{!isshowIncomeDetail}}" />
+      <van-icon class="arrow" name="arrow-up" wx:if="{{isshowIncomeDetail}}" />
+    </view>
+</view>
+<!-- 单趟成本计费明细 -->
+<view class="fee detail_common">
+  <view class="wayTitle">
+    <text>单趟成本计费</text>
+  </view>
+  <view class="total">
+    <view class="item">
+      <view>计费方式</view>
+      <view>{{format.formatTo_(info.costFee.billingTypeName)}}</view>
+    </view>
+    <view class="item">
+      <view>车型车长</view>
+      <view>{{format.formatTo_(info.costFee.quoteVehicleTypeName)}}/{{format.formatTo_(info.costFee.vehicleLengthName)}}</view>
+    </view>
+    <view class="item">
+      <view>收入合计</view>
+      <view>￥{{format.formatToZero(info.costFee.totalFee)}}</view>
+    </view>
+  </view>
+  <view class="detail" wx:if="{{isshowCostDetail}}">
+    <view class="item clearfix">
+      <view class="label">结算主体</view><view class="text">{{info.costFee.settleBodyName}}</view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">计费单价</view><view class="text">{{format.formatToZero(info.costFee.freightPrice)}}</view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">中途点数</view><view class="text">{{format.formatToZero(info.costFee.midwayPointNum)}}</view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">点位费</view><view class="text">{{format.formatToZero(info.costFee.pointFee)}}</view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">点位费合计（单价 * 中途点数）</view><view class="text">{{format.formatToZero(info.costFee.totalPointFee)}}</view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">运费</view><view class="text">{{format.formatToZero(info.costFee.freight)}}</view>
+    </view>
+  </view>
+  <view class="showmore" bindtap="showCostDetail">单趟成本计费明细
+      <van-icon class="arrow" name="arrow-down" wx:if="{{!isshowCostDetail}}" />
+      <van-icon class="arrow" name="arrow-up" wx:if="{{isshowCostDetail}}" />
+    </view>
+</view>
+<!-- 货物清单 -->
+<view class="goods detail_common">
+  <view class="wayTitle">
+    <text>货物清单</text>
+  </view>
+  <view class="content">
+    <view class="total">
+      <view class="item">
+        <view>件数（件）</view>
+        <view>{{info.orderPlan.goodsCountSum}}</view>
+      </view>
+      <view class="item">
+        <view>重量（KG）</view>
+        <view>{{info.orderPlan.goodsWeightSum}}</view>
+      </view>
+      <view class="item">
+        <view>体积（m³）</view>
+        <view>{{info.orderPlan.goodsVolumeSum}}</view>
+      </view>
+    </view>
+    <view class="detail" wx:if="{{isshowGoodsDetail}}">
+      <view class="item" wx:for="{{info.goodsData}}">
+        <view class="title">{{item.goodsName}}</view>
+        <view class="inner clearfix">
+          <view>规格：{{item.goodsModel}}</view>
+          <view>件数：{{item.goodsCount}}件</view>
+          <view>包装：{{item.packingTypeName}}</view>
+          <view>重量：{{item.goodsWeight}}kg</view>
+          <view>类别：{{item.className}}</view>
+          <view>体积：{{item.goodsVolume}}m³</view>
+        </view>
+      </view>
+    </view>
+    <view class="showmore" bindtap="showGoodsDetail">货物明细
+      <van-icon class="arrow" name="arrow-down" wx:if="{{!isshowGoodsDetail}}" />
+      <van-icon class="arrow" name="arrow-up" wx:if="{{isshowGoodsDetail}}" />
+    </view>
+  </view>
+</view>
+<!-- 单据信息 -->
+<view class="ticket">
+  <view class="wayTitle">
+    <view>绑定供应商/司机/车辆</view>
+    <view class="titleTip">注：只有绑定的供应商/司机才可以领单进行运作</view>
+  </view>
+  <view class="content">
+    <view class="supplierData" wx:for="{{info.supplierData}}">{{index+1}}、{{item.supplierName}}</view>
+  </view>
+</view>

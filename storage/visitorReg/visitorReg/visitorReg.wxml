@@ -1,0 +1,82 @@
+<view class="banner">
+  <image src="/common/images/quesBanner.png" mode="widthFix" alt=""></image>
+</view>
+<view class="tips">
+  <view class="title">来访登记</view>
+  <view class="content">
+    <view>在进入工厂前，敬请仔细阅读和遵循以下规定：</view>
+    <view>1. 访客需扫码登记信息获取来彷凭证，向工作人员出示来访凭证后方可进入</view>
+    <view>2. 车辆厂区内限速15km/h，禁止鸣笛，按指定路线行驶和停放</view>
+    <view>3. 装卸货物时须技指定位置，不得随意停靠,不乱丟皮弃物</view>
+    <view>4. 携带物品外出需办理 《物品出门证》</view>
+    <view>5. 本公司实行禁烟，请勿在厂区内吸烟</view>
+    <view>6. 厂区内未经允许谢绝拍照、摄像</view>
+    <view>7. 未经允许，不得擅自进入办公区、生产或研发车间</view>
+  </view>
+</view>
+<view class="myField"  style="{{disabled?'pointer-events:none':''}}">
+  <view class="item clearfix">
+    <view class="label"><text class="red">*</text>来访人姓名</view>
+    <view class="input-text">
+      <input type="text" placeholder="请输入" value="{{info.visitName}}" data-key="visitName" bindinput="inputSetDataDefault"></input>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label"><text class="red">*</text>来访人联系方式</view>
+    <view class="input-text">
+      <input type="number" placeholder="请输入" value="{{info.visitPhone}}" data-key="visitPhone" bindinput="inputSetDataDefault"></input>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label"><text class="red">*</text>身份证号</view>
+    <view class="input-text">
+      <input type="idcard" placeholder="请输入" value="{{info.idCard}}" data-key="idCard" bindinput="inputSetDataDefault"></input>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">来访人车牌</view>
+    <view class="input-text">
+      <mp-license-plate value="{{info.plateNumber}}" bindchange="changePlate" autoShow="{{false}}" />
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label"><text class="red">*</text>来访时间</view>
+    <view class="input-text">
+      <datetimepicker placeholder="来访时间" bind:change="changeDate" isInit="{{info.visitDate?true:false}}" initValue="{{info.visitDate}}" type="minute" placeholder="请选择来访时间"></datetimepicker>
+      <van-icon class="arrow-down" name="arrow-down" />
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label"><text class="red">*</text>来访所属客户/供应商</view>
+    <view class="input-text">
+      <input type="text" placeholder="请输入" value="{{info.visitCustomer}}" data-key="visitCustomer" bindinput="inputSetDataDefault"></input>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label"><text class="red">*</text>来访事由</view>
+    <view class="input-text">
+      <picker mode="selector" range="{{visitReasonList}}" bindchange="visitReasonChange" range-key="codeName"
+        value="{{visitReasonIndex}}" disabled="{{disabled}}">
+        <view wx:if="{{visitReasonList.length !=0 && visitReasonIndex!=null}}">
+          {{visitReasonList[visitReasonIndex].codeName}}
+        </view>
+        <view style="color:#c8c9cc;" wx:else>请选择来访事由</view>
+        <van-icon name="arrow-down" class="arrow-down" />
+      </picker>
+    </view>
+  </view>
+</view>
+
+<button disabled="{{isSubmit}}" class="submit" bindtap="submit" open-type="liveActivity" createliveactivity="liveActivity" wx:if="{{!disabled}}">提交</button>
+
+<view class="company">广东易迁易物流技术有限公司</view>
+
+<!-- 完成答卷 -->
+
+<view class="endView" wx:if="{{isEnd}}">
+  <view class="content">
+    <image src="/common/images/quesEnd.png" mode="widthFix" alt=""></image>
+    <view>您已经完成本次来访登记，感谢您的配合</view>
+  </view>
+  <view class="endViewCompany">广东易迁易物流技术有限公司</view>
+</view>

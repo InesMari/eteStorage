@@ -1,0 +1,15 @@
+<view class="title">用手机号找回密码</view>
+<view class="logs-inputBox">
+  <view class="field">
+    <view class="item">
+      <image class="icon" src="/common/images/icon_phone.png" mode="widthFix" ></image>
+      <input type="text" type="number" value="{{ phone }}" data-key="phone" placeholder="请输入手机号" bindinput="inputSetData"></input>
+    </view>
+    <view class="item">
+      <image class="icon psw" src="/common/images/icon_password.png" mode="widthFix" ></image>
+      <input type="text" value="{{ smsValidCode }}" data-key="smsValidCode" placeholder="请输入验证码" bindinput="inputSetData"></input>
+      <button class="msg-btn {{!phone||!stamp?'disabled':''}}" bindtap="getCode">{{msg}}</button>
+    </view>
+  </view>
+</view>
+<button class="logs-bot {{!smsValidCode||!phone?'disabled':''}}" bindtap="goNext">下一步</button>

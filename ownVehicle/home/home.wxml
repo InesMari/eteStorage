@@ -1,0 +1,28 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<!-- 货主 -->
+<view class="contain">
+  <view class="headInfo">
+    <image class="bg" src="/common/images/info_bg.png"></image>
+    <view class="userInfo" bindtap="goback">
+      <image class="back" src="/common/images/back.png" mode="widthFix"></image>
+    </view>
+    <view class="workName">自有车管理</view>
+  </view>
+  <view class="list clearfix">
+    <view  class="item" bindtap="toOwnVehicleStatistics" wx:if="{{entitys[1002233]}}">
+      <image src="/common/images/i_42.png"></image>
+      <view class="name">自有车运力统计</view>
+      <view class="explain">自有车运力统计</view>
+    </view>
+    <view  class="item" bindtap="toVehicleWaybillCostManage" wx:if="{{entitys[1002130]}}">
+      <image src="/common/images/i_40.png"></image>
+      <view class="name">自有车变动成本</view>
+      <view class="explain">自有车变动成本</view>
+    </view>
+    <view  class="item" bindtap="toVehicleRepairCostManage" wx:if="{{entitys[1002131]}}">
+      <image src="/common/images/i_41.png"></image>
+      <view class="name">车辆修理成本</view>
+      <view class="explain">车辆修理成本</view>
+    </view>
+  </view>
+</view>

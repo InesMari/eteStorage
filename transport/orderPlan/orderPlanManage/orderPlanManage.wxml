@@ -1,0 +1,70 @@
+<wxs src="../../../common/wxs/format.wxs" module="format"></wxs>
+<van-search value="{{ value }}" bind:change="search" placeholder="输入线路、客户名称模糊搜索订单包" />
+<image mode="widthFix" wx:if="{{isRefresh}}" class="loading-icon" src="/common/images/loading.gif"></image>
+<scroll-view class="scorll" scroll-y="{{true}}" bindscrolltoupper="toupper" upper-threshold="1" bindscrolltolower="scrolltolowerHandler">
+  <view class="list mt_20">
+    <view class="item" wx:for="{{list}}" wx:key="id" bindtap="toDetail" data-item="{{item}}">
+      <view class="inner">
+        <view class="title clearfix"> 
+          <view class="router fl">{{item.routeName}}</view>
+          <view class="state {{item.sts==0?'state0':''}} {{item.sts==1?'state1':''}} {{item.sts==2?'state2':''}} {{item.sts==3?'state3':''}} {{item.sts==5?'state5':''}}" >
+          {{item.stsName}}</view>
+        </view>
+        <view class="info">
+          <view>下单客户：<text class="text">{{item.orderCustName}}</text></view>
+          <view>订单包数：<text class="text">{{item.planCount}}</text></view>
+          <view>剩余订单包数：<text class="text">{{item.planUnCount}}</text></view>
+          <view>订单类型：<text class="text">{{item.orderTypeName}}</text></view>
+          <view>查看小程序码：<text class="text link" catchtap="visitCode" data-item="{{item}}">点击查看</text></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+
+<view class="footerBtn" wx:if="{{entitys[1003031]}}">
+  <button bindtap="addOrderPlan">新增订单包</button>
+</view>
+
+<!-- 小程序码弹窗 -->
+<view class="code-dialog" wx:if="{{showCodeDialog}}">
+  <view class="mask" bindtap="closeCodeDialog"></view>
+  <view class="dialog-content">
+    <view class="orderView">
+      <view class="orderHeader">
+        <image class="logo" src="/common/images/logo.png" mode="heightFix"></image>
+        <view class="oderNumInfo">
+          <view class="name">订单号</view>
+          <view class="value">{{currentItem.planNum}}</view>
+        </view>
+      </view>
+      <view class="oderInfo">
+        <view class="item">
+          <view class="label">订单类型：</view>
+          <view class="text">
+            <view class="site">{{currentItem.orderTypeName}}</view>
+          </view>
+        </view>
+        <view class="item" wx:for="{{currentItem.workData}}" wx:key="index">
+          <view class="label">{{item.workTypeName}}货地址：</view>
+          <view class="text">
+            <view class="site">{{item.workName}}</view>
+            <view class="tip">{{item.workAddressStr}}</view>
+          </view>
+        </view>
+      </view>
+      <view class="codeView">
+        <view class="title" wx:if="{{currentItem.thrdPlanNum}}">宝奇司机APP</view>
+        <view class="title" wx:else>易迁易小程序</view>
+        <image class="code-img" src="{{currentItem.qrcodeFileUrl}}" mode="widthFix"></image>
+        <view class="tip">
+          <view>分享扫描二维码查看相关信息</view>
+          <view>二维码始终有效</view>
+        </view>
+      </view>
+    </view>
+    <view class="dialog-footer">
+      <button class="close-btn" bindtap="closeCodeDialog">关闭</button>
+    </view>
+  </view>
+</view>

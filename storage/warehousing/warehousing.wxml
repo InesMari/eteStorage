@@ -1,0 +1,189 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<view class="pageView">
+  <view class="myField">
+    <view class="item clearfix">
+      <view class="label">入库单号：</view>
+      <view class="input-text" bindtap="showOutOrderMaterialPopover">
+        <view wx:if="{{info.info.inOrderNum}}">
+          {{info.info.inOrderNum}}
+        </view>
+        <view style="color:#c8c9cc;" wx:else>请选择入库单</view>
+        <van-icon name="arrow-down" class="arrow-down" />
+      </view>
+    </view>
+  </view>  
+  <van-icon class="orderScan" name="scan" bindtap="orderScan"/>
+</view>
+<view class="pageView" wx:if="{{info}}">
+  <view class="baseInfo">
+    <view class="wayTitle">
+      <text>入库单基础信息</text>
+    </view>
+    <view class="detail">
+      <view class="item">
+        <view class="inner clearfix">
+          <view>入库单号：{{info.info.inOrderNum}}</view>
+          <view>预计入库时间：{{info.info.requireInDate}}</view>
+          <view>货主：{{info.info.srcTenantName}}</view>
+          <view class="view33">入库箱数：{{info.info.boxNums}}</view>
+          <view class="view33">入库托数：{{info.info.palletNums}}</view>
+          <view class="view33">入库数量：{{info.info.nums}}</view>
+          <view class="view33">实际箱数：<text class="red">{{info.info.realBoxNums}}</text></view>
+          <view class="view33">入库托数：<text class="red">{{info.info.realPalletNums}}</text></view>
+          <view class="view33">入库数量：<text class="red">{{info.info.realNums}}</text></view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="tabs clearfix">
+    <view class="tabItem {{item.active?'active':''}}" bindtap="changeTab" data-index="{{index}}" wx:for="{{info.materialList}}">物料{{index+1}}</view>
+  </view>
+  <view class="baseInfo">
+    <view class="detail" style="padding-top: 20rpx;">
+      <view class="item">
+        <view class="inner clearfix">
+          <view>物料编码：{{info.materialList[currentMaterialIndex].materialNum}}</view>
+          <view>物料描述：{{info.materialList[currentMaterialIndex].materialDesc}}</view>
+          <view>到货厂商：{{info.materialList[currentMaterialIndex].fromTenantName}}</view>
+          <view class="view50">批次号：{{info.materialList[currentMaterialIndex].batchNum}}</view>
+          <view class="view50">供应商批次号：{{info.materialList[currentMaterialIndex].supplierBatchNum}}</view>
+          <view class="view50">ASN：{{info.materialList[currentMaterialIndex].asn}}</view>
+          <view class="view50">入库数量：{{info.materialList[currentMaterialIndex].nums}}</view>
+          <view class="view50">箱数量：{{info.materialList[currentMaterialIndex].boxNums}}</view>
+          <view class="view50">托数：{{info.materialList[currentMaterialIndex].palletNums}}</view>
+          <view style="line-height: 48rpx;">时代条码：
+            <view style="display:inline-block;border: 1rpx solid #ccc;padding: 0 16rpx;border-radius: 6rpx;background: #efefef;">{{info.materialList[currentMaterialIndex].codeNum}}</view>
+            <van-icon class="sdCodeScan" name="scan" bindtap="sdCodeScan"/>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+<view class="wayTitle">
+  <text>物料入库情况</text>
+</view>
+
+<view class="warehouseInfo" wx:for="{{info.materialList[currentMaterialIndex].list}}">
+  <view class="clearfix">
+    <view class="table">
+      <view class="tr">
+        <view class="th">库区</view>
+        <view class="th">库位</view>
+      </view>
+      <view class="tr">
+        <view class="td">
+          <picker mode="selector" range="{{reservoirList}}" bindchange="reservoirChange"
+            range-key="reservoirName" value="{{item.reservoirIndex}}" data-index="{{index}}">
+            <view wx:if="{{reservoirList.length !=0 && item.reservoirIndex!=null}}">
+              {{reservoirList[item.reservoirIndex].reservoirName}}
+            </view>
+            <view style="color:#c8c9cc;" wx:else>请选择</view>
+            <van-icon name="arrow-down" class="arrow-down" />
+          </picker>
+        </view>
+        <view class="td">
+          <picker mode="selector" range="{{storageList}}" bindchange="storageChange"
+            range-key="storageCode" value="{{item.storageIndex}}" data-index="{{index}}">
+            <view wx:if="{{storageList.length !=0 && item.storageIndex!=null}}">
+              {{storageList[item.storageIndex].storageCode}}
+            </view>
+            <view style="color:#c8c9cc;" wx:else>请选择</view>
+            <van-icon name="arrow-down" class="arrow-down" />
+          </picker>
+        </view>
+      </view>
+      <view class="tr">
+        <view class="th">实际入库数量</view>
+        <view class="th">实际入库箱数</view>
+        <view class="th">实际入库托数</view>
+      </view>
+      <view class="tr">
+        <view class="td">
+          <input type="number" placeholder="请输入" value="{{item.realNums}}" data-key="realNums" data-index="{{index}}" bindinput="inputSetDataAndCal"></input>
+        </view>
+        <view class="td">
+          <input type="number" placeholder="请输入" value="{{item.realBoxNums}}" data-key="realBoxNums" data-index="{{index}}" bindinput="inputSetDataAndCal"></input>
+        </view>
+        <view class="td">
+          <input type="number" placeholder="请输入" value="{{item.realPalletNums}}" data-key="realPalletNums" data-index="{{index}}" bindinput="inputSetDataAndCal"></input>
+        </view>
+      </view>
+    </view>
+    <view class="opBtns">
+      <van-icon class="add" name="add-square" bindtap="addItem" wx:if="{{index == 0}}" />
+      <view class="minus" bindtap="delItem" wx:if="{{index != 0}}" data-index="{{index}}"></view>
+      <van-icon class="scan" name="scan" bindtap="doScan" data-index="{{index}}" />
+      <van-icon class="delete" name="delete" bindtap="clearNum" data-index="{{index}}" />
+    </view>
+  </view>
+  <view class="inner clearfix">
+    <view class="innerFrom">每张条码数量：
+          <input type="number" placeholder="请输入" value="{{item.perNum}}" data-index="{{index}}" bindinput="inputSetDataPerNum"></input>
+    </view>
+    <view class="innerFrom">条码张数：
+      <input type="number" disabled="{{true}}" value="{{item.perPaperNum}}" style="background: #efefef;"></input>
+    </view>
+  </view>
+  <view class="inner clearfix">
+    <view class="innerFrom">是否冻结
+      <van-switch checked="{{ item.freezeState == 1 }}" bind:change="onFreezeChange" data-index="{{index}}" size="14px" />
+    </view>    
+    <button bindtap="sdScan" class="sdScanBtn" data-index="{{index}}"><van-icon class="sdScan" name="scan"/>时代扫码</button>
+  </view>  
+  <view id="{{'scanTable'+index}}" class="scanTable" wx:if="{{item.qrcodeList.length>0}}">
+    <view class="tr">
+      <view class="th">序号</view>
+      <view class="th" style="flex: 6;">条形编码</view>
+      <view class="th" style="flex: 2;">条码数量</view>
+      <view class="th">操作</view>
+    </view>
+    <view class="tr" wx:for="{{item.qrcodeList}}" wx:for-item="innerItem" wx:for-index="innerIndex">
+      <view class="td">{{innerIndex+1}}</view>
+      <view class="td" style="flex: 6;">{{innerItem.codeNum}}</view>
+      <view class="td" style="flex: 2;">
+        <input type="number" placeholder="请输入" value="{{innerItem.nums}}"  data-listindex="{{index}}" data-index="{{innerIndex}}" bindinput="inputSetDataSDnums" style="text-align: center;"></input>
+      </view>
+      <view class="td"><van-icon name="delete" class="del" bindtap="delScanCode" data-listindex="{{index}}" data-index="{{innerIndex}}" /></view>
+    </view>
+  </view>
+</view>
+
+
+<view class="wayTitle">
+    <text>包材信息</text>
+  </view>
+  <view class="scanTable" wx:if="{{info.packMaterialList.length>0}}">
+    <view class="tr">
+      <view class="th">序号</view>
+      <view class="th" style="flex: 4;">可回收包材</view>
+      <view class="th" style="flex: 2;">入库数量</view>
+      <view class="th" style="flex: 2;">实际入库数量</view>
+    </view>
+    <view class="tr" wx:for="{{info.packMaterialList}}">
+      <view class="td">{{index+1}}</view>
+      <view class="td" style="flex: 4;">{{item.name}}</view>
+      <view class="td" style="flex: 2;">{{item.nums}}</view>
+      <view class="td" style="flex: 2;">        
+        <input type="text" placeholder="请输入" value="{{item.realNums}}" data-index="{{index}}" bindinput="inputSetPackData" style="text-align: center;"></input>         
+      </view>
+    </view>
+  </view>
+
+</view>
+
+<view class="footerBtn btns">
+  <button bindtap="submit">扫码完成</button>
+</view>
+
+<!-- 选择入库单 -->
+<popover is-show="{{isShowOutOrderMaterialPopover}}">
+  <view class="filter-container">
+    <input type="text" placeholder="请输入入库单号" bindinput='searchOutOrderMaterialList'
+      value="{{outOrderMaterialSearch}}"></input>
+    <scroll-view class="scrollList" scroll-y="{{true}}">
+      <view class="item {{item.select?'active':''}}" wx:for="{{outOrderMaterialList}}" wx:key="{{index}}"
+        bindtap="selectOutOrderMaterial" data-item="{{item}}" data-index="{{index}}">{{item.inOrderNum}}</view>
+    </scroll-view>
+  </view>
+</popover>

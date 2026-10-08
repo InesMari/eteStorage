@@ -1,0 +1,52 @@
+@import '/pages/login/login.wxss';
+.logs-inputBox{
+  width:auto;
+  padding:0 20rpx 0 34rpx;
+}
+.logs-inputBox .field{
+  margin-top: 140rpx;
+}
+.logs-inputBox .field .item{
+  padding-left: 54rpx;
+}
+.logs-bot{
+  margin-top: 140rpx;
+}
+.verifyTitle{
+  font-size: 42rpx;
+  margin-bottom: 10rpx;
+}
+.verifyIpt{
+  border-bottom: 1rpx solid #efefef;
+  position: relative;
+  padding: 20rpx 0;
+}
+.verifyIpt van-icon{
+  position: absolute;
+  top: 30rpx;
+  right:0;
+}
+.verifyIpt .van-icon{
+  color: #999;
+  cursor: pointer;
+}
+/* .list{
+  width: 600rpx;
+  margin: 20rpx auto 20rpx;
+} */
+.list .item{
+  width: 90rpx;
+  height: 90rpx;
+  border: 1rpx solid #dee2e9;
+  border-radius: 5rpx;
+  background: #fff;
+  float: left;
+  box-sizing: border-box;
+  margin-right:20rpx;
+}
+.list .item input{
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  font-size: 34rpx;
+}

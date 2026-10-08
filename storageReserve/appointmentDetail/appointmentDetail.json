@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "到仓报到",
+  "usingComponents": {
+    "datetimepicker": "/common/components/datetimepicker/datetimepicker"    
+  }
+}

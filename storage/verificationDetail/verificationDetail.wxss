@@ -1,0 +1,242 @@
+page {
+  background: #F1F2F5;
+}
+.main{  
+  padding: 30rpx;
+}
+/* 货物信息 */
+.goods {
+  background: #fff;
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.wayTitle{
+  line-height: 1;
+  margin-bottom: 38rpx;
+  padding: 30rpx 30rpx 0;
+  font-weight: bold;
+  position: relative;
+}
+.wayTitle::after{
+  content: '';
+  border-bottom: 4rpx solid #333;
+  position: absolute;
+  bottom:-10rpx;
+  left: 30rpx;
+  width: 112rpx;
+}
+
+.goods .detail {}
+
+.goods .detail .item {
+  border-bottom: 1rpx solid #F6F6F6;
+}
+
+.goods .detail .item:last-child {
+  border: none;
+}
+
+.goods .detail .title {
+  margin: 24rpx 0;
+  padding: 0 30rpx;
+}
+
+.goods .detail .inner {
+  padding: 0 30rpx;
+}
+
+.goods .detail .inner .innerItem {
+  float: left;
+  width: 50%;
+  margin-bottom: 20rpx;
+  font-size: 24rpx;
+  color: #666;
+  display: flex;
+}
+.goods .detail .inner .innerItem>view{
+  width: 144rpx;
+  text-align: right;
+  padding-right: 15rpx;
+}
+/* 费用信息 */
+.fee {
+  border-radius: 20rpx;
+  background: #fff;
+  margin-bottom: 20rpx;
+}
+
+.fee .detail {
+  padding: 0 30rpx 15rpx; 
+  margin-top: 20rpx;
+  border-bottom: 1rpx solid #F6F6F6;
+}
+
+.fee .detail .item {
+  line-height: 56rpx;
+  font-size: 28rpx;
+  display: flex;
+  border-bottom: 1rpx solid #eee;
+}
+
+.fee .detail .item:last-child{
+  border-bottom: none;
+}
+
+.fee .detail .item .label {
+  width: 144rpx;
+  padding-right: 8rpx;
+  text-align: right;
+  color: #666;
+  font-size: 24rpx;
+  border-right: 1rpx solid #eee;
+}
+
+.fee .detail .item .text {
+  flex: 1;
+  color: #666;
+  font-size: 24rpx;
+  padding-left: 15rpx;
+}
+
+.fee .totalSum {
+  display: block;
+  text-align: right;
+  font-size: 32rpx;
+  padding: 0 30rpx;
+  line-height: 90rpx;
+  border-bottom: 1rpx solid #F6F6F6;
+  color: #E12006;
+}
+
+.fee .feeList {
+  display: flex;
+  padding: 30rpx 0;
+  margin-bottom: 20rpx;
+}
+
+.fee .feeList .item {
+  flex: 1;
+  -webkit-flex: 1;
+  text-align: center;
+  color: #666;
+}
+
+.fee .feeList .item>view:first-child {
+  margin-bottom: 10rpx;
+}
+.operation{
+  padding: 10rpx 20rpx;
+}
+.operation .item {
+  float: left;
+  width: 50%;
+  margin-bottom: 20rpx;
+}
+
+.operation .item .name {
+  width: 140rpx;
+  line-height: 55rpx;
+  border-radius: 6rpx;
+  font-size: 24rpx;
+  background: #1990ff;
+  color: #fff;
+  text-align: center;
+  float: left;
+}
+
+.operation .item .state {
+  line-height: 55rpx;
+  margin-left: 10rpx;
+  float: left;
+  font-size: 24rpx;
+}
+
+.alert .con{
+  padding: 20rpx;
+}
+.alert van-radio-group{
+  display: flex;
+}
+.alert van-radio-group van-radio{
+  flex: 1;
+}
+.alert .van-radio{
+  justify-content: center;
+  margin-right: 30rpx;
+}
+.alert textarea{
+  border: 1rpx solid #eee;
+  padding: 20rpx;
+  margin-top: 20rpx;
+  border-radius: 8rpx;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 26rpx;
+  height: 150rpx;
+}
+.alert .textarea-placeholder{
+  font-size: 26rpx;
+}
+.alert .bottom{
+  border-top:1rpx solid #f6f6f6;
+}
+.alert .bottom button{
+  width: 50%;
+  font-size: 26rpx;
+  float: left;
+  line-height: 80rpx;
+  border-right:1rpx solid #f6f6f6;
+  background: #fff;
+  box-sizing: border-box;
+}
+.alert .bottom button:last-child{
+  border:none;
+  background: #1990ff;
+  color: #fff;
+  border-radius: 0;
+}
+.upload-show{
+  pointer-events: none;
+  width: 460rpx;
+  height: 460rpx;
+  position: relative;
+  border-radius: 10rpx;
+  box-sizing: border-box;
+  background: #fff;
+  border: 1rpx solid #eee;
+  margin-top: 20rpx;
+}
+.upload-show .bg{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.upload-show .icon{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -50rpx 0 0 -50rpx;
+  width: 100rpx;
+  height: 100rpx;
+  z-index: 9;
+}
+.upload-show text{
+  position: absolute;
+  bottom: 22rpx;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 26rpx;
+}
+.van-uploader__preview-image{
+  width: 460rpx!important;
+  height: 460rpx!important;
+  margin-top: 20rpx;
+}
+.van-uploader__preview-delete{
+  top:20rpx;
+}

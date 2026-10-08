@@ -1,0 +1,33 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<van-search value="{{ value }}" bind:change="search" placeholder="搜索申请单号、申请部门" />
+<van-tabs active="{{active}}" bind:change="onChange">
+  <van-tab title="全部"></van-tab>
+  <van-tab title="未确认"></van-tab>
+  <van-tab title="已确认"></van-tab>
+</van-tabs>
+<image mode="widthFix" wx:if="{{isRefresh}}" class="loading-icon" src="/common/images/loading.gif"></image>
+<scroll-view class="scorll" scroll-y="{{true}}" bindscrolltoupper="toupper" upper-threshold="1" bindscrolltolower="scrolltolowerHandler">
+  <view class="pagelist mt_20">
+    <view class="item" wx:for="{{list}}" bindtap="toDetail" data-item="{{item}}">
+      <view class="inner">
+        <view class="title clearfix"> 
+          <view class="router fl">{{item.deliveryNum}}</view>
+          <view class="state {{item.confirmState==0?'state1':''}} {{item.confirmState==1?'state2':''}} {{item.confirmState==2?'state':''}} {{item.confirmState==4?'state3':''}} {{item.confirmState==3?'state5':''}}" >
+          {{item.confirmStateName}}</view>
+        </view>
+        <view class="info">
+          <view>采购单单号：<text class="text">{{item.purchaseNum}}</text></view>
+          <view>物品种类：<text class="text">{{item.feeSubTypeName}}</text></view>
+          <view>入库数量：<text class="text">{{item.deliveryTotalNums}}</text></view>
+          <view>入库地：<text class="text">{{format.formatTo_(item.workName)}}</text></view>
+          <view>入库日期：<text class="text">{{item.inDate}}</text></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+
+
+<view class="footerBtn">
+  <button bindtap="takeDelivery">收货入库</button>
+</view>

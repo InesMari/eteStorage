@@ -1,0 +1,60 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<view class="headInfo">
+  <image wx:if="{{info.state<0||info.state>3}}" class="bg" src="../../common/images/detail_bg3.png"></image>
+  <image wx:if="{{info.state==2}}" class="bg" src="../../common/images/detail_bg0.png"></image>
+  <image wx:if="{{info.state==0}}" class="bg" src="../../common/images/detail_bg1.png"></image>
+  <image wx:if="{{info.state==1}}" class="bg" src="../../common/images/detail_bg2.png"></image>
+  <image wx:if="{{info.state==3}}" class="bg" src="../../common/images/detail_bg3.png"></image>
+  <view class="number"></view>
+  <view class="workName">{{info.verifyStateName}}</view>
+</view>
+
+<view class="detailView">
+  <view class="titleTab fw">领用信息</view>
+  <view class="pagelist">
+    <view class="item">
+      <view class="inner">
+        <view class="info clearfix">
+          <view>物品种类：<text class="text">{{info.feeSubTypeName}}</text></view>
+          <view>品名：<text class="text">{{info.projectName}}</text></view>
+          <view>规格型号：<text class="text">{{info.specification}}</text></view>
+          <view>固定资产编号：<text class="text">{{info.stockNum}}</text></view>
+          <view>库存地：<text class="text">{{info.workName}}</text></view>
+          <view>数量单位：<text class="text">{{info.unit}}</text></view>
+          <view>领用部门：<text class="text">{{info.useOrgName}}</text></view>
+          <view>领用人员：<text class="text">{{info.useUserName}}</text></view>
+          <view>领用数量：<text class="text">{{info.useNums}}</text></view>
+          <view>审核人：<text class="text">{{info.useUserName}}</text></view>
+          <view>审核意见：<text class="text">{{info.verifyStateName}}</text></view>          
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<block wx:if="{{fileList.length>0}}">
+<view class="titleTab fw">固定资产标识卡</view>
+<view class="uploadImg clearfix">
+  <view class="imgItem" wx:for="{{fileList}}">
+    <fileviewer url="{{item.fileUrl}}"></fileviewer>
+  </view>
+</view>
+</block>
+
+
+<view class="footerBtn btns" wx:if="{{info.showPass}}">
+  <button class="default" bindtap="showAlertMethod" data-type="1">审核通过</button>
+  <button bindtap="showAlertMethod" data-type="2">审核不通过</button>
+</view>
+
+<!-- 审核不通过原因 -->
+<alert isshow="{{showAlert}}" title="提示" class="showAlert" bind:closealert="cancelAlert" aStyle="width:500rpx;">  
+  <view class="content">
+    <view class="label">请输入审核意见：</view>
+    <input type="text" value="{{remark}}" bindinput="inputSetRemark" placeholder=""></input>
+  </view>
+  <view class="bottom clearfix">
+    <button bindtap="cancelAlert">取消</button>
+    <button bindtap="sureAlert">确定</button>  
+  </view>
+</alert>

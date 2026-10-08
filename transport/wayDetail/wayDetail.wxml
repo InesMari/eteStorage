@@ -1,0 +1,15 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<van-cell-group>
+  <van-cell title="作业点名称" value="{{info.workName}}" />
+  <van-cell title="详细地址" value="{{info.workAddress}}" />
+  <van-cell title="作业内容" value="{{info.workTypeName}}" />
+  <van-cell title="要求运作时间" value="{{format.formatTo_(info.workDate)}}" />
+  <van-cell title="联系人" value="{{info.linkmanName}}" />
+  <van-cell title="联系手机" value="{{info.bill}}" />
+  <van-cell title="联系电话" value="{{info.phone}}" />
+</van-cell-group>
+
+
+<!-- <view class="footerBtn">
+  <button bindtap="back">返回</button>
+</view> -->

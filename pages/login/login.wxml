@@ -1,0 +1,29 @@
+<view class="contain">
+    <view class="title">Hi，欢迎登录易迁易平台小程序</view>
+    <view class="logs-inputBox">
+      <view class="type">
+        <!-- <view class="item"><text class="active">验证码登录</text></view>
+        <view class="item"><text>密码登录</text></view> -->
+      </view>
+      <view class="field">
+        <view class="item">
+          <image class="icon" src="/common/images/icon_phone.png" mode="widthFix" ></image>
+          <input type="text" type="number" value="{{ username }}" placeholder="请输入手机号" bind:input="username"></input>
+        </view>
+        <view class="item">
+          <image class="icon psw" src="/common/images/icon_password.png" mode="widthFix" ></image>
+          <input value="{{ password }}" type="password" password="{{true}}" placeholder="请输入密码" bind:input="password"></input>
+        </view>
+      </view>
+      <view class="forgetPassword" bindtap="toForgetPsw">忘记密码？</view>
+    </view>
+    <button class="logs-bot {{!username||!password||disabled?'disabled':''}}" open-type="getUserInfo" bindgetuserinfo="login">登<text style="margin:0 25rpx;"></text>录</button>
+    <!-- <view class="protocol">
+        点击登录，即表示已阅读并同意 <view class="protocol-text span" bindtap="protocol">《易迁易用户协议》</view>
+    </view> -->
+</view>
+<image class="loginBg" src="/common/images/loginBg.png" mode="widthFix" ></image>
+
+<!-- 开发测试仓库预约列表入口 -->
+<view wx:if="{{isTest}}" class="storageList" bind:tap="toStorageList" style="position: absolute;bottom:20%;text-align: center;width: 100%;text-decoration: underline;">仓库列表</view>
+<view wx:if="{{isTest}}" class="storageList" bind:tap="toVisitorReg" style="position: absolute;bottom:17%;text-align: center;width: 100%;text-decoration: underline;">来访登记</view>

@@ -1,0 +1,27 @@
+<wxs src="../../../common/wxs/format.wxs" module="format"></wxs>
+<van-search value="{{ value }}" bind:change="search" placeholder="输入关键字模糊搜索" />
+<van-tabs active="{{active}}" bind:change="onChange">
+  <van-tab title="全部"></van-tab>
+  <van-tab title="未配送"></van-tab>
+  <van-tab title="已配送"></van-tab>
+</van-tabs>
+<image mode="widthFix" wx:if="{{isRefresh}}" class="loading-icon" src="/common/images/loading.gif"></image>
+<scroll-view class="scorll" scroll-y="{{true}}" bindscrolltoupper="toupper" upper-threshold="1" bindscrolltolower="scrolltolowerHandler">
+  <view class="list mt_20">
+    <view class="item" wx:for="{{list}}" bindtap="toDetail" data-item="{{item}}">
+      <view class="inner">
+        <view class="info clearfix">
+          <view>配送单号：<text class="text">{{item.waybillNum}}</text></view>
+          <view>供应商：<text class="text">{{item.tenantName}}</text></view>
+          <view style="width: 50%;float: left;">出库数量：<text class="text">{{item.nums}}</text></view>
+          <view style="width: 50%;float: left;">配送托数：<text class="text">{{item.palletNums}}</text></view>
+          <view style="width: 50%;float: left;">车牌号：<text class="text">{{item.plateNumber}}</text></view>
+          <view style="width: 50%;float: left;">配送状态：<text class="text">{{item.waybillStateName}}</text></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+<!-- <view class="footerBtn" wx:if="{{entitys[1005095]}}">
+  <button bindtap="add">新增短驳</button>
+</view> -->

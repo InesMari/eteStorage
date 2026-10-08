@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "零担派车",
+  "usingComponents": {
+    "popover": "/common/components/popover/popover"    
+  }
+}

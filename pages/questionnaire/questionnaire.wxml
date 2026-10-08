@@ -1,0 +1,169 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<view class="banner">
+  <image src="/common/images/quesBanner.png" mode="widthFix" alt=""></image>
+</view>
+<view class="startWord">
+  <text>{{info.startWords}}</text>
+</view>
+<view class="putTable clearfix">
+  <view class="item">
+    <view class="label">客服名称</view>
+    <view class="input-text">
+      {{info.putUserName}}
+    </view>
+  </view>
+  <view class="item">
+    <view class="label">客服手机</view>
+    <view class="input-text">
+      {{info.putUserPhone}}
+    </view>
+  </view>
+  <view class="item" style="width: 100%;">
+    <view class="label">仓库名称</view>
+    <view class="input-text">
+      {{info.putUserWorkName}}
+    </view>
+  </view>
+</view>
+
+<view class="putTable clearfix">
+  <view class="row">
+    <view>服务时长</view>
+    <view>服务天数</view>
+    <view>满意率</view>
+  </view>
+  <view class="row">
+    <view>{{info.serviceDuration}}</view>
+    <view>{{info.serviceDay}}</view>
+    <view>{{info.satisfactionRate}}</view>
+  </view>
+</view>
+
+<view class="title" style="padding:18rpx 30rpx 0;">5星累计评价</view>
+<view class="putTable clearfix">
+  <view class="item">
+    <view class="label">文明有礼貌</view>
+    <view class="input-text">
+      {{format.formatToZero(info.civilizationCount)}}
+    </view>
+  </view>
+  <view class="item">
+    <view class="label">服务态度好</view>
+    <view class="input-text">
+      {{format.formatToZero(info.serviceCount)}}
+    </view>
+  </view>
+  <view class="item">
+    <view class="label">解决问题及时</view>
+    <view class="input-text">
+      {{format.formatToZero(info.solveCount)}}
+    </view>
+  </view>
+  <view class="item">
+    <view class="label">专业敬业</view>
+    <view class="input-text">
+      {{format.formatToZero(info.professionalCount)}}
+    </view>
+  </view>
+  <view class="item" style="width: 100%;">
+    <view class="label">语言流畅</view>
+    <view class="input-text">
+      {{format.formatToZero(info.languageCount)}}
+    </view>
+  </view>
+</view>
+
+<view></view>
+
+<!-- <view class="myField">
+  <view class="item clearfix">
+    <view class="label">客户名称</view>
+    <view class="input-text">
+      <input type="text" placeholder="请输入" value="{{item.customerName}}" data-key="customerName" data-index="{{index}}" bindinput="inputSetDataDefault"></input>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">受访客户姓名</view>
+    <view class="input-text">
+      <input type="text" placeholder="请输入" value="{{item.customerUserName}}" data-key="customerUserName" data-index="{{index}}" bindinput="inputSetDataDefault"></input>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">受访客户部门</view>
+    <view class="input-text">
+      <input type="text" placeholder="请输入" value="{{item.customerUserDept}}" data-key="customerUserDept" data-index="{{index}}" bindinput="inputSetDataDefault"></input>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">受访客户职务</view>
+    <view class="input-text">
+      <input type="text" placeholder="请输入" value="{{item.customerUserJob}}" data-key="customerUserJob" data-index="{{index}}" bindinput="inputSetDataDefault"></input>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">受访客户地址</view>
+    <view class="input-text">
+      <input type="text" placeholder="请输入" value="{{item.customerAddress}}" data-key="customerAddress" data-index="{{index}}" bindinput="inputSetDataDefault"></input>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">联系人电话/传真</view>
+    <view class="input-text">
+      <input type="text" placeholder="请输入" value="{{item.customerUserBill}}" data-key="customerUserBill" data-index="{{index}}" bindinput="inputSetDataDefault"></input>
+    </view>
+  </view>
+</view> -->
+
+<view class="questionList" wx:for="{{info.titleList}}">
+  <view class="title">{{item.titleName}}</view>
+  <input wx:if="{{item.titleType == 2}}" class="suggest" type="text" placeholder="请输入意见和建议" value="{{item.titleAnswer}}" data-key="titleAnswer" data-index="{{index}}" bindinput="inputSetDataTitle"></input>  
+  <view wx:if="{{item.titleType == 1}}" class="titleRadio clearfix">  
+    <van-radio-group value="{{ item.scoreLevel }}" data-key="scoreLevel" data-index="{{index}}" bind:change="titleChange">
+      <van-radio class="fl" name="5" icon-size="16px">很满意</van-radio>
+      <van-radio class="fl" name="4" icon-size="16px">满意</van-radio>
+      <van-radio class="fl" name="3" icon-size="16px">一般</van-radio>
+      <van-radio class="fl" name="2" icon-size="16px">尚可</van-radio>
+      <van-radio class="fl" name="1" icon-size="16px">差</van-radio>
+    </van-radio-group>
+  </view>
+  <view class="innerQues" wx:for="{{item.questionList}}" wx:for-item="innerItem" wx:for-index="innerIndex">
+    <view class="innerTitle">{{innerIndex+1}}、{{innerItem.questionName}}</view>
+    <view class="answer clearfix">
+      <input wx:if="{{innerItem.questionType == 2}}" class="suggest" type="text" placeholder="请输入意见和建议" value="{{innerItem.questionAnswer}}" data-key="questionAnswer" data-index="{{index}}" data-innerindex="{{innerIndex}}" bindinput="inputSetDataQues"></input>  
+      <van-radio-group wx:if="{{innerItem.questionType == 1}}" value="{{ innerItem.scoreLevel }}" data-key="scoreLevel" data-index="{{index}}" data-innerIndex="{{innerIndex}}" bind:change="innerChange">
+        <van-radio class="fl" name="5" icon-size="16px">很满意</van-radio>
+        <van-radio class="fl" name="4" icon-size="16px">满意</van-radio>
+        <van-radio class="fl" name="3" icon-size="16px">一般</van-radio>
+        <van-radio class="fl" name="2" icon-size="16px">尚可</van-radio>
+        <van-radio class="fl" name="1" icon-size="16px">差</van-radio>
+      </van-radio-group>
+    </view>
+  </view>
+</view>
+
+<view class="myField">
+  <view class="item clearfix">
+    <view class="label">贵司简称</view>
+    <view class="input-text">
+      <input type="text" placeholder="请输入" value="{{item.customerName}}" data-key="customerName" data-index="{{index}}" bindinput="inputSetDataDefault"></input>
+    </view>
+  </view>
+</view>
+
+<button class="submit" bindtap="submit">提交</button>
+
+<view class="aboutme">
+  <view>异常反馈、投诉渠道</view>
+  <view>{{info.feedbackChannel}}</view>
+</view>
+<view class="company">广东易迁易物流技术有限公司</view>
+
+<!-- 完成答卷 -->
+
+<view class="endView" wx:if="{{isEnd}}">
+  <view class="content">
+    <image src="/common/images/quesEnd.png" mode="widthFix" alt=""></image>
+    <view>您已完成本次问卷，感谢您的帮助与支持</view>
+  </view>
+  <view class="endViewCompany">广东易迁易物流技术有限公司</view>
+</view>

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "入库单详情",
+  "usingComponents": {
+    "alert":"/common/components/alert/alert"       
+  }
+}

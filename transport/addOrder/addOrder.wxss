@@ -1,0 +1,145 @@
+page{
+  background:#F1F2F5;
+  padding-bottom: 150rpx;
+}
+.history-title{
+  font-weight: bold;
+  margin-top: 30rpx;
+  padding:0 30rpx;
+}
+.history-list{
+  padding:0 30rpx;
+}
+.history-list .item{
+  float: left;
+  margin: 20rpx 20rpx 0 0;
+  padding:0 20rpx;
+  border-radius: 100rpx;
+  line-height: 50rpx;
+  background: #d1d1d3;
+  font-size:24rpx;
+}
+.myFieldList{
+  padding-bottom:30rpx;
+  background:#fff;
+}
+.myFieldList .myField{
+  border-bottom: 1rpx dashed #666;
+  padding-bottom: 40rpx;
+}
+.myField .item{
+  display: flex;
+}
+.myField .item .flex{
+  flex: 1;
+  -webkit-flex:1;
+  display: flex;
+  line-height: 60rpx;
+}
+.myField .item .flex .flex-input-text{
+  flex: 1;
+  -webkit-flex:1;
+  padding: 0 30rpx 0 20rpx;
+}
+.myField .item .flex .flex-input-text input{
+  height: 60rpx;
+  line-height: 60rpx;
+  border: 1rpx solid #dfdfdf;
+  padding: 0 10rpx;
+  border-radius: 6rpx;
+}
+.myField .item.spec .input-text{
+  width: calc(100% - 330rpx);
+  position: relative;
+  z-index: 9;
+}
+.myField .item.spec .input-text-right{
+  width: 120rpx;
+}
+.myField .item.spec .disabled-bg{
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: #f9f9f9!important;
+  width: calc(100% - 190rpx);
+  height: 100%;
+}
+.addGood{
+  padding-bottom: 30rpx;
+  background: #fff;
+  font-size: 40rpx;
+  color: red;
+  text-align: center;
+  font-weight: bold;
+}
+.addGood image{
+  width: 50rpx;
+  margin:0 20rpx;
+  display: inline-block;
+}
+van-radio{
+  margin-right: 30rpx;
+}
+van-radio .van-radio__label{
+  margin-left: 10rpx;
+}
+
+/* 侧边栏 */
+.filter-container{
+  height: 100%;
+}
+.filter-container input{
+  width: 90%;
+  display: block;
+  margin: 20rpx auto;
+  border:1rpx solid #dee2e9;
+  border-radius: 6rpx;
+  padding: 0 24rpx;
+  box-sizing: border-box;
+  height: 80rpx;
+}
+.filter-container .title{
+  font-weight: bold;
+  padding-left: 20rpx;
+  margin-top: 40rpx;
+  padding-bottom: 10rpx;
+}
+.filter-container .scrollList{
+  height: calc(100% - 150rpx);
+}
+.filter-container .scrollList .item{
+  line-height: 40rpx;
+  padding: 20rpx;
+  border-bottom: 1rpx solid #dee2e9;
+}
+.filter-container .scrollList .item:first-child{
+  border-top: 1rpx solid #dee2e9;
+}
+.filter-container .btn{
+  margin:30rpx auto;
+  width:200rpx;
+}
+.footerBtn{
+  display: flex;
+}
+.footerBtn button{
+  margin: 0 20rpx;
+  flex: 1;
+  -webkit-flex:1;
+}
+.footerBtn button.preBtn{
+  background: none;
+  color: #E12006;
+  position: relative;
+}
+.footerBtn button.preBtn::before{
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1rpx solid #E12006;
+  border-radius: 100rpx;
+  top: 0;
+  left: 0;
+}

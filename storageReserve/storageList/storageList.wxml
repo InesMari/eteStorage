@@ -1,0 +1,31 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<image mode="widthFix" src="/common/images/v2_qxjt3z.jpg"></image>
+<view class="footerBtn" wx:if="{{!isLogin}}">
+  <button bindtap="getPhoneNumber">一键登录</button>
+  <view class="tip">请登录，登录后可查看预约仓库</view>
+</view>
+<block wx:if="{{isLogin}}">
+<image mode="widthFix" wx:if="{{isRefresh}}" class="loading-icon" src="/common/images/loading.gif"></image>
+<scroll-view class="scorll" scroll-y="{{true}}" bindscrolltoupper="toupper" upper-threshold="1" bindscrolltolower="scrolltolowerHandler">
+  <view class="list mt_20">
+    <view class="item clearfix" data-item="{{item}}" bindtap="toDetail" wx:for="{{storeList}}">
+      <view class="header">
+        <image src="{{item.attachUrl}}" catchtap="seeBigImg" data-url="{{item.attachUrl}}"></image>
+      </view>
+      <view class="inner">
+        <view class="title clearfix"> 
+          <view class="router fl">{{item.workName}}</view>
+          <view class="state {{item.state==0?'state0':''}} {{item.state==1?'state1':''}} {{item.state==2?'state2':''}} {{item.state==3?'state3':''}} {{item.state==5?'state5':''}}" >
+          {{item.stateName}}</view>
+        </view>
+        <view class="info">
+          <view>仓库联系人：<text class="text">{{format.formatTo_(item.serviceName)}}</text></view>
+          <view>仓库联系电话：<text class="text">{{format.formatTo_(item.servicePhone)}}</text></view>
+          <view catchtap="guide" data-item="{{item}}" class="guide">地址：<image src="/common/images/nav.png" mode="widthFix"></image><text class="text">{{item.workAddress}}</text></view>
+          <!-- <view class="guide" catchtap="guide" data-item="{{item}}">导航到这</view> -->
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+</block>

@@ -1,0 +1,205 @@
+page{
+  background:#F1F2F5;
+  padding-bottom: 120rpx;
+}
+.pageTitle{
+  margin: 30rpx;
+  border-radius: 18rpx;
+  overflow: hidden;
+  position: relative;
+}
+.pageTitle .bg{
+  height: 140rpx;
+  width: 100%;
+}
+.pageTitle .info{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding:28rpx;
+  box-sizing: border-box;
+}
+.pageTitle .info .route>view{
+  font-size: 32rpx;
+  color:#fff;
+  line-height: 1;
+}
+.pageTitle .info .waybillNum{
+  font-size:24rpx;
+  color: #fff;
+  line-height: 1;
+  margin-top: 22rpx;
+}
+
+.tabs{
+  margin: 30rpx;
+  border:1rpx solid #1990ff;
+  border-radius: 6rpx;
+  background:#fff;
+}
+.tabs .tab{
+  color: #1990ff;
+  line-height: 70rpx;
+  text-align: center;
+  float: left;
+  width: 33.3333%;
+  border-right:1rpx solid #1990ff;
+  box-sizing: border-box;
+}
+.tabs .tab:last-child{
+  border:none;
+}
+.tabs .tab.active{
+  color: #fff;
+  background:#1990ff;
+}
+
+.filter-container{
+  height: 100%;
+}
+.filter-container input{
+  width: 90%;
+  display: block;
+  margin: 20rpx auto;
+  border:1rpx solid #dee2e9;
+  border-radius: 6rpx;
+  padding: 0 24rpx;
+  box-sizing: border-box;
+  height: 80rpx;
+}
+.filter-container .scrollList{
+  height: calc(100% - 120rpx);
+}
+.filter-container .scrollList .item{
+  line-height: 40rpx;
+  padding: 20rpx 24rpx;
+  border-bottom: 1rpx solid #dee2e9;
+}
+.filter-container .scrollList .item:first-child{
+  border-top: 1rpx solid #dee2e9;
+}
+.filter-container .loading-more,
+.filter-container .no-more{
+  text-align: center;
+  padding: 20rpx;
+  color: #999;
+  font-size: 26rpx;
+}
+.filter-container .no-more{
+  color: #ccc;
+}
+.filter-container .btn{
+  margin:30rpx auto;
+  width:200rpx;
+}
+
+.myField .item.vehicleType .input-text::before{
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 15%;
+  height: 70%;
+  border-left: 1rpx solid #ebedf0;
+}
+.myField .item.vehicleType picker{
+  position: relative;
+}
+
+/* 完成页面 */
+.finishPage van-icon{
+  width: 100%;
+}
+.finishPage .van-icon{
+  color: red;
+  margin:120rpx auto 50rpx;
+  font-size: 230rpx;
+}
+.finishPage .tipText{
+  text-align: center;
+  font-size: 32rpx;
+  color: red;
+}
+.finishPage .numTip{
+  text-align: center;
+  margin-top: 40rpx;
+  color: #999;
+}
+.finishPage .con{
+  width: 80%;
+  margin: 80rpx auto;
+  border-top: 1rpx solid #ddd;
+  padding: 10rpx;
+}
+.finishPage .con .item{    
+  color: #999;
+  line-height: 90rpx;
+  font-size: 26rpx;
+}
+.finishView{
+  position: fixed;
+  bottom:90rpx;
+  left: 10%;
+  width: 80%;
+  box-sizing: border-box;
+}
+.finishView button{
+  background: red;
+  line-height: 76rpx;
+  height: 76rpx;
+  width: 100%;
+  color: #fff;
+  font-size: 32rpx;
+  text-align: center;
+  border-radius: 50rpx;
+}
+.finishView .backText{
+  text-align: center;
+  color: #999;
+  font-size: 30rpx;
+  margin-top: 60rpx;
+}
+
+/* 底部按钮 */
+.footerBtn{
+  display: flex;
+}
+.footerBtn button{
+  margin: 0 20rpx;
+  flex: 1;
+  -webkit-flex:1;
+}
+.footerBtn button.preBtn{
+  background: none;
+  color: #E12006;
+  position: relative;
+}
+.footerBtn button.preBtn::before{
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1rpx solid #E12006;
+  border-radius: 100rpx;
+  top: 0;
+  left: 0;
+}
+.goodsInfo{
+  position: relative;
+  padding-left: 100rpx;
+}
+.goodsInfo .leftIndex{
+  width: 100rpx;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 0.5rpx solid #ebedf0;
+  border-right: 0.5rpx solid #ebedf0;
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  top: 0;
+}

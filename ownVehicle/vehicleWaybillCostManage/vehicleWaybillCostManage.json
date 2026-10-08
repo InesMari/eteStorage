@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "自有车变动成本",
+  "usingComponents": {
+    "alert":"/common/components/alert/alert"    
+  }
+}

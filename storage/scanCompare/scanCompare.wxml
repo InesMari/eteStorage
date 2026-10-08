@@ -1,0 +1,5 @@
+<view class="codes" wx:for="{{codes}}">扫描结果：{{item}}</view>
+
+<view class="footerBtn" bindtap="scan">
+  <button>扫描二维码</button>
+</view>

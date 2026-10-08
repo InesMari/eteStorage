@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "固定资产调拨详情",
+  "usingComponents": {
+    "alert":"/common/components/alert/alert"       
+  }
+}

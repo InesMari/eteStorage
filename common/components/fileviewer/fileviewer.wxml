@@ -1,0 +1,5 @@
+<image style="{{style}}" bindtap="visitFile" wx:if="{{isImg}}" src="{{url}}"></image>
+<image style="{{style}}" bindtap="visitFile" wx:if="{{!isImg && fileType=='pdf'}}" src="/common/images/pdf.png"></image>
+<image style="{{style}}" bindtap="visitFile" wx:if="{{!isImg && (fileType=='doc'||fileType=='docx')}}" src="/common/images/doc.png"></image>
+<image style="{{style}}" bindtap="visitFile" wx:if="{{!isImg && (fileType=='xls'||fileType=='xlsx')}}" src="/common/images/xls.png"></image>
+<image style="{{style}}" bindtap="visitFile" wx:if="{{!isImg && fileType=='file'}}" src="/common/images/file.png"></image>

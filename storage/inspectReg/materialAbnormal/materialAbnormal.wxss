@@ -1,0 +1,54 @@
+page{
+  background-color: #f5f5f5;
+  padding-bottom: 120rpx;
+}
+.myField {
+  margin:20rpx;
+  border-radius: 10rpx;
+}
+.myField .item.area{
+  flex-direction: column;
+}
+.myField .item.area .label{
+  max-width: 100%;
+}
+
+.myField .item.area .input-text{
+  padding: 0;
+}
+.myField .item .input-text textarea{
+  width: 100%;
+  background: #f8f8f8;
+  height: 200rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+  border-radius: 10rpx;
+}
+.myField .item .input-text textarea::-webkit-placeholder{
+  line-height: 52rpx;
+}
+
+.uploadImg{
+  padding: 20rpx 32rpx;
+}
+.uploadImg .title{
+  /* font-weight: bold; */
+
+}
+.uploadImg .title>text{
+  color: #999;
+  margin-left: 10rpx;
+  font-weight: normal;
+}
+.uploadImg .tip{
+  font-size: 24rpx;
+  margin:10rpx 0 20rpx;
+  color: #999;
+}
+.van-uploader__preview-image,.van-uploader__upload{
+  width: 200rpx!important;
+  height: 200rpx!important;
+}
+.van-uploader__preview{
+  margin: 0 20rpx 20rpx 0!important;
+}

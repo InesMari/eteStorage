@@ -1,0 +1,171 @@
+/*  
+#1990ff;  //主体颜色
+#2e9aff;  //主体颜色经过辅色
+#333333;  //主要字体颜色
+#666666;  //普通字体颜色
+#999999;  //次要字体颜色
+#c5c5c5;  //placeholder颜色
+#f6f6f6;  //边线颜色
+#F1F2F5;  //背景颜色
+*/
+
+page {
+  /* background: #f0f5fb; */
+  color: #333;
+  font-size: 28rpx;  
+  line-height: 1;
+}
+.ud {
+  text-decoration: underline;
+}
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.txt_hide{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.txt_center{
+  text-align: center
+}
+.fw{
+  font-weight: bold;
+}
+.fl {
+  float: left !important;
+}
+.fr {
+  float: right !important;
+}
+.txt_l{
+  text-align: left;
+}
+.txt_r{
+  text-align: right;
+}
+.mt_20 {
+  margin-top: 20rpx;
+}
+.mt_30 {
+  margin-top: 30rpx;
+}
+.mr_10 {
+  margin-right: 10rpx;
+}
+.mr_20 {
+  margin-right: 20rpx;
+}
+.ml_10 {
+  margin-left: 20rpx;
+}
+.ml_20 {
+  margin-left: 20rpx;
+}
+.mb_20 {
+  margin-bottom: 20rpx;
+}
+.mb_30 {
+  margin-bottom: 30rpx;
+}
+.mb_40 {
+  margin-bottom: 40rpx;
+}
+.pb_20 {
+  padding-bottom: 20rpx !important;
+}
+.pb_30 {
+  padding-bottom: 30rpx !important;
+}
+.pt_20{
+  padding-top: 20rpx !important;
+}
+.pt_30{
+  padding-top: 30rpx !important;
+}
+.red{
+  color: red!important;
+}
+.zt_999 {
+  color: #999 !important;
+}
+.zt_666 {
+  color: #666 !important;
+}
+.zt_333 {
+  color: #333 !important;
+}
+.zt_000 {
+  color: #000 !important;
+}
+.zt_green {
+  color: #5bc240 !important;
+}
+.zt_link, .zt_blue {
+  color: #1089db !important;
+}
+.bg-blue {
+  background: #199ed8 !important;
+}
+.bg-red {
+  background: #e83b13 !important;
+}
+.fs_20,.fs20 {
+  font-size: 20rpx !important;
+}
+.fs_24,.fs24 {
+  font-size: 24rpx !important;
+}
+.fs_26,.fs26 {
+  font-size: 26rpx !important;
+}
+.fs_28,.fs28 {
+  font-size: 26rpx !important;
+}
+.fs_30,.fs30 {
+  font-size: 30rpx !important;
+}
+.fs34 {
+  font-size: 34rpx !important;
+}
+
+button::after{
+  border: none;
+  border-radius: 200rpx;
+}
+
+image {
+  width: auto;
+  height: auto;
+  display: block;
+}
+.popup_bj {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+}
+.link {
+  color: #1089db !important;
+  text-decoration: underline;
+}
+
+textarea{
+  color: #333;
+}
+
+.input-placeholder{
+  color: #999;
+}
+/* 重写button禁用样式 */
+button[disabled]:not([type]),button[disabled]{
+  background-color: initial;
+  opacity: 0.3;
+}

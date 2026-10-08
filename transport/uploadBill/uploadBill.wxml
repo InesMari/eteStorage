@@ -1,0 +1,81 @@
+<view class="pageTitle">
+  <image wx:if="{{info.waybillState<0||info.waybillState>3}}" class="bg" src="../../common/images/detail_bg3.png"></image>
+  <image wx:if="{{info.waybillState==0}}" class="bg" src="../../common/images/detail_bg0.png"></image>
+  <image wx:if="{{info.waybillState==1}}" class="bg" src="../../common/images/detail_bg1.png"></image>
+  <image wx:if="{{info.waybillState==2}}" class="bg" src="../../common/images/detail_bg2.png"></image>
+  <image wx:if="{{info.waybillState==3}}" class="bg" src="../../common/images/detail_bg3.png"></image>
+  <view class="info">
+    <view class="route clearfix">
+      <view class="fl">{{info.routeName}}</view>
+    </view>
+    <view class="waybillNum">
+      派车单号：{{info.waybillNum}}
+    </view>
+  </view>
+</view>
+
+<view class="myField">
+    <view class="item clearfix">
+      <view class="label">订单号</view>
+      <view class="input-text" bindtap="showVehiclePopover">
+        <picker mode="selector" range="{{orderIdList}}" bindchange="orderIdChange" range-key="orderNum" value="{{orderIdIndex}}">
+          <view wx:if="{{orderIdList.length !=0 && orderIdIndex!=null}}">
+            {{orderIdList[orderIdIndex].orderNum}}
+          </view>
+          <view style="color:#c8c9cc;" wx:else>请选择订单号</view>
+          <van-icon name="arrow-down" class="arrow-down" />
+        </picker>
+      </view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">客户名称</view>
+      <view class="input-text disabled">
+          {{info.tenantName}}
+      </view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">作业点</view>
+      <view class="input-text" bindtap="showVehiclePopover">
+        <picker mode="selector" range="{{orderWorkDataList}}" bindchange="orderWorkDataChange" range-key="workName" value="{{orderWorkDataIndex}}">
+          <view wx:if="{{orderWorkDataList.length !=0 && orderWorkDataIndex!=null}}">
+            {{orderWorkDataList[orderWorkDataIndex].workName}}
+          </view>
+          <view style="color:#c8c9cc;" wx:else>请选择作业点</view>
+          <van-icon name="arrow-down" class="arrow-down" />
+        </picker>
+      </view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">详细地址</view>
+      <view class="input-text disabled">
+          {{info.workAddressStr}}
+      </view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">单据类型</view>
+      <view class="input-text">
+        <van-radio-group value="{{ info.receiptsType }}" bind:change="receiptsTypeChange">
+          <van-radio name="1" class="fl">过磅单</van-radio>
+          <van-radio name="2" class="fl" style="margin-left:60rpx;">回单</van-radio>
+        </van-radio-group>
+      </view>
+    </view>
+</view>
+
+<view class="uploadImg">
+  <view class="list">
+    <view class="item">
+      <van-uploader 
+        file-list="{{info.imgData}}"
+        bind:after-read="afterRead" bind:delete="deleteImg" upload-text="上传图片" 
+        show-upload="{{info.imgData.length<5}}"
+      />
+    </view>
+  </view>
+  <view class="title">上传图片<text>最多上传5张，已经上传<text class="zt_333">{{info.imgData.length}}</text>张</text></view>
+  <view class="tip">只能上传jpg/png文件，单张图片不超过20mb</view>
+</view>
+
+<view class="footerBtn" bindtap="submit">
+  <button>确认上传</button>
+</view>

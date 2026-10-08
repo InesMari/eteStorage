@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "车辆点检",
+  "usingComponents": {
+    "alert":"/common/components/alert/alert",
+    "headerRemind":"/common/components/header-remind/headerRemind",
+    "datetimepicker": "/common/components/datetimepicker/datetimepicker"
+  }
+  
+}

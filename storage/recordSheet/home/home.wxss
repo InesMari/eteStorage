@@ -1,0 +1,45 @@
+@import '/pages/index/index.wxss';
+
+.headInfo .bg {
+  height: 80rpx;
+}
+
+.showAlert .content {
+  padding: 40rpx 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.showAlert .content picker {
+  height: 64rpx;
+  padding: 10rpx 12rpx;
+  box-sizing: border-box;
+  border: 1rpx solid #3894ff;
+  border-radius: 6rpx;
+  line-height: 40rpx;
+  width: 200rpx;
+}
+
+.showAlert .bottom {
+  border-top: 1rpx solid #f6f6f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.showAlert .bottom button {
+  flex: 1;
+  font-size: 26rpx;
+  border-right: 1rpx solid #f6f6f6;
+  background: #e6f3ff;
+  box-sizing: border-box;
+  border-radius: 0;
+  height: 80rpx;
+  line-height: 80rpx;
+}
+
+.showAlert .bottom button:last-child {
+  border: none;
+  background-color: #dbffc8;
+}

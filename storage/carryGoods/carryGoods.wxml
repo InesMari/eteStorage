@@ -1,0 +1,96 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<van-tabs active="{{active}}" bind:change="onChange">
+  <van-tab title="全部"></van-tab>
+  <van-tab title="已预约"></van-tab>
+  <van-tab title="已报到"></van-tab>
+  <van-tab title="操作中"></van-tab>
+  <van-tab title="操作完成"></van-tab>
+  <van-tab title="超时完成"></van-tab>
+</van-tabs>
+<view class="changeWork" bindtap="changWorkAlert"><view>切换</view><view>仓库</view></view>
+<image mode="widthFix" wx:if="{{isRefresh}}" class="loading-icon" src="/common/images/loading.gif"></image>
+<scroll-view class="scorll" scroll-y="{{true}}" bindscrolltoupper="toupper" upper-threshold="1" bindscrolltolower="scrolltolowerHandler">
+  <view class="list mt_20">
+    <view class="item" wx:for="{{list}}" bindtap="toDetail" data-item="{{item}}">
+      <view class="inner">
+        <view class="title clearfix">
+          <view class="router" >{{item.plateNumber}}</view>
+          <view class="state {{item.state==0?'state0':''}} {{item.state==1?'state1':''}} {{item.state==2?'state2':''}}">{{item.stateName}}</view>
+          <view class="waitTime" wx:if="{{item.state == 2}}">已等待{{item.waitTime}}分钟</view>
+        </view>
+        <view class="info">
+          <view>预约编号：<text class="text">{{item.appointNum}}</text></view>
+          <view>联系电话：<van-icon name="phone-o" style="color: #5353dc" /><text class="text" style="color: #1990ff;" catchtap="callPhone" data-phone="{{item.billId}}">{{item.billId}}</text></view>
+          <view>仓库：<text class="text">{{item.workName}}</text></view>
+          <view>到货厂商：<text class="text">{{format.formatTo_(item.fromTenantName)}}</text></view>
+          <view>托数：<text class="text">{{format.formatTo_(item.goodsCount)}}</text></view>
+          <view>重量：<text class="text">{{format.formatTo_(item.goodsWeight)}}</text></view>
+          <view>实际报到时间：<text class="text">{{format.formatTo_(item.checkInDate)}}</text></view>
+          <view>预计到达时间：<text class="text">{{format.formatTo_(item.expectArriveDate)}}</text></view>
+          <view>到货单：
+            <van-uploader 
+              file-list="{{[{url:item.url}]}}"
+              show-upload="{{false}}"
+              disabled="{{true}}"
+              deletable="{{false}}"
+            />
+          </view>
+        </view>
+      </view>
+      <view class="operate clearfix">
+        <button class="btn fr" wx:if="{{item.state==1 || item.state==2}}" catchtap="changeTenant" data-item="{{item}}">修改厂商</button>
+        <button class="btn fr" wx:if="{{item.state==2}}" catchtap="showAlertMethod" data-item="{{item}}">开始操作</button>
+        <button class="btn fr" wx:if="{{item.state==3}}" catchtap="showAlertMethod" data-item="{{item}}">操作完成</button>
+        <button class="btn fr" wx:if="{{item.state==1 && entitys[1005286]}}" catchtap="appoint" data-item="{{item}}">预约报到</button>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+
+<!-- 审核不通过原因 -->
+<alert isshow="{{showAlert}}" title="提示" class="showAlert" bind:closealert="cancelAlert" aStyle="width:600rpx;">  
+  <view class="content">
+    <view>预约编号：{{currentItem.appointNum}}</view>
+    <view>车牌号码：{{currentItem.plateNumber}}</view>
+    <view wx:if="{{currentItem.state==2}}">操作状态从【已报到】变更为【<text class="red">操作中</text>】</view>
+    <view wx:if="{{currentItem.state==3}}">操作状态从【操作中】变更为【<text class="red">操作完成</text>】</view>
+    <view>是否继续？</view>
+  </view>
+  <view class="bottom clearfix">
+    <button bindtap="cancelAlert">取消</button>
+    <button bindtap="sure">确定</button>  
+  </view>
+</alert>
+
+
+<!-- 选择仓库 -->
+<alert isshow="{{workAlert}}" class="organizationAlert" bind:closealert="cancelWrok" aStyle="width:500rpx;">
+  <scroll-view scroll-y="{{true}}" style="max-height: 700rpx;">
+    <van-radio-group value="{{ userInfo.workId }}" bind:change="onWorkChange">
+      <van-radio name="{{item.workId}}" wx:for="{{currentOrg.workList}}">{{item.workName}}</van-radio>
+    </van-radio-group>
+  </scroll-view>
+  <view class="bottom clearfix">
+    <button bindtap="cancelWork" style="width: 100%;">取消</button>
+  </view>
+</alert>
+
+<!-- 修改到货厂商弹窗 -->
+<alert isshow="{{showChangeTenantAlert}}" title="修改到货厂商" class="showChangeTenantAlert" bind:closealert="cancelChangeTenant" aStyle="width:600rpx;">
+  <view class="content">
+    <view class="field">
+      <text class="label">原到货厂商：</text>
+      <text class="value">{{currentItem.fromTenantName}}</text>
+    </view>
+    <view class="field">
+      <text class="label">新到货厂商：</text>
+      <view class="input-wrapper">
+        <input class="input" type="text" placeholder="请输入新到货厂商" value="{{newTenantName}}" bindinput="onTenantNameInput"/>
+      </view>
+    </view>
+  </view>
+  <view class="bottom clearfix">
+    <button bindtap="cancelChangeTenant">取消</button>
+    <button bindtap="sureChangeTenant">确定</button>
+  </view>
+</alert>

@@ -1,0 +1,3 @@
+@import '/common/css/base.wxss';
+@import '/common/css/comList.wxss';
+@import '/common/css/resetVant.wxss';

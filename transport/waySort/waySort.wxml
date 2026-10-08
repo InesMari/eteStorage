@@ -1,0 +1,26 @@
+<!-- <view class="list">
+  <view class="item clearfix" wx:for="{{list}}" wx:key="{{index}}">
+    <view class="content">
+      <view class="name">{{item.workTypeName}} - {{item.workName}}</view>
+      <view class="site">{{item.workAddress}}</view>
+    </view>
+    <input class="num" type="number" value="{{index+1}}" bindinput="numIpt" data-item="{{item}}" data-index="{{index}}" />
+  </view>
+</view> -->
+<view class="list">
+  <view class="item clearfix" wx:for="{{list}}" data-item="{{item}}">
+    <view class="state">{{item.workTypeName}}货</view>
+    <image class="state-img" wx:if="{{item.workType==1}}" src="../../../common/images/ti.png"></image>
+    <image class="state-img" wx:if="{{item.workType==2}}" src="../../../common/images/xie.png"></image>
+    <image class="state-img" wx:if="{{item.workType==3}}" src="../../../common/images/tixie.png"></image>
+    <view class="content">
+      <view class="name">{{item.workName}}</view>
+      <view class="site">{{item.workAddress}}</view>
+    </view>
+    <input class="num {{index==0||index==list.length-1?'disabled':''}}" type="number" value="{{index+1}}" bindinput="numIpt" data-item="{{item}}" data-index="{{index}}" />
+  </view>
+</view>
+
+<view class="footerBtn">
+  <button bindtap="submit">提<text style="margin:0 25rpx;"></text>交</button>
+</view>

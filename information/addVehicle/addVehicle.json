@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "新增车辆",
+  "usingComponents": {
+    "popover": "/common/components/popover/popover"    
+  }
+}

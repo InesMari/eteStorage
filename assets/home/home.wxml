@@ -1,0 +1,31 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<!-- 货主 -->
+<view class="contain">
+  <view class="headInfo">
+    <image class="bg" src="/common/images/info_bg.png"></image>
+    <view class="userInfo" bindtap="goback">
+      <image class="back" src="/common/images/back.png" mode="widthFix"></image>
+    </view>
+    <view class="workName">资产管理</view>
+  </view>
+  <view class="list clearfix">
+    <view  class="item" bindtap="toPurchaseApply" wx:if="{{entitys[1009003]}}">
+      <image src="/common/images/i_12.png"></image>
+      <view class="name">采购申请单</view>
+      <view class="explain">审核采购申请单</view>
+      <view class="tip" wx:if="{{counts.purchaseApplySum > 0}}">{{counts.purchaseApplySum}}</view>
+    </view>
+    <view  class="item" bindtap="toItemClaimApply" wx:if="{{entitys[1009004]}}">
+      <image src="/common/images/i_16.png"></image>
+      <view class="name">物品领用申请</view>
+      <view class="explain">审核物品领用申请</view>
+      <view class="tip" wx:if="{{counts.claimApplySum > 0}}">{{counts.claimApplySum}}</view>
+    </view>
+    <view  class="item" bindtap="toAssetsAllocat" wx:if="{{entitys[1009005]}}">
+      <image src="/common/images/i_18.png"></image>
+      <view class="name">固定资产调拨</view>
+      <view class="explain">审核固定资产调拨</view>
+      <view class="tip" wx:if="{{counts.assetsAllocatSum > 0}}">{{counts.assetsAllocatSum}}</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,14 @@
+button{
+  margin:60rpx 30rpx;
+}
+
+.codeView{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.tip{
+  line-height: 80rpx;
+  font-size: 28rpx;
+  text-align: center;
+}

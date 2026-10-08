@@ -1,0 +1,27 @@
+@import '../dispatch/dispatch.wxss';
+
+.uploadImg{
+  padding: 20rpx 32rpx;
+  background: #fff;
+}
+.uploadImg .title{
+  /* font-weight: bold; */
+
+}
+.uploadImg .title>text{
+  color: #999;
+  margin-left: 10rpx;
+  font-weight: normal;
+}
+.uploadImg .tip{
+  font-size: 24rpx;
+  margin:10rpx 0 20rpx;
+  color: #999;
+}
+.van-uploader__preview-image,.van-uploader__upload{
+  width: 200rpx!important;
+  height: 200rpx!important;
+}
+.van-uploader__preview{
+  margin: 0 20rpx 20rpx 0!important;
+}

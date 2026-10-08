@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "异常管理",
+  "usingComponents": {
+    "alert":"/common/components/alert/alert"    
+  }
+}

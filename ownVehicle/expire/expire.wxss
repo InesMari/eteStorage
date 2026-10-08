@@ -1,0 +1,69 @@
+page{
+  background: #f5f5f5;
+}
+.serchView{
+  background-color: #fff;
+  margin-top: 20rpx;
+  padding: 20rpx 0;
+}
+.serchView {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.serchView input,
+.serchView picker {
+  width: 200rpx;
+  margin-left: 20rpx;
+  border: 1px solid #efefef;
+  border-radius: 6rpx;
+  height: 50rpx;
+  text-align: center;
+  line-height: 50rpx;
+  position: relative;
+}
+
+.serchView picker {
+  padding-right: 30rpx;
+}
+
+.serchView .arrow-down {
+  position: absolute;
+  right: 20rpx;
+  top: 15rpx;
+  color: #999;
+}
+.serchView  button{
+  margin: 30rpx;
+}
+
+.table {
+  display: table;
+  width: 100%;
+  border-left: 1rpx solid #eee;
+  border-top: 1rpx solid #eee;
+  background: #fff;
+  table-layout: fixed;
+  margin-bottom: 20rpx;
+}
+
+.table .thead {
+  background: #eef1f6;
+  display: table-row;
+}
+
+.table .tbody {
+  display: table-row;
+}
+
+.table .td {
+  display: table-cell;
+  text-align: center;
+  border-right: 1rpx solid #eee;
+  border-bottom: 1rpx solid #eee;
+  padding: 16rpx 0;
+  line-height: 32rpx;
+  font-size: 24rpx;
+  vertical-align: middle;
+}

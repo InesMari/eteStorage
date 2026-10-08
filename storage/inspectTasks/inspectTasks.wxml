@@ -1,0 +1,38 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<van-search value="{{ value }}" bind:change="search" placeholder="输入巡检事项、巡检设备查询" />
+<van-tabs active="{{active}}" bind:change="onChange">
+  <van-tab title="全部"></van-tab>
+  <van-tab title="待处理"></van-tab>
+  <van-tab title="已处理"></van-tab>
+  <van-tab title="未处理"></van-tab>
+</van-tabs>
+<!-- 加载中 -->
+<image mode="widthFix" wx:if="{{isRefresh}}" class="loading-icon" src="/common/images/loading.gif"></image>
+<!-- 扫码 -->
+<view class="scanView" bind:tap="scan">
+  <van-icon name="scan" />
+</view>
+<scroll-view class="scorll" scroll-y="{{true}}" bindscrolltoupper="toupper" upper-threshold="1" bindscrolltolower="scrolltolowerHandler">
+  <view class="list mt_20">
+    <view class="item" wx:for="{{list}}" bindtap="toDetail" data-item="{{item}}">
+      <view class="inner">
+        <view class="title clearfix"> 
+          <view class="router fl">{{item.taskNum}}</view>
+          <view class="state {{item.taskState==0?'state0':''}} {{item.taskState==1?'state1':''}} {{item.taskState==2?'state2':''}} {{item.taskState==3?'state3':''}} {{item.taskState==9?'state5':''}}" >
+          {{item.taskStateName}}</view>
+        </view>
+        <view class="info">
+          <view>巡检事项：<text class="text">{{item.inspectionItem}}</text></view>
+          <view>巡检设备：<text class="text">{{item.equipment}}</text></view>
+          <view>设备编号：<text class="text">{{item.equipmentNum}}</text></view>
+          <view>执行人：<text class="text">{{item.executorStr}}</text></view>
+          <view style="font-size: 24rpx;">规定巡检时间：<text class="text">{{item.stipulateDate}}</text></view>
+        </view>
+      </view>
+      <view class="operate clearfix" wx:if="{{item.showButton}}">
+        <button class="btn fr" catchtap="showUnPassAlertMethod" data-id="{{item.id}}">开始巡检</button>
+        <button class="btn fr" catchtap="audit" data-id="{{item.id}}">重新巡检</button>
+      </view>
+    </view>
+  </view>
+</scroll-view>

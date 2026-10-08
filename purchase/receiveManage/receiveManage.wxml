@@ -1,0 +1,30 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<van-search value="{{ value }}" bind:change="search" placeholder="搜索物品种类、品名" />
+<van-tabs active="{{active}}" bind:change="onChange">
+  <van-tab title="全部"></van-tab>
+  <van-tab title="未审核"></van-tab>
+  <van-tab title="审核通过"></van-tab>
+  <van-tab title="审核不通过"></van-tab>
+</van-tabs>
+<image mode="widthFix" wx:if="{{isRefresh}}" class="loading-icon" src="/common/images/loading.gif"></image>
+<scroll-view class="scorll" scroll-y="{{true}}" bindscrolltoupper="toupper" upper-threshold="1" bindscrolltolower="scrolltolowerHandler">
+  <view class="pagelist mt_20">
+    <view class="item" wx:for="{{list}}" bindtap="toDetail" data-item="{{item}}">
+      <view class="inner">
+        <view class="title clearfix"> 
+          <view class="router fl">{{item.feeSubTypeName}}</view>
+          <view class="state {{item.verifyState==0?'state1':''}} {{item.verifyState==1?'state2':''}} {{item.verifyState==2?'state':''}} {{item.verifyState==4?'state3':''}} {{item.verifyState==3?'state5':''}}" >
+          {{item.verifyStateName}}</view>
+        </view>
+        <view class="info">
+          <view>品名：<text class="text">{{item.projectName}}</text></view>
+          <view>领用数量：<text class="text">{{item.useNums}}</text></view>
+          <view>库存地：<text class="text">{{item.workName}}</text></view>
+          <view>领用人：<text class="text">{{item.useUserName}}</text></view>
+          <view>领用部门：<text class="text">{{item.useOrgName}}</text></view>
+          <view>领用日期：<text class="text">{{item.useDate}}</text></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

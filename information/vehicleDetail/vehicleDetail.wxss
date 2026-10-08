@@ -1,0 +1,19 @@
+page{
+  background: #f5f5f5;
+  padding-bottom: 120rpx;
+}
+.van-uploader{
+  float: left;
+}
+.myField .dbUpload{
+  padding:0 30rpx;
+}
+.myField .dbUpload .field-title{
+  padding-left: 22rpx;
+}
+.myField .dbUpload .item-upload{
+  padding:0;
+}
+.myField .dbUpload .field-title::after{
+  left: 0;
+}

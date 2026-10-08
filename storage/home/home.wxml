@@ -1,0 +1,88 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<!-- 货主 -->
+<view class="contain">
+  <view class="headInfo">
+    <image class="bg" src="/common/images/info_bg.png"></image>
+    <view class="userInfo" bindtap="goback">
+      <image class="back" src="/common/images/back.png" mode="widthFix"></image>
+    </view>
+    <view class="workName" bindtap="changeWork">{{userInfo.workName}}</view>
+  </view>
+  <view class="list clearfix">
+    <!-- <view  class="item" bindtap="toDelivery" wx:if="{{entitys[1005027]}}">
+      <image src="/common/images/i_8.png"></image>
+      <view class="name">出库扫码</view>
+      <view class="explain">用于仓储出库扫码</view>
+    </view>
+    <view  class="item" bindtap="toWarehousing" wx:if="{{entitys[1005020]}}">
+      <image src="/common/images/i_9.png"></image>
+      <view class="name">入库扫码</view>
+      <view class="explain">用于仓储入库扫码</view>
+    </view> -->
+    <!-- <view  class="item" bindtap="toPackageManager"> 
+      <image src="/common/images/i_16.png"></image>
+      <view class="name">包材管理</view>
+      <view class="explain">查看包材库存列表</view>
+    </view> -->
+    <view  class="item" bindtap="toScanCompare">
+      <image src="/common/images/i_20.png"></image>
+      <view class="name">扫码比较</view>
+      <view class="explain">扫码比较</view>
+    </view>
+    <view  class="item" bindtap="toWarehousingVerification" wx:if="{{entitys[1007051]}}">
+      <image src="/common/images/i_22.png"></image>
+      <view class="name">入库核查</view>
+      <view class="explain">物流中心绩效考核</view>
+    </view>
+    <view  class="item" bindtap="toExWarehouseverification" wx:if="{{entitys[1007051]}}">
+      <image src="/common/images/i_21.png"></image>
+      <view class="name">出库核查</view>
+      <view class="explain">物流中心绩效考核</view>
+    </view>
+    <view  class="item" bindtap="toCarryGoods" wx:if="{{entitys[1005111]}}">
+      <image src="/common/images/i_39.png"></image>
+      <view class="name">仓库预约</view>
+      <view class="explain">仓库预约到货装货操作</view>
+    </view>
+    <view  class="item" bindtap="toShortBarge" wx:if="{{entitys[1005094]}}">
+      <image src="/common/images/i_23.png"></image>
+      <view class="name">短驳配送</view>
+      <view class="explain">短线接驳车辆调度</view>
+    </view>
+    <view  class="item" bindtap="toInspectTasks" wx:if="{{entitys[1005170]}}">
+      <image src="/common/images/i_25.png"></image>
+      <view class="name">巡检任务</view>
+      <view class="explain">完成每天的巡检任务</view>
+    </view>
+    <view  class="item" bindtap="toInspectRegMain" wx:if="{{entitys[1005179]}}">
+      <image src="/common/images/i_26.png"></image>
+      <view class="name">巡检登记</view>
+      <view class="explain">登记仓库异常品和来料异常</view>
+    </view>
+    <view  class="item" bindtap="toVisitionReg" wx:if="{{entitys[1005242]}}">
+      <image src="/common/images/i_34.png"></image>
+      <view class="name">来访登记</view>
+      <view class="explain">来访人员登记信息</view>
+    </view>
+    <view  class="item" bindtap="toRecordSheet" wx:if="{{entitys[1005270]}}">
+      <image src="/common/images/i_36.png"></image>
+      <view class="name">报表查询</view>
+      <view class="explain">查询巡检或温湿度报表</view>
+    </view>
+  </view>
+</view>
+
+
+
+<!-- 选择仓库 -->
+<alert isshow="{{workAlert}}" class="organizationAlert" bind:closealert="cancelWrok" aStyle="width:500rpx;">  
+  <scroll-view scroll-y="{{true}}" style="max-height: 700rpx;">
+    <van-radio-group value="{{ userInfo.workId }}" bind:change="onWorkChange">
+      <van-radio name="{{item.workId}}" wx:for="{{currentOrg.workList}}">{{item.workName}}</van-radio>
+    </van-radio-group>
+  </scroll-view>
+  <view class="bottom clearfix">
+    <button bindtap="cancelWork" style="width: 100%;">取消</button>
+  </view>
+</alert>
+

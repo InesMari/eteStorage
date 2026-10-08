@@ -1,0 +1,49 @@
+@import "../exceptHandle/exceptHandle.wxss";
+
+.myField .item .input-text.input{
+  padding:0 12rpx;
+  background-color: #f8f8f8;
+}
+
+/* 步骤条 */
+.stepView{
+  display: flex;
+  background: #fff;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+}
+.stepView .item{
+  text-align: center;
+  line-height: 40rpx;
+  font-size: 24rpx;
+  flex:1;
+  position: relative;
+}
+.stepView .item::after{
+  content: "";
+  position: absolute;
+  top:22rpx;
+  left: 50%;
+  border-bottom: 1rpx dashed #1990ff;
+  width: 100%;
+}
+
+.stepView .item.ispass::after{
+  border-bottom: 1rpx solid #1990ff;
+}
+.stepView .item:last-child:after{
+  display: none;
+}
+.stepView .icon{
+  display: inline-block;
+  width: 50rpx;
+  font-size: 28rpx;
+  background-color: #fff;
+  position: relative;
+  top: 6rpx;
+  z-index: 99;
+}
+.stepView .date{
+  color: #999;
+  font-size: 20rpx;
+}

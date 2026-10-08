@@ -1,0 +1,80 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<view class="main">
+  <!-- 基础信息 -->
+  <view class="fee">
+    <view class="wayTitle">
+      <text>基础信息</text>
+    </view>
+    <view class="detail">
+      <view class="item clearfix">
+        <view class="label">{{operation==1?'入':'出'}}库单号：</view>
+        <view class="text">{{format.formatTo_(info.baseInfo.orderNum)}}</view>
+      </view>
+      <view class="item clearfix">
+        <view class="label">仓库名称：</view>
+        <view class="text">{{format.formatTo_(info.baseInfo.workName)}}</view>
+      </view>
+      <view class="item clearfix">
+        <view class="label">货主名称：</view>
+        <view class="text">{{format.formatTo_(info.baseInfo.tenantName)}}</view>
+      </view>
+      <view class="item clearfix">
+        <view class="label">{{operation==1?'入':'出'}}库托数：</view>
+        <view class="text">{{format.formatToZero(info.baseInfo.totalPalletNums)}}</view>
+      </view>
+    </view>
+  </view>
+  <!-- 货物明细 -->
+  <view class="goods detail_common">
+    <view class="wayTitle">
+      <text>货物明细</text>
+    </view>
+    <view class="detail">
+      <view class="item" wx:for="{{info.materialList}}">
+        <view class="inner clearfix">
+          <view class="innerItem" style="width: 100%;"><view>物料名称：</view>{{item.materialDesc}}</view>
+          <view class="innerItem"><view>总数量：</view>{{item.nums}}</view>
+          <view class="innerItem"><view>管理单位：</view>{{item.unitName}}</view>
+          <view class="innerItem"><view>批次号：</view>{{item.batchNum}}</view>
+          <view class="innerItem"><view>总托数：</view>{{item.palletNums}}</view>
+          <view class="innerItem"><view>ASN：</view>{{format.formatTo_(item.asn)}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="operation clearfix" style="{{info.baseInfo.sts==2||info.baseInfo.orderState==1?'pointer-events: none;':''}}">
+    <view class="item" wx:for="{{info.examineItemList}}" bindtap="operate" data-item="{{item}}">
+      <view class="name">{{item.itemName}}</view>
+      <view class="state {{item.itemSts==0?'red':''}}" style="{{info.baseInfo.sts==2||info.baseInfo.orderState==1?'color:#999!important;':''}}">{{item.itemStsName}}</view>
+    </view>
+  </view>
+</view>
+
+<view class="footerBtn">
+  <button bindtap="submit" bindtap="allSure" disabled="{{disabledAllSure}}">一键确认</button>
+</view>
+
+<alert isshow="{{showAlert}}" title="操作提示" class="alert" bind:closealert="cancelAlert" aStyle="width:500rpx;">  
+  <view class="con">
+    <van-radio-group value="{{currentItem.itemSts}}" bind:change="changeSts">
+      <van-radio name="1" >正常</van-radio>
+      <van-radio name="2">异常</van-radio>
+    </van-radio-group>
+    <textarea wx:if="{{currentItem.itemSts==2}}" value="{{currentItem.remark}}" placeholder="请输入异常详情" placeholder-style="font-size:26rpx;" bindinput="textareaSetData"></textarea>
+    <van-uploader 
+       file-list="{{currentItem.imgData}}" 
+       wx:if="{{currentItem.itemSts==2}}"
+       show-upload="{{currentItem.imgData.length<1 || !currentItem.imgData}}"
+       bind:after-read="afterRead" bind:delete="deleteImg" upload-text="上传正面" >
+        <view class="upload-show" wx:if="{{currentItem.imgData.length<1 || !currentItem.imgData}}">
+          <image class="icon" src="/common/images/upload_icon.png" alt=""></image>
+          <text>上传异常图片</text>
+        </view>
+      </van-uploader >
+  </view>
+  <view class="bottom clearfix">
+    <button bindtap="cancelAlert">取消</button>
+    <button bindtap="sureAlert">保存</button>  
+  </view>
+</alert>

@@ -1,0 +1,420 @@
+page{
+  background: #f1f2f5;
+}
+/* 头部切换按钮 */
+.headerTop{
+  background: #fff;
+  padding:16rpx 30rpx 20rpx;
+}
+.headerTop .userType{
+  border-radius: 100rpx;
+  overflow: hidden;
+  background: #EDEDED;
+  /* width: auto; */
+  display: inline-block;
+  color: #999;
+}
+.headerTop .userType view{
+  border-radius: 100rpx;
+  line-height: 66rpx;
+  height: 66rpx;
+  width: 150rpx;
+  position: relative;
+  text-align: center;
+  display: inline-block;
+  font-size: 28rpx;
+  box-sizing: border-box;
+  left: 6rpx;
+}
+.headerTop .userType view:last-child{
+  width: 124rpx;
+  left: -6rpx;
+}
+.headerTop .userType view.active{
+  background: #E60012;
+  color: #fff;
+  left: 0!important;
+}
+/* 组织弹窗 */
+.organizationAlert .listView{
+  max-height:800rpx;
+  overflow-y:auto;
+  padding-top:30rpx;
+}
+.organizationAlert .van-radio{
+  padding: 20rpx 30rpx;
+}
+.organizationAlert .bottom{
+  border-top:1rpx solid #f6f6f6;
+}
+.organizationAlert .bottom button{
+  width: 50%;
+  font-size: 24rpx;
+  float: left;
+  line-height: 80rpx;
+  border-right:1rpx solid #f6f6f6;
+  background: #fff;
+}
+.organizationAlert .bottom button:last-child{
+  border:none;
+}
+/* 头部切换按钮 end*/
+.contain{
+  padding: 24rpx 30rpx;
+}
+.headInfo{
+  width: 100%;
+  position: relative;
+  margin-bottom: 30rpx;
+}
+.headInfo .bg{
+  width: 100%;
+}
+.headInfo .userInfo{
+  position: absolute;
+  padding: 24rpx 26rpx;
+  top: 0;
+  left: 0;
+  z-index: 9;
+}
+.headInfo .userInfo .name{
+  font-size: 30rpx;
+  line-height: 1;
+  margin-bottom: 16rpx;
+  color: #fff;
+}
+.headInfo .userInfo .phone{
+  font-size: 28rpx;
+  line-height: 1;
+  color: #fff;
+}
+.headInfo .userInfo .back{
+  width: 40rpx;
+}
+.headInfo .workName{
+  position: absolute;
+  top: 24rpx;
+  right: 26rpx;
+  z-index: 9;
+  color: #fff;
+}
+.headInfo .finance{
+  position: absolute;
+  bottom: 24rpx;
+  left: 26rpx;
+  z-index: 9;
+}
+.headInfo .finance .item{
+  float: left;
+  margin-right: 88rpx;
+  line-height: 1;
+  color: #fff;
+  font-size: 28rpx;
+  text-align: center;
+}
+.headInfo .finance .num{
+  margin-bottom: 24rpx;
+}
+.headInfo .personal,.comList .improveInfo{
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform:translateY(-50%);
+  -webkit-transform:translateY(-50%);
+  color: #fff;
+  font-size: 28rpx;
+  text-align: center;
+  line-height: 66rpx;
+  height: 66rpx;
+  background: rgba(0,0,0,0.4);
+  padding:0 8rpx 0 24rpx;
+  border-top-left-radius: 50rpx;
+  border-bottom-left-radius: 50rpx;
+  z-index: 9;
+}
+.headInfo .personal van-icon,.comList .improveInfo van-icon{
+  vertical-align: middle;  
+  margin-top: -2rpx;
+}
+
+.headInfo .exit{
+  position: absolute;
+  top: 50%;
+  width: 40rpx;
+  right: 26rpx;
+  z-index: 99;
+  transform: translateY(-50%);
+}
+
+/* 菜单 */
+.list .item{
+  background: #fff;
+  border-radius: 18rpx;
+  text-align: center;
+  width: 48%;
+  margin-right: 4%;
+  margin-bottom: 30rpx;
+  padding: 30rpx 0;
+  float: left;
+  position: relative;
+}
+.list .item:nth-child(even){
+  margin-right: 0;
+}
+.list .item image{
+  width: 93px;
+  height: 93px;
+  margin:0 auto;
+}
+.list .item .name{
+  font-weight: Regular;
+  margin:24rpx 0;
+  font-size: 32rpx;
+  line-height: 1;
+}
+.list .item .explain{
+  font-size: 24rpx;
+  line-height: 1;
+  color: #999;
+}
+.list .item .tip{
+  position: absolute;
+  top: 20rpx;
+  right: 20rpx;
+  background: red;
+  color: #fff;
+  height: 40rpx;
+  width: 40rpx;
+  border-radius: 50%;
+  font-size: 20rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.comList{
+  margin:0 0 24rpx;
+  border-radius: 18rpx;
+  overflow: hidden;
+}
+.comList .item{
+  margin:0;
+}
+.currentTask{
+  background: #fff;
+  padding:30rpx 0 0;
+  margin-bottom:24rpx;
+  border-radius: 18rpx;
+}
+.currentTask .con-title{
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.currentTask .con-title .state{
+  display: inline-block;
+  margin-left: 20rpx;
+  line-height: 40rpx;
+  font-size: 24rpx;
+  width: 120rpx;
+  height: 40rpx;
+  border-radius: 50rpx;
+  text-align: center;
+  color: #05D188;
+  background: #E6F7F0;
+}
+.currentTask .con-title .btn{
+  height: 42rpx;
+  width: 126rpx;
+  text-align: center;
+  line-height: 40rpx;
+  border: 1rpx solid #C5C5C5;
+  border-radius: 50rpx;
+  float: right;
+  background: none;
+  font-size: 24rpx;
+  padding: 0;
+  font-weight: normal;
+}
+.currentTask .operate{
+  margin-top: 40rpx;
+}
+.currentTask .operate .btn{
+  width: 49%;
+  color: #fff;
+  font-size: 32rpx;  
+  height: 110rpx;
+  line-height: 100rpx;
+  text-align: center;
+  margin-right: 2%;
+  position: relative;
+}
+.currentTask .operate .btn .btn-bg{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.currentTask .operate .btn-con {
+  position: relative;
+  z-index: 9;
+  height: 100%;
+}
+.currentTask .operate .btn .icon{
+  width: 28rpx;
+  margin-right: 18rpx;
+  vertical-align: middle;
+  display: inline-block;
+}
+.currentTask .operate .btn:last-child{
+  margin: 0;
+}
+.currentTask .companyName{
+  font-size: 26rpx;
+  margin:18rpx 0;
+}
+.currentTask .arriveTime{
+  background: #FFF3F2;
+  padding:0 14rpx;
+  line-height: 52rpx;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+}
+.site{
+  padding: 30rpx 0 24rpx;
+}
+.site text{
+  margin:0 10rpx 0 42rpx
+}
+.site image{
+  width: 24rpx;
+  display: inline-block;
+  vertical-align: bottom;
+}
+.linkDetail{
+  position: relative;
+}
+.linkDetail .phone{
+  font-size:24rpx;
+  margin-bottom: 18rpx;
+}
+.linkDetail .phone image{
+  width: 18rpx;
+  margin-right: 16rpx;
+  display: inline-block;
+  vertical-align: top;
+}
+.linkDetail .linkman{
+  font-size:24rpx;
+  margin-bottom: 18rpx;
+}
+.linkDetail .linkman image{
+  width: 24rpx;
+  margin-right: 10rpx;
+  display: inline-block;
+  vertical-align: top;
+}
+.linkDetail .remark{
+  font-size:24rpx;
+}
+.linkDetail .remark image{
+  width: 22rpx;
+  margin-right: 12rpx;
+  display: inline-block;
+  vertical-align: top;
+}
+.linkDetail .detailtext{
+  position: absolute;
+  right: 0;
+  font-size: 26rpx;
+  color: #999;
+  top:14rpx;
+}
+.linkDetail .detailtext van-icon{
+  font-size: 30rpx;
+  margin: -4rpx 0 0 12rpx;
+  vertical-align: middle;
+}
+.specificInfo{
+  margin:30rpx 0 0;
+  border-top:1rpx solid #F6F6F6;
+  border-bottom:1rpx solid #F6F6F6;
+  padding: 30rpx 26rpx 0;
+}
+.tabs_inner{
+  display: flex;
+}
+.tabs_inner view{
+  flex:1;
+  -webkit-flex:1;
+}
+.tabs_inner .tab{
+  font-size: 26rpx;
+  padding:0 3rpx 8rpx;
+  margin-right: 30rpx;
+}
+.tabs_inner .tab.active{
+  border-bottom:2rpx solid red;
+}
+.tabs_inner .btn{
+  margin-left: 30rpx;
+  margin-top: 6rpx;
+  color: #E60012;
+  font-size: 26rpx;
+}
+.tabs_inner .btn .icon{
+  width: 24rpx;
+  margin-right: 6rpx;
+  vertical-align: top;
+  display: inline-block;
+}
+.goodsDetail_data{
+  display: flex;
+}
+.goodsDetail_data>view{
+  flex:1;
+  -webkit-flex:1;
+  text-align: center;
+  line-height: 80rpx;
+  font-size:26rpx;
+}
+.goodsDetail{
+  padding: 0 15rpx;
+  border-bottom:1rpx solid #F6F6F6;
+}
+.goodsDetail .item{
+  border-bottom:1rpx solid #F6F6F6;
+}
+.goodsDetail .item:last-child{
+  border:none;
+}
+.goodsDetail .title{
+  margin:24rpx 0;
+  padding:0 30rpx;
+}
+.goodsDetail .inner{
+  padding:0 30rpx;
+}
+.goodsDetail .inner>view{
+  float: left;
+  width: 40%;
+  margin-bottom: 20rpx;
+  font-size:28rpx;
+  color: #666;
+}
+.goodsDetail .inner>view:nth-child(odd){
+  width: 60%;
+}
+
+.showmore{
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #666;
+}
+.showmore .arrow{
+  vertical-align: middle;
+  margin-left: 6rpx;
+}

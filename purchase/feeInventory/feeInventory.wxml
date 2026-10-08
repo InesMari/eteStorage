@@ -1,0 +1,25 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<view class="mb_20">
+<van-cell-group>
+  <view class="title fw">基本信息</view>
+  <van-cell title="费用清单号" value="{{info.planNum}}" />
+  <van-cell title="成本发生日期" value="{{info.billMonth}}" />
+  <van-cell title="成本发生部门" value="{{info.orgName}}" />
+  <van-cell title="含税金额" value="{{info.fee}}" />
+  <van-cell class="mylink" title="采购单号" value="{{info.purchaseNum}}" data-id="{{info.purchaseOrderId}}" bindtap="toPurchaseDetail" />
+  <van-cell class="mylink" title="费用申请单号" value="{{info.applyNum}}" data-id="{{info.applyId}}" bindtap="toApplyDetail" />
+
+  <view class="title fw">物品/项目信息</view>
+  <van-cell title="费用类型" value="{{info.feeNames}}" />
+  <van-cell title="品名/项目" value="{{info.projectName}}" />
+  <van-cell title="规格型号" value="{{info.specification}}" />
+  <van-cell title="数量" value="{{info.nums}}" />
+  <van-cell title="付款类型" value="{{info.payTypeName}}" />
+  <van-cell title="租赁/分期月份数" value="{{info.depreciationMonthCount}}" />
+  <van-cell title="开始计费日期" value="{{info.chargeDate}}" />
+  <van-cell title="增值税" value="{{info.rate}}" />
+  <van-cell title="含税参考单价	" value="{{info.referPrice}}" />
+  <van-cell title="收货日期	" value="{{info.inDate}}" />
+</van-cell-group>
+</view>
+

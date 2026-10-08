@@ -1,0 +1,25 @@
+<wxs src="../../../common/wxs/format.wxs" module="format"></wxs>
+<van-search value="{{ value }}" bind:change="search" placeholder="输入关键字模糊搜索" />
+<view class="total">
+  <view class="item">
+    <view class="nums">{{visitCountSum}}</view>
+    <view class="text">来访登记累计次数</view>
+  </view>
+  <view class="item">
+    <view class="nums">{{currentMonthVisitCountSum}}</view>
+    <view class="text">来访登记本月次数</view>
+  </view>
+</view>
+<image mode="widthFix" wx:if="{{isRefresh}}" class="loading-icon" src="/common/images/loading.gif"></image>
+<scroll-view class="scorll" scroll-y="{{true}}" bindscrolltoupper="toupper" upper-threshold="1" bindscrolltolower="scrolltolowerHandler">
+  <view class="list">
+    <view class="item" wx:for="{{list}}" bindtap="toDetail" data-item="{{item}}">
+      <view class="info">
+        <view class="fw">{{item.visitName}} 完成了来访登记</view>
+        <view>来访所属客户/供应商：{{item.visitCustomer}}</view>
+        <view>来访事由：{{item.visitReason}}</view>
+        <view>来访时间：{{item.visitDate}}</view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

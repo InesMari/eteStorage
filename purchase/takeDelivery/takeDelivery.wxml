@@ -1,0 +1,125 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+
+<view class="detailView">
+  <view class="titleTab fw">采购信息</view>
+  <view class="pagelist">
+    <view class="item">
+      <view class="inner">
+        <view class="info clearfix">
+          <view class="item">          
+            <view class="label">采购单单号：</view>
+            <view class="input-text picker" bindtap="showPurchasePopover">
+                <view wx:if="{{info.purchaseNum}}">
+                  {{info.purchaseNum}}
+                </view>
+                <view style="color:#999;" wx:else>请选择采购单单号</view>
+                <van-icon name="arrow-down" class="arrow-down" />
+            </view>
+          </view>
+          <view class="item">  
+            <view class="label">采购方：</view>
+            <view class="input-text">{{format.formatTo_(info.settleBodyName)}}</view>
+          </view>
+          <view class="item">  
+            <view class="label">入库地：</view>
+            <view class="input-text">{{format.formatTo_(info.workName)}}</view>
+          </view>
+          <view class="item">          
+            <view class="label">入库日期：</view>
+            <view class="input-text">
+              <picker mode="date" value="{{info.inDate}}" data-key="inDate" start="2000-01-01" end="2099-12-31" bindchange="inputSetDataDefault">
+                <view class="picker">
+                  <view wx:if="{{info.inDate}}">
+                    {{info.inDate}}
+                  </view>
+                  <view style="color:#999;" wx:else>选择时间</view>
+                  <van-icon name="arrow-down" class="arrow-down" />
+                </view>
+              </picker>
+            </view>
+          </view>
+          <view class="item">
+            <view class="label">备注：</view>
+            <view class="input-text">
+              <input type="text" placeholder="备注" value="{{info.orderRemark}}" data-key="orderRemark" bindinput="inputSetDataDefault"></input>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+
+<view class="detailView" wx:if="{{info.purchaseNum}}">
+  <view class="titleTab fw">入库明细</view>
+  <view class="pagelist">
+    <view class="item" wx:for="{{dtlList}}">
+      <view class="inner">
+        <view class="info clearfix">
+          <view>物品类型：<text class="text">{{item.feeSubTypeName}}</text></view>
+          <view>品名：<text class="text">{{item.projectName}}</text></view>
+          <view>规格型号：<text class="text">{{item.specification}}</text></view>
+          <view class="w50">数量单位：<text class="text">{{item.unit}}</text></view>
+          <view class="w50">采购数量：<text class="text">{{item.purchaseNum}}</text></view>
+          <view class="w50">已入库数量：<text class="text">{{item.deliveryNums}}</text></view>
+          <view class="w50">付款类型：<text class="text">{{item.payTypeName}}</text></view>
+          <view class="item">          
+            <view class="label" style="width: 180rpx;">开始计费日期：</view>
+            <view class="input-text">
+              <picker mode="date" value="{{item.chargeDate}}" data-index="{{index}}" data-key="chargeDate" start="2000-01-01" end="2099-12-31" bindchange="inputSetDataItem">
+                <view class="picker">
+                  <view wx:if="{{item.chargeDate}}">
+                    {{item.chargeDate}}
+                  </view>
+                  <view style="color:#999;" wx:else>选择时间</view>
+                  <van-icon name="arrow-down" class="arrow-down" />
+                </view>
+              </picker>
+            </view>
+          </view>
+          <view class="item">
+            <view class="label" style="width: 180rpx;">入库数量：</view>
+            <view class="input-text">
+              <input type="number" placeholder="入库数量" value="{{item.nums}}" data-key="nums" data-index="{{index}}" bindinput="inputSetDataItem"></input>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="titleTab fw">交货单：</view>
+<view class="uploadImg clearfix">
+  <van-uploader 
+    file-list="{{fileList}}"
+    bind:after-read="afterRead" bind:delete="deleteImg" upload-text="上传" 
+    show-upload="{{fileList.length<1}}"
+  />
+</view>
+
+<view class="titleTab fw">实物图：</view>
+<view class="uploadImg clearfix">
+  <van-uploader 
+    file-list="{{realList}}"
+    bind:after-read="afterReadReal" bind:delete="deleteImgReal" upload-text="上传" 
+    show-upload="{{realList.length<1}}"
+  />
+</view>
+
+<!-- 选择采购单 -->
+<popover is-show="{{isShowPurchasePopover}}">
+  <view class="filter-container">
+    <input type="text" placeholder="请输入采购单单号" bindinput='searchPurchaseList' value="{{purchaseSearch}}"></input>
+    <scroll-view class="scrollList" scroll-y="{{true}}">
+      <view class="item" wx:for="{{purchaseList}}" wx:key="{{index}}" bindtap="selectPurchase" data-item="{{item}}">{{item.purchaseNum}}</view>
+    </scroll-view>
+  </view>
+</popover>
+
+
+<view class="footerBtn">
+  <button bindtap="sure">确认入库</button>
+</view>

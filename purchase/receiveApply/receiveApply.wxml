@@ -1,0 +1,112 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+
+<view class="detailView">
+  <view class="titleTab fw">领用信息</view>
+  <view class="pagelist">
+    <view class="item">
+      <view class="inner">
+        <view class="info clearfix">
+          <view class="item">          
+            <view class="label">库存地：</view>
+            <view class="input-text">{{format.formatTo_(info.workName)}}</view>
+            <!-- <view class="input-text picker" bindtap="showStockPopover">
+                <view wx:if="{{info.workName}}">
+                  {{info.workName}}
+                </view>
+                <view style="color:#999;" wx:else>请选择库存地</view>
+                <van-icon name="arrow-down" class="arrow-down" />
+            </view> -->
+          </view>
+          <view class="item">          
+            <view class="label">领用物品：</view>
+            <view class="input-text">{{format.formatTo_(info.settleBodyName)}}</view>
+            <!-- <view class="input-text picker" bindtap="showDataPopover" data-list="stockList" data-code="workName">
+                <view wx:if="{{info.workName}}">
+                  {{info.workName}}
+                </view>
+                <view style="color:#999;" wx:else>请选择领用物品</view>
+                <van-icon name="arrow-down" class="arrow-down" />
+            </view> -->
+          </view>
+          <view class="item">  
+            <view class="label">物品种类：</view>
+            <view class="input-text">{{format.formatTo_(info.feeSubTypeName)}}</view>
+          </view>
+          <view class="item">  
+            <view class="label">品名：</view>
+            <view class="input-text">{{format.formatTo_(info.projectName)}}</view>
+          </view>
+          <view class="item">  
+            <view class="label">规格型号：</view>
+            <view class="input-text">{{format.formatTo_(info.specification)}}</view>
+          </view>
+          <view class="item">
+            <view class="label">领用数量：</view>
+            <view class="input-text">
+              <input type="text" placeholder="领用数量" value="{{info.num}}" data-key="num" bindinput="inputSetDataDefault"></input>
+            </view>
+          </view>
+          <view class="item">
+            <view class="label">固定资产编号：</view>
+            <view class="input-text">
+              <input type="text" placeholder="固定资产编号" value="{{info.assetsNum}}" data-key="assetsNum" bindinput="inputSetDataDefault"></input>
+            </view>
+          </view>
+          <view class="item">          
+            <view class="label"><text class="red">*</text>领用部门：</view>
+            <view class="input-text picker" bindtap="showOrgPopover">
+                <view wx:if="{{info.orgName}}">
+                  {{info.orgName}}
+                </view>
+                <view style="color:#999;" wx:else>请选择领用部门</view>
+                <van-icon name="arrow-down" class="arrow-down" />
+            </view>
+          </view>
+          <view class="item">          
+            <view class="label"><text class="red">*</text>领用人员：</view>
+            <view class="input-text picker" bindtap="showStaffPopover">
+                <view wx:if="{{info.staffName}}">
+                  {{info.staffName}}
+                </view>
+                <view style="color:#999;" wx:else>请选择领用人员</view>
+                <van-icon name="arrow-down" class="arrow-down" />
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="titleTab fw">固定资产标识卡：</view>
+<view class="uploadImg clearfix">
+  <van-uploader 
+    file-list="{{fileList}}"
+    bind:after-read="afterRead" bind:delete="deleteImg" upload-text="上传" 
+    show-upload="{{fileList.length<1}}"
+  />
+</view>
+
+<view class="footerBtn">
+  <button bindtap="sure">确认</button>
+</view>
+
+<!-- 领用部门 -->
+<popover is-show="{{isShowOrgPopover}}">
+  <view class="filter-container">
+    <input type="text" placeholder="请输入关键字搜索" bindinput='searchOrgList' value="{{orgSearch}}"></input>
+    <scroll-view class="scrollList" scroll-y="{{true}}">
+      <view class="item" wx:for="{{orgList}}" wx:key="{{index}}" bindtap="selectOrg" data-item="{{item}}">{{item.orgName}}</view>
+    </scroll-view>
+  </view>
+</popover>
+
+<!-- 领用部门 -->
+<popover is-show="{{isShowStaffPopover}}">
+  <view class="filter-container">
+    <input type="text" placeholder="请输入关键字搜索" bindinput='searchStaffList' value="{{staffSearch}}"></input>
+    <scroll-view class="scrollList" scroll-y="{{true}}">
+      <view class="item" wx:for="{{staffList}}" wx:key="{{index}}" bindtap="selectStaff" data-item="{{item}}">{{item.staffName}}</view>
+    </scroll-view>
+  </view>
+</popover>

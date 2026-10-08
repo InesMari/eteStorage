@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "车辆修理成本",
+  "usingComponents": {
+    "alert":"/common/components/alert/alert",
+    "fileviewer":"/common/components/fileviewer/fileviewer"    
+  }
+}

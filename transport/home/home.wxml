@@ -1,0 +1,53 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<!-- 货主 -->
+<view class="contain">
+  <view class="headInfo">
+    <image class="bg" src="/common/images/info_bg.png"></image>
+    <view class="userInfo" bindtap="goback">
+      <image class="back" src="/common/images/back.png" mode="widthFix"></image>
+    </view>
+    <view class="workName">运输中心</view>
+  </view>
+  <view class="list clearfix">
+    <view  class="item" bindtap="toAddOrder" wx:if="{{entitys[1003002]}}">
+      <image src="/common/images/i_11.png"></image>
+      <view class="name">新增订单</view>
+      <view class="explain">可进行订单的新增</view>
+    </view>
+    <view  class="item" bindtap="toOrderPlan" wx:if="{{entitys[1003008]}}">
+      <image src="/common/images/i_40.png"></image>
+      <view class="name">订单包管理</view>
+      <view class="explain">可对订单包进行管理</view>
+    </view>
+    <view  class="item" bindtap="toWaybillManage" wx:if="{{entitys[1003009]}}">
+      <image src="/common/images/i_1.png"></image>
+      <view class="name">派车单管理</view>
+      <view class="explain">可查看修改派车单</view>
+    </view>
+    <view  class="item" bindtap="doScan" wx:if="{{entitys[1003009]}}">
+      <image src="/common/images/i_20.png"></image>
+      <view class="name">标签扫码查询</view>
+      <view class="explain">扫描回单标签查看派车单详情</view>
+    </view>
+    <view  class="item" bindtap="toTransportManage" data-type="1" wx:if="{{entitys[1003003]}}">
+      <image src="/common/images/i_3.png"></image>
+      <view class="name">订单调度</view>
+      <view class="explain">可进行订单订单调度</view>
+    </view>
+    <view  class="item" bindtap="toTransportManage" data-type="4" wx:if="{{entitys[1003004]}}">
+      <image src="/common/images/i_12.png"></image>
+      <view class="name">零担调度</view>
+      <view class="explain">可进行订单的零担调度</view>
+    </view>
+    <view  class="item" bindtap="toVehicleCheck" wx:if="{{entitys[1003079]}}">
+      <image src="/common/images/i_25.png"></image>
+      <view class="name">点检管理</view>
+      <view class="explain">确认车辆的点检</view>
+    </view>
+    <view  class="item" bindtap="toOwnCar" wx:if="{{entitys[1008016]}}">
+      <image src="/common/images/i_19.png"></image>
+      <view class="name">自有车定位</view>
+      <view class="explain">可查看自有车位置</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "物品领用申请详情",
+  "usingComponents": {
+    "alert":"/common/components/alert/alert"       
+  }
+}

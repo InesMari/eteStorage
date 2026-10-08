@@ -1,0 +1,28 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<van-search value="{{ value }}" bind:change="search" placeholder="输入关键字模糊搜索" />
+<van-tabs active="{{active}}" bind:change="onChange">
+  <van-tab title="全部"></van-tab>
+  <van-tab title="待检查"></van-tab>
+  <van-tab title="检查中"></van-tab>
+  <van-tab title="已完成"></van-tab>
+</van-tabs>
+<image mode="widthFix" wx:if="{{isRefresh}}" class="loading-icon" src="/common/images/loading.gif"></image>
+<scroll-view class="scorll" scroll-y="{{true}}" bindscrolltoupper="toupper" upper-threshold="1" bindscrolltolower="scrolltolowerHandler">
+  <view class="list mt_20">
+    <view class="item" wx:for="{{list}}" bindtap="toDetail" data-item="{{item}}">
+      <view class="inner">
+        <view class="title clearfix"> 
+          <view class="router fl">{{item.orderNum}}</view>
+          <view wx:if="{{item.orderState == 0}}" class="state {{item.sts==0?'state0':''}} {{item.sts==1?'state1':''}} {{item.sts==2?'state2':''}}">{{item.stsName}}</view>
+          <view wx:if="{{item.orderState == 1}}" class="state state3">{{item.stsName}}</view>
+          <view class="state state3" wx:if="{{item.orderState == 1}}" style="margin-right: 10rpx;">{{info.operation==1?'已入库':'已出库'}}</view>
+        </view>
+        <view class="info">
+          <view>仓库名称：<text class="text">{{item.workName}}</text></view>
+          <view>货主名称：<text class="text">{{item.tenantName}}</text></view>
+          <view>ASN：<text class="text">{{item.asn}}</text></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

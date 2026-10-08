@@ -1,0 +1,144 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<view class="pageView">
+  <view class="myField">
+    <view class="item clearfix">
+      <view class="label">出库单号：</view>
+      <view class="input-text" bindtap="showOutOrderMaterialPopover">
+        <view wx:if="{{info.baseInfo.outOrderNum}}">
+          {{info.baseInfo.outOrderNum}}
+        </view>
+        <view style="color:#c8c9cc;" wx:else>请选择出库单</view>
+        <van-icon name="arrow-down" class="arrow-down" />
+      </view>
+    </view>
+  </view>  
+  <van-icon class="orderScan" name="scan" bindtap="orderScan"/>
+</view>
+<view class="pageView" wx:if="{{info}}">
+  <view class="baseInfo"> 
+    <view class="wayTitle">
+      <text>出库单基础信息</text> 
+    </view>
+    <view class="detail">
+      <view class="item">
+        <view class="inner clearfix">
+          <view>出库单号：{{info.baseInfo.outOrderNum}}</view>
+          <view>要求出库时间：{{format.formatTo_(info.baseInfo.realOutDate)}}</view>
+          <view>货主：{{info.baseInfo.srcTenantName}}</view>
+          <view class="view50">出库箱数：{{info.baseInfo.boxNums}}</view>
+          <view class="view50">出库托数：{{info.baseInfo.palletNums}}</view>
+          <view class="view50">出库数量：{{info.baseInfo.nums}}</view>
+          <view class="view50">扫码累计：<text class="red">{{info.baseInfo.scanTotal}}</text></view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="wayTitle">
+    <text>物料出库信息</text> 
+  </view>
+  <view class="baseInfo">
+    <view class="detail" style="padding-top: 20rpx;" wx:for="{{info.outMaterialList}}">
+      <view class="title">{{item.materialDesc}}</view>
+      <view class="item">
+        <view class="inner clearfix">
+          <view>物料编码：{{item.materialNum}}</view>
+          <view style="line-height: 48rpx;">时代条码：
+            <view style="display:inline-block;border: 1rpx solid #ccc;padding: 0 16rpx;border-radius: 6rpx;background: #efefef;">{{item.codeNum}}</view>
+            <van-icon class="sdCodeScan" name="scan" bindtap="sdCodeScan" data-index="{{index}}"/>
+          </view>
+          <view class="view50">批次号：{{item.batchNum}}</view>
+          <view class="view50">ASN：{{item.asn}}</view>
+          <view class="view50">规格：{{item.materialSpecsName}}</view>
+          <view class="view50">库区：{{item.reservoirCode}}</view>
+          <view class="view50">库位：{{item.storageCode}}</view>
+          <view class="view50">托数：{{item.planPalletNums}}</view>
+          <view class="view50">箱数：{{item.planBoxNums}}</view>
+          <view class="view50">数量：{{item.planNums}}</view>
+        </view>
+      </view>
+      <view class="innerInfo clearfix">
+        <view class="innerItem">
+          <view class="label">新ASN：</view>
+          <view class="input">
+            <input type="text" placeholder="请输入" value="{{item.newAsn}}" data-key="newAsn" data-index="{{index}}" bindinput="inputSetData"></input>            
+          </view>
+        </view>
+        <view class="innerItem">
+          <view class="label">新批次号：</view>
+          <view class="input">
+            <input type="text" placeholder="请输入" value="{{item.newBatchNum}}" data-key="newBatchNum" data-index="{{index}}" bindinput="inputSetData"></input>            
+          </view>
+        </view>
+        <view class="innerItem">
+          <view class="label">扫码次数：</view>
+          <view class="input">
+            <input type="number" disabled="{{true}}" value="{{item.scanTotal}}" style="background: #efefef;"></input>          
+          </view>
+        </view>
+        <view class="innerItem">
+          <view class="label">扫码数量：</view>
+          <view class="input">
+            <input type="number" disabled="{{true}}" value="{{item.scanNums}}" style="background: #efefef;"></input>        
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="wayTitle">
+    <text>扫码结果</text>
+    <button bindtap="mScan" class="mScanBtn"><van-icon class="mScan" name="scan"/>物料出库扫码</button>
+  </view>
+  <view class="noScan" wx:if="{{info.qrcodeList.length==0}}">
+    暂无扫码记录...
+  </view>
+  <view class="scanTable" wx:if="{{info.qrcodeList.length>0}}">
+    <view class="tr">
+      <view class="th">序号</view>
+      <view class="th" style="flex: 2;">条形编码</view>
+      <view class="th">条码数量</view>
+      <view class="th">操作</view>
+    </view>
+    <view class="tr" wx:for="{{info.qrcodeList}}">
+      <view class="td">{{index+1}}</view>
+      <view class="td" style="flex: 2;">{{item.codeNum}}</view>
+      <view class="td">{{item.nums}}</view>
+      <view class="td"><van-icon name="delete" class="del" bindtap="delCode" data-index="{{index}}" /></view>
+    </view>
+  </view>
+  <view class="wayTitle">
+    <text>包材信息</text>
+  </view>
+  <view class="scanTable" wx:if="{{info.packMaterialList.length>0}}">
+    <view class="tr">
+      <view class="th">序号</view>
+      <view class="th" style="flex: 4;">可回收包材</view>
+      <view class="th" style="flex: 2;">出库数量</view>
+      <view class="th" style="flex: 2;">实际出库数量</view>
+    </view>
+    <view class="tr" wx:for="{{info.packMaterialList}}">
+      <view class="td">{{index+1}}</view>
+      <view class="td" style="flex: 4;">{{item.name}}</view>
+      <view class="td" style="flex: 2;">{{item.nums}}</view>
+      <view class="td" style="flex: 2;">        
+        <input type="text" placeholder="请输入" value="{{item.realNums}}" data-index="{{index}}" bindinput="inputSetPackData"style="text-align: center;"></input>         
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="footerBtn btns">
+  <view class="total">已扫码：{{info.qrcodeList.length}}个</view>
+  <button bindtap="submit">扫码完成</button>
+</view>
+
+<!-- 选择出库单 -->
+<popover is-show="{{isShowOutOrderMaterialPopover}}">
+  <view class="filter-container">
+    <input type="text" placeholder="请输入出库单号" bindinput='searchOutOrderMaterialList'
+      value="{{outOrderMaterialSearch}}"></input>
+    <scroll-view class="scrollList" scroll-y="{{true}}">
+      <view class="item {{item.select?'active':''}}" wx:for="{{outOrderMaterialList}}" wx:key="{{index}}"
+        bindtap="selectOutOrderMaterial" data-item="{{item}}" data-index="{{index}}">{{item.outOrderNum}}</view>
+    </scroll-view>
+  </view>
+</popover>

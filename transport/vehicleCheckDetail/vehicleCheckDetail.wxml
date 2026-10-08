@@ -1,0 +1,81 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<block wx:if="{{!showFinish}}">
+<van-tabs active="{{active}}" bind:click="toScroll">
+  <van-tab title="基本信息"></van-tab>
+  <van-tab title="点检信息"></van-tab>
+</van-tabs>
+<view class="mb_20">
+<view class="titleTab fw" id="base">基本信息补充</view>
+<view class="myField">
+  <view class="item clearfix">
+    <view class="label">*提交日期</view>
+    <view class="input-text">{{info.submitDate}}</view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">*所属车队</view>
+    <view class="input-text">{{info.tenantName}}</view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">*线路名称</view>
+    <view class="input-text">{{info.routeName}}</view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">*司机名称</view>
+    <view class="input-text">{{info.driverName}}</view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">*车头号码</view>
+    <view class="input-text">{{info.plateNumber}}</view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">挂车号码</view>
+    <view class="input-text">{{info.trailerNumber}}</view>
+  </view>
+  <view class="item clearfix">
+    <view class="label">*到厂时间</view>
+    <view class="input-text">{{info.arriveDate}}</view>
+  </view>
+</view>
+
+<view class="titleTab fw mt_20" id="constract">点检信息</view>
+<view class="myField">
+  <view class="item clearfix" wx:for="{{info.checkList}}">
+    <view class="label">
+      <rich-text nodes="{{item.content}}"></rich-text>
+    </view>
+    <view class="input-text">
+      <van-radio-group value="{{ item.checkState }}">
+        <van-radio name="{{1}}" shape="square" icon-size="24rpx">正常</van-radio>
+        <van-radio name="{{0}}" shape="square" icon-size="24rpx">异常</van-radio>
+      </van-radio-group>
+    </view>
+  </view>
+</view>
+</view>
+<view class="uploadImg" wx:if="{{info.fileList.length>0}}">
+  <view class="list clearfix">
+    <view class="item" wx:for="{{info.fileList}}" bindtap="seeBigImg" data-url="{{url}}">
+      <image src="{{item.fileUrl}}"></image>
+    </view>
+  </view>
+</view>
+
+<textarea class="remarkArea" disabled="{{true}}" placeholder="请根据实际情况输入异常记录" value="{{info.submitRemark}}" data-key="submitRemark" bindinput="inputSetDataDefault"></textarea>
+
+<view class="footerBtn btns" wx:if="{{info.confirmState == 0}}">
+  <button class="default" bindtap="audit">确认通过</button>
+  <button bindtap="showUnPassAlertMethod">不通过</button>
+</view>
+</block>
+
+<!-- 评审不通过原因 -->
+<alert isshow="{{showUnPassAlert}}" title="提示" class="showUnPassAlert" bind:closealert="cancelAlert" aStyle="width:500rpx;">  
+  <view class="content">
+    <view class="label">请输入车辆点检不通过原因：</view>
+    <input type="text" value="{{remark}}" bindinput="inputSetRemark" placeholder=""></input>
+  </view>
+  <view class="bottom clearfix">
+    <button bindtap="cancelAlert">取消</button>
+    <button bindtap="sureAlert">确定</button>  
+  </view>
+</alert>

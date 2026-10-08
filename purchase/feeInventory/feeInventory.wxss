@@ -1,0 +1,25 @@
+page{
+  background: #f1f2f5;
+  padding-bottom: 130rpx;
+}
+
+.van-cell__title{
+  flex:initial!important;
+  -webkit-flex:initial!important;
+  max-width: 250rpx!important;
+}
+.van-cell__value{
+  text-align: right;
+  color: #333!important;
+}
+.mylink .van-cell__value{
+  text-decoration: underline!important;
+  color: #3894ff!important;
+}
+.mylink .van-cell__title{
+  max-width: initial!important;
+}
+.title{
+  line-height: 80rpx;
+  padding: 0 30rpx;
+}

@@ -1,0 +1,101 @@
+<view class="pageTitle">
+  <image wx:if="{{info.waybillState<0||info.waybillState>3}}" class="bg" src="../../common/images/detail_bg3.png"></image>
+  <image wx:if="{{info.waybillState==0}}" class="bg" src="../../common/images/detail_bg0.png"></image>
+  <image wx:if="{{info.waybillState==1}}" class="bg" src="../../common/images/detail_bg1.png"></image>
+  <image wx:if="{{info.waybillState==2}}" class="bg" src="../../common/images/detail_bg2.png"></image>
+  <image wx:if="{{info.waybillState==3}}" class="bg" src="../../common/images/detail_bg3.png"></image>
+  <view class="info">
+    <view class="route clearfix">
+      <view class="fl">{{info.routeName}}</view>
+    </view>
+    <view class="waybillNum">
+      派车单号：{{info.waybillNum}}
+    </view>
+  </view>
+</view>
+
+<view class="myField">
+    <view class="item clearfix">
+      <view class="label">供应商</view>
+      <view class="input-text">
+        <picker mode="selector" range="{{supplierList}}" bindchange="supplierChange" range-key="supplierName" value="{{supplierIndex}}" data-key="PICK">
+          <view wx:if="{{supplierList.length !=0 &&supplierIndex!=null}}">
+            {{supplierList[supplierIndex].supplierName}}
+          </view>
+          <view style="color:#c8c9cc;" wx:else>请选择供应商</view>
+          <van-icon name="arrow-down" class="arrow-down" />
+        </picker>
+      </view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">车辆号</view>
+      <view class="input-text" bindtap="showVehiclePopover">
+          <view wx:if="{{info.plateNumber}}">
+            {{info.plateNumber}}
+          </view>
+          <view style="color:#c8c9cc;" wx:else>请选择或输入{{item.typeName}}车牌号</view>
+          <van-icon name="arrow-down" class="arrow-down" />
+      </view>
+    </view>
+    <view class="item vehicleType clearfix">
+      <view class="label">车辆类型</view>
+      <view class="input-text">
+        <picker disabled="{{true}}" class="fl" style="width:40%;" mode="selector" range="{{vehicleTypeList}}" bindchange="vehicleTypeChange" range-key="codeName" value="{{vehicleTypeIndex}}" data-key="PICK">
+          <view wx:if="{{vehicleTypeList.length !=0 &&vehicleTypeIndex!=null}}">
+            {{vehicleTypeList[vehicleTypeIndex].codeName}}
+          </view>
+          <view style="color:#c8c9cc;" wx:else>车型</view>
+          <!-- <van-icon name="arrow-down" class="arrow-down" /> -->
+        </picker>
+        <picker disabled="{{true}}" class="fr" style="width:40%;" mode="selector" range="{{vehicleLengthList}}" bindchange="vehicleLengthChange" range-key="codeName" value="{{vehicleLengthIndex}}" data-key="PICK">
+          <view wx:if="{{vehicleLengthList.length !=0 && vehicleLengthIndex!=null}}">
+            {{vehicleLengthList[vehicleLengthIndex].codeName}}
+          </view>
+          <view style="color:#c8c9cc;" wx:else>车长</view>
+          <!-- <van-icon name="arrow-down" class="arrow-down" /> -->
+        </picker>
+      </view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">司机</view>
+      <view class="input-text" bindtap="showDriverPopover">
+          <view wx:if="{{info.driverName}}">
+            {{info.driverName}}
+          </view>
+          <view style="color:#c8c9cc;" wx:else>请选择或输入{{info.typeName}}司机</view>
+          <van-icon name="arrow-down" class="arrow-down" />
+      </view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">司机手机号</view>
+      <view class="input-text">
+        <input type="number" placeholder="请输入提货司机手机号码" value="{{info.linkPhone}}" data-key="linkPhone" bindinput="inputSetDataDefault"></input>
+      </view>
+    </view>
+</view>
+
+<view class="footerBtn">
+  <button bindtap="submit">确定</button>
+</view>
+
+<!-- 选择车辆 -->
+<popover is-show="{{isShowVehiclePopover}}">
+  <view class="filter-container">
+    <input type="text" placeholder="请输入车牌号" bindinput='searchVehicleList' value="{{vehicleSearch}}"></input>
+    <scroll-view class="scrollList" scroll-y="{{true}}">
+      <view class="item" wx:for="{{vehicleList}}" wx:key="{{index}}" bindtap="selectVehicle" data-item="{{item}}">{{item.plateNumber}}</view>
+    </scroll-view>
+    <button type="primary" class="btn" catchtap="selectVehicle">确定</button>
+  </view>
+</popover>
+
+<!-- 选择司机 -->
+<popover is-show="{{isShowDriverPopover}}">
+  <view class="filter-container">
+    <input type="text" placeholder="请输入司机" bindinput='searchDriveList' value="{{driverSearch}}"></input>
+    <scroll-view class="scrollList" scroll-y="{{true}}">
+      <view class="item" wx:for="{{driveList}}" wx:key="{{index}}" bindtap="selectDriver" data-item="{{item}}">{{item.driverName}}</view>
+    </scroll-view>
+    <button type="primary" class="btn" catchtap="selectDriver">确定</button>
+  </view>
+</popover>

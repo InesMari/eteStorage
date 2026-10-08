@@ -1,0 +1,88 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<!-- 货主 -->
+<view class="contain">
+  <view class="headInfo">
+    <image class="bg" src="/common/images/info_bg.png" mode="widthFix"></image>
+    <view class="userInfo">
+      <view class="name">{{userInfo.userName}}</view>
+      <view class="phone">{{userInfo.billId}}</view>
+    </view>
+    <view class="workName" bindtap="showOrgAlert">{{userInfo.orgName}}</view>
+    <image src="/common/images/exit2.png" class="exit" bindtap="toLogout" mode="widthFix"></image>
+  </view>
+  <view class="list clearfix">
+    <view  class="item" bindtap="toTransport" wx:if="{{entitys[1003001]}}">
+      <image src="/common/images/i_1.png"></image>
+      <view class="name">运输中心</view>
+      <view class="explain">可进行新增/调度订单</view>
+    </view>
+    <view  class="item" bindtap="toStorage" wx:if="{{entitys[1005001]}}">
+      <image src="/common/images/i_10.png"></image>
+      <view class="name">仓储中心</view>
+      <view class="explain">可进行出库入库操作</view>
+    </view>
+    <view  class="item" bindtap="toReceipts" wx:if="{{entitys[1006114]}}">
+      <image src="/common/images/i_13.png"></image>
+      <view class="name">单据管理</view>
+      <view class="explain">可对付款单/请款单审核</view>
+      <view class="tip" wx:if="{{counts.receiptsSum > 0}}">{{counts.receiptsSum}}</view>
+    </view>
+    <view  class="item" bindtap="toContract" wx:if="{{entitys[1011027]}}">
+      <image src="/common/images/i_24.png"></image>
+      <view class="name">合同评审</view>
+      <view class="explain">可对供应商合同评审</view>
+      <view class="tip" wx:if="{{counts.contractReviewSum > 0}}">{{counts.contractReviewSum}}</view>
+    </view>
+    <!-- <view  class="item" bindtap="toAssets" wx:if="{{entitys[1009002]}}">
+      <image src="/common/images/i_17.png"></image>
+      <view class="name">资产管理</view>
+      <view class="explain">审核资产类申请</view>
+      <view class="tip" wx:if="{{counts.capitalSum > 0}}">{{counts.capitalSum}}</view>
+    </view> -->
+    <view  class="item" bindtap="towxOrderCode">
+      <image src="/common/images/i_26.png"></image>
+      <view class="name">自有车回程单填报</view>
+      <view class="explain">自有车回程单填报</view>
+    </view>
+    <view  class="item" bindtap="toExcept" wx:if="{{entitys[1013002]}}">
+      <image src="/common/images/i_27.png"></image>
+      <view class="name">异常管理</view>
+      <view class="explain">管理事故、客诉等异常</view>
+    </view>
+    <view  class="item" bindtap="toPurchase" wx:if="{{entitys[1014001]}}">
+      <image src="/common/images/i_29.png"></image>
+      <view class="name">采购管理</view>
+      <view class="explain">收货入库列表、审核</view>
+      <view class="tip" wx:if="{{counts.purchaseManagementTodoSum > 0}}">{{counts.purchaseManagementTodoSum}}</view>
+    </view>
+    <view  class="item" bindtap="toFindcar" wx:if="{{entitys[1008016]}}">
+      <image src="/common/images/i_19.png"></image>
+      <view class="name">我要找车</view>
+      <view class="explain">寻找需要的车辆</view>
+    </view>
+    <view  class="item" bindtap="toInformation" wx:if="{{entitys[1002005]}}">
+      <image src="/common/images/i_33.png"></image>
+      <view class="name">运力管理</view>
+      <view class="explain">车辆、司机信息维护</view>
+    </view>
+    <view  class="item" bindtap="toOwnVehicle" wx:if="{{entitys[1002109]}}">
+      <image src="/common/images/i_35.png"></image>
+      <view class="name">自有车管理</view>
+      <view class="explain">自有车管理</view>
+    </view>
+  </view>
+</view>
+
+
+<!-- 选择组织 -->
+<alert isshow="{{organizationAlert}}" class="organizationAlert" bind:closealert="cancelOrg" aStyle="width:500rpx;">  
+  <view class="listView">
+    <van-radio-group value="{{ currentOrg.id }}" bind:change="onChange">
+      <van-radio name="{{item.id}}" wx:for="{{userInfo.orgList}}">{{item.orgName}}</van-radio>
+    </van-radio-group>
+  </view>
+  <view class="bottom clearfix">
+    <button bindtap="cancelOrg">取消</button>
+    <button bindtap="sureOrg">确定</button>
+  </view>
+</alert>

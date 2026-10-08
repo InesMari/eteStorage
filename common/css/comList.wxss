@@ -1,0 +1,366 @@
+.comList{
+  /* margin-top: 30rpx; */
+}
+.comList .item{
+  background: #fff;
+  padding: 30rpx;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1rpx solid #F6F6F6;
+}
+.comList .item:last-child{
+  border:none;
+}
+.comList .header{
+  float: left;
+  width: 136rpx;
+  height: 136rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.comList .header image{
+  width: 100%;
+  height: 100%;
+}
+.comList .info{
+  float: left;
+  margin-left: 20rpx;
+  width: calc(100% - 160rpx);
+}
+.comList .info>view{
+  margin-top: 20rpx;
+  font-size: 30rpx;
+}
+.comList .info.threeRows>view{
+  margin:0 0 26rpx;
+}
+.comList .info.threeRows>view:last-child{
+  margin:0;
+}
+.comList .item .info .state{
+  display: inline-block;
+  margin-left: 20rpx;
+  line-height: 40rpx;
+  font-size: 24rpx;
+  width: 120rpx;
+  height: 40rpx;
+  background: #E6F4F9;
+  border-radius: 50rpx;
+  color: #0CCBF8;
+  text-align: center;
+}
+.comList .item .info  .state.red-bg{
+  background: #FFCDCD;
+  color: #E60012;
+}
+.comList .item .info  .state.green-bg{
+  color: #05D188;
+  background: #E6F7F0;  
+}
+.comList .item .info  .state.skyBlue-bg{
+  background: #E6F4F9;
+  color: #0CCBF8;
+}
+.comList .item .info  .state.gray-bg{
+  background: #F1F2F5;
+  color: #999;
+}
+
+
+.footerBtn{
+  position: fixed;
+  height: 116rpx;
+  text-align: center;
+  bottom:0;
+  left: 0;
+  width: 100%;
+  z-index: 9;
+  background: #fff;
+  padding:20rpx 30rpx;
+  box-sizing: border-box;
+  box-shadow: 0 0 3rpx rgba(0,0,0,0.15);
+}
+.footerBtn button{
+  background: #E12006;
+  line-height: 74rpx;
+  height: 76rpx;
+  width: 100%;
+  color: #fff;
+  font-size: 32rpx;
+  text-align: center;
+  border-radius: 50rpx;
+}
+.footerBtn button[disabled]{
+  background: #E12006;
+  opacity: 0.3;
+  color: #fff;
+}
+.footerBtn button[type="success"]{
+  background: #1aad19;
+}
+.footerBtn.btns{
+  text-align: right;
+}
+.footerBtn.btns button{
+  padding: 0 54rpx;
+  width: auto;
+  display: inline-block;
+  margin-left: 40rpx;
+}
+.footerBtn.btns button.default{
+  background: #fff!important;
+  color: #E12006!important;
+}
+.footerBtn.btns button.default::after{
+  border:1rpx solid #E12006;
+}
+/* 新增页面公用样式 */
+.myField{
+  background: #fff;
+}
+.myField .item{
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 18rpx 30rpx;
+  font-size: 28rpx;
+  line-height: 52rpx;
+  color: #323233;
+  position: relative;
+  display: flex;
+}
+.myField .item::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom:0;
+  width: 100%;
+  border-bottom: 1rpx solid #ebedf0;
+  transform: scaleY(0.5);
+  -webkit-transform: scaleY(0.5);
+}
+.myField .item .label{
+  min-width: 164rpx;
+  max-width: 164rpx;
+  margin-right: 24rpx;
+  vertical-align: middle;
+  align-items:center;
+  display: flex;
+  float: left;
+}
+.myField .item .label::before{
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+}
+.myField .item .input-text{
+  flex:1;
+  padding-left: 20rpx;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.myField .item .input-text.disabled{
+  background: #F1F2F5!important;
+}
+.myField .item .input-text input{
+  width: 100%;
+  line-height: 52rpx;
+  min-height: 52rpx;
+}
+.myField .item .input-text .input-placeholder{
+  color: #c8c9cc;
+}
+.myField .item .input-text .textarea-placeholder{
+  color: #c8c9cc;
+  font-size: 24rpx;
+}
+.myField .item  .input-text.right{
+  text-align: right;
+}
+.myField .item  .input-text .van-radio{
+  padding:8rpx 0;
+}
+.myField .item .input-text textarea{
+  line-height: 52rpx;
+  height: 104rpx;
+}
+.myField .field-title{
+  padding: 30rpx 30rpx 30rpx 52rpx;
+  font-size: 30rpx;
+  position: relative;
+}
+.myField .field-title::after{
+  content: "";
+  width: 8rpx;
+  height: 30rpx;
+  position: absolute;
+  left: 30rpx;
+  top: 30rpx;
+  background: #333;
+}
+.myField .item-upload{
+  padding:0 30rpx;
+}
+.myField .upload-box .upload-show{
+  pointer-events: none;
+  width: 330rpx;
+  height: 216rpx;
+  position: relative;
+  border-radius: 10rpx;
+  box-sizing: border-box;
+  background: #fff;
+}
+.myField .upload-box .upload-show .bg{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.myField .upload-box .upload-show .icon{
+  position: absolute;
+  top: 46rpx;
+  left: 50%;
+  margin-left: -50rpx;
+  width: 100rpx;
+  height: 100rpx;
+  z-index: 9;
+}
+.myField .upload-box .upload-show text{
+  position: absolute;
+  bottom: 22rpx;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 26rpx;
+}
+.myField .upload-box .van-uploader__preview-image{
+  width: 330rpx!important;
+  height: 216rpx!important;
+}
+.myField .item .input-text .arrow-down{
+  position: absolute;
+  right: 0;
+  top: 15rpx;
+  color: #999;
+}
+/* 下拉刷新图片 */
+.loading-icon{
+  width: 30rpx;
+  margin:20rpx auto;
+}
+
+/* 列表 */
+.pagelist{
+  padding: 24rpx 30rpx;
+  border-radius: 4rpx;
+}
+.pagelist .item{
+  background: #fff;
+  border-radius: 18rpx;
+  margin-bottom: 24rpx;
+}
+.pagelist .item .inner{
+  padding:28rpx 24rpx 0;
+  border-bottom: 1rpx solid #F6F6F6;
+}
+.pagelist .item .title{
+  margin-bottom: 32rpx;
+  font-weight: bold;
+}
+.pagelist .item .title .router{
+  font-size: 32rpx;
+  line-height: 40rpx;
+  float: left;
+}
+.pagelist .item .title .state{
+  float: right;
+  line-height: 40rpx;
+  font-size: 24rpx;
+  min-width: 100rpx;
+  padding:0 20rpx;
+  height: 40rpx;
+  background: #FFCDCD;
+  border-radius: 50rpx;
+  color: #E60012;
+  text-align: center;
+}
+.pagelist .item .title .state.state1{
+  color: #0CCBF8;
+  background: #E6F4F9;
+}
+.pagelist .item .title .state.state2{
+  color: #05D188;
+  background: #E6F7F0;
+}
+.pagelist .item .title .state.state3{
+  color: #C5C5C5;
+  background: #F1F2F5;
+}
+.pagelist .item .title .state.state5{
+  color: #FF7C1C;
+  background: #FFDDCB;
+}
+.pagelist .item .info{
+  line-height: 40rpx;
+  position: relative;
+}
+.pagelist .item .info>view{
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 26rpx;
+  line-height: 40rpx;
+  margin-bottom: 14rpx;
+  display: flex;
+}
+.pagelist .item .info .text{
+  color: #666;
+  color: #666;
+  flex: 1;
+  white-space: normal;
+  word-break: break-all;
+}
+.pagelist .item .info .price{
+  font-size: 34rpx;
+  position: absolute;
+  right: 0;
+  top: 0;
+  line-height: 1;
+}
+.pagelist .item .isUrgent{
+  border-radius: 50rpx;
+  height: 30rpx;
+  width: 60rpx;
+  line-height: 30rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #fff;
+  background: #E12006;
+  margin: 8rpx 16rpx 0;
+}
+.pagelist .operate{
+  padding:18rpx 24rpx;
+}
+.pagelist .operate .time{
+  line-height: 56rpx;
+  font-size: 26rpx;
+}
+.pagelist .operate .btn{
+  background: #fff;
+  line-height: 54rpx;
+  height: 56rpx;
+  border-radius: 50rpx;
+  color: #E60012;
+  font-size: 25rpx;
+  box-sizing: border-box;
+  margin: 10rpx 0 10rpx 10rpx;
+  padding: 0 20rpx;
+}
+.pagelist .operate .btn::after{
+  border: 1rpx solid #E60012;
+}

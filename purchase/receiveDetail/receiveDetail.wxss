@@ -1,0 +1,60 @@
+@import '../feeApplyDetail/feeApplyDetail';
+page{
+  padding-bottom:120rpx;
+}
+.pagelist .item .info .item{
+  align-items: center;
+}
+.pagelist .item .info .label{
+  width: 160rpx;
+  text-align: right;
+}
+.pagelist .item .info .input-text{
+  flex: 1;
+}
+.pagelist .item .info .picker,.pagelist .item .info input{
+  position: relative;
+  border: 1rpx solid #efefef;
+  border-radius: 6rpx;
+  padding: 10rpx;
+}
+.pagelist .item .info .input-text .arrow-down{
+  position: absolute;
+  right: 10rpx;
+  top: 18rpx;
+}
+
+
+.filter-container {
+  height: 100%;
+}
+
+.filter-container input {
+  width: 90%;
+  display: block;
+  margin: 20rpx auto;
+  border: 1rpx solid #dee2e9;
+  border-radius: 6rpx;
+  padding: 0 24rpx;
+  box-sizing: border-box;
+  height: 80rpx;
+}
+
+.filter-container .scrollList {
+  height: calc(100% - 280rpx);
+}
+
+.filter-container .scrollList .item {
+  line-height: 40rpx;
+  padding: 20rpx 24rpx;
+  border-bottom: 1rpx solid #dee2e9;
+}
+
+.filter-container .scrollList .item.active {
+  color: #fff;
+  background: #1990ff;
+}
+
+.filter-container .scrollList .item:first-child {
+  border-top: 1rpx solid #dee2e9;
+}

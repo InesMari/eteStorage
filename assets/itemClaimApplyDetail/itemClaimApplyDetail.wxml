@@ -1,0 +1,100 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<block wx:if="{{!showFinish}}">
+<view class="mb_20">
+<van-cell-group>
+  <van-cell title="标题" value="{{info.title}}" />
+  <van-cell title="申请编号" value="{{info.applyNum}}" />
+  <van-cell title="紧急程度" value="{{info.urgentLevelName}}" />
+  <van-cell title="申请人" value="{{info.applyUser}}" />
+  <van-cell title="申请人部门" value="{{info.applyUserOrg}}" />
+  <van-cell title="申请日期" value="{{info.applyDate}}" />
+  <van-cell title="物品申请类型" value="{{info.applyItemTypeName}}" />
+  <van-cell title="当前审核人" value="{{info.currentVerifyUserName}}" />
+  <van-cell title="部门审核人" value="{{info.orgVerifyName}}" />
+  <van-cell title="部门审核时间" value="{{info.orgVerifyDate}}" />
+  <van-cell title="部门审核意见" value="{{info.orgVerifyDate}}" />
+  <van-cell title="人事审核人" value="{{info.hrVerifyUserName}}" />
+  <van-cell title="人事审核时间" value="{{info.hrVerifyDate}}" />
+  <van-cell title="申请理由" value="{{info.applyReason}}" />
+</van-cell-group>
+</view>
+
+<view class="myField">
+  <view class="goodsInfo clearfix" wx:for="{{info.list}}">
+    <view class="leftIndex">{{index+1}}</view>
+    <view>
+      <view class="item clearfix">
+        <view class="label">物品类型</view>
+        <view class="input-text">
+          {{item.itemType}}
+        </view>
+      </view>
+      <view class="item clearfix">
+        <view class="label">物品明细</view>
+        <view class="input-text">
+          {{item.itemName}}
+        </view>
+      </view>
+      <view class="item clearfix">
+        <view class="label">物品规格</view>
+        <view class="input-text">
+          {{item.itemSpecification}}
+        </view>
+      </view>
+      <view class="item clearfix">
+        <view class="label">数量</view>
+        <view class="input-text">
+          {{item.itemCount}}
+        </view>
+      </view>
+      <view class="item clearfix">
+        <view class="label">单位</view>
+        <view class="input-text">
+          {{item.itemUnit}}
+        </view>
+      </view>
+      <view class="item clearfix">
+        <view class="label">用途</view>
+        <view class="input-text">
+          {{item.itemUse}}
+        </view>
+      </view>
+      <view class="item clearfix">
+        <view class="label">备注</view>
+        <view class="input-text">
+          {{item.itemRemark}}
+        </view>
+      </view>
+    </view>
+  </view>    
+</view>
+
+<view class="footerBtn btns" wx:if="{{info.showVerify && entitys[1009011]}}">
+  <button class="default" bindtap="showAlertMethod" data-type="1">审核通过</button>
+  <button bindtap="showAlertMethod" data-type="2">审核不通过</button>
+</view>
+</block>
+
+<!-- 审核不通过原因 -->
+<alert isshow="{{showAlert}}" title="提示" class="showAlert" bind:closealert="cancelAlert" aStyle="width:500rpx;">  
+  <view class="content">
+    <view class="label">请输入审批意见：</view>
+    <input type="text" value="{{remark}}" bindinput="inputSetRemark" placeholder=""></input>
+  </view>
+  <view class="bottom clearfix">
+    <button bindtap="cancelAlert">取消</button>
+    <button bindtap="sureAlert">确定</button>  
+  </view>
+</alert>
+
+
+<!-- 调度完成 -->
+<block wx:if="{{showFinish}}">
+  <view class="finishPage">
+    <van-icon name="checked" />
+    <view class="tipText">审核完成，系统会对应提示申请人</view>
+    <view class="finishView">
+      <button bindtap="back">完成</button>
+    </view>
+  </view>
+</block>

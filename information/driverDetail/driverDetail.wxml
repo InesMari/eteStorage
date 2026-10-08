@@ -1,0 +1,160 @@
+<van-cell-group wx:if="{{isEdit}}">
+  <van-field
+    value="{{ value }}"
+    placeholder="手机号"
+    label="手机号"
+    value="{{info.driverPhone}}" data-key="driverPhone" bindinput="inputSetData" bindblur="queryInfo"
+  />
+</van-cell-group>
+
+<view class="myField mb_30 pb_30 {{isEdit?'mt_20':''}}">
+ <view class="field-title">身份证</view>
+ <view class="item-upload clearfix">
+  <view class="upload-box fl">
+    <van-uploader 
+      file-list="{{idCardFrontList}}" 
+      show-upload="{{idCardFrontList.length==0}}"
+      data-id="idCardFront"
+      disabled="true"
+      deletable="{{false}}" >
+        <view class="upload-show" wx:if="{{idCardFrontList.length==0}}">
+          <image class="bg" src="../../common/images/sfz_bg1.png" alt=""></image>
+          <image class="icon" src="../../common/images/upload_icon.png" alt=""></image>
+          <text>上传身份证人像面</text>
+        </view>
+    </van-uploader >
+  </view>
+  <view class="upload-box fr">
+    <van-uploader 
+      file-list="{{idCardBackList}}" 
+      show-upload="{{idCardBackList.length==0}}"
+      data-id="idCardBack"
+      disabled="true"
+      deletable="{{false}}" >
+      <view class="upload-show" wx:if="{{idCardBackList.length==0}}">
+          <image class="bg" src="../../common/images/sfz_bg2.png" alt=""></image>
+          <image class="icon" src="../../common/images/upload_icon.png" alt=""></image>
+          <text>上传身份证国徽面</text>
+        </view>
+    </van-uploader>
+  </view>
+ </view>
+ <view class="field-title">驾驶证</view>
+ <view class="item-upload clearfix">
+  <view class="upload-box fl">
+    <van-uploader 
+      file-list="{{driverLicenceFrontList}}" 
+      show-upload="{{driverLicenceFrontList.length==0}}"
+      data-id="driverLicenceFront" 
+      disabled="true"
+      deletable="{{false}}">
+        <view class="upload-show" wx:if="{{driverLicenceFrontList.length==0}}">
+          <image class="bg" src="../../common/images/jsz_bg1.png" alt=""></image>
+          <image class="icon" src="../../common/images/upload_icon.png" alt=""></image>
+          <text>上传驾驶证正面</text>
+        </view>
+    </van-uploader>
+  </view>
+  <view class="upload-box fr">
+    <van-uploader 
+      file-list="{{driverLicenceBackList}}" 
+      show-upload="{{driverLicenceBackList.length==0}}"
+      data-id="driverLicenceBack"
+      disabled="true"
+      deletable="{{false}}">
+        <view class="upload-show" wx:if="{{driverLicenceBackList.length==0}}">
+          <image class="bg" src="../../common/images/jsz_bg2.png" alt=""></image> 
+          <image class="icon" src="../../common/images/upload_icon.png" alt=""></image>
+          <text>上传驾驶证反面</text>
+        </view>
+    </van-uploader>
+  </view>
+ </view>
+ <view class="field-title" wx:if="{{info.qualifyCertImgPath_}}">从业资格证</view>
+ <view class="item-upload clearfix" style="border:none;padding-bottom:40rpx;" wx:if="{{info.qualifyCertImgPath_}}">
+   <view class="upload-box fl">
+    <van-uploader 
+      file-list="{{qualifyCertList}}" 
+      show-upload="{{qualifyCertList.length<1 || !qualifyCertList}}"
+      data-id="qualifyCert" 
+      disabled="true"
+      deletable="{{false}}"
+      bind:after-read="afterRead" bind:delete="deleteImg" upload-text="上传正面">
+        <view class="upload-show" wx:if="{{qualifyCertList.length<1 || !qualifyCertList}}">
+          <image class="bg" src="../../common/images/jsz_bg1.png" alt=""></image>
+          <image class="icon" src="../../common/images/upload_icon.png" alt=""></image>
+          <text>上传从业资格证</text>
+        </view>
+    </van-uploader>
+   </view>
+ </view>
+</view>
+<van-cell-group>
+  <van-field
+    placeholder=""
+    label="司机姓名"
+    disabled="true"
+    value="{{info.driverName}}" data-key="driverName" bindinput="inputSetData"
+  />
+  <van-field
+    placeholder=""
+    label="手机号"
+    disabled="true"
+    value="{{info.driverPhone}}" data-key="driverPhone" bindinput="inputSetData"
+    wx:if="{{!isEdit}}"
+  />
+  <van-field
+    placeholder=""
+    label="身份证号"
+    disabled="true"
+    value="{{info.idCard}}" data-key="idCard" bindinput="inputSetData"
+  />
+  <van-field
+    placeholder=""
+    label="驾驶证号"
+    disabled="true"
+    value="{{info.driverLicence}}" data-key="driverLicence" bindinput="inputSetData"
+  />
+  <van-field
+    placeholder=""
+    label="准驾车型"
+    disabled="true"
+    value="{{info.driverClass}}" data-key="driverClass" bindinput="inputSetData"
+  />
+  <van-field
+    placeholder=""
+    label="发证机关"
+    disabled="true"
+    value="{{info.licenseIssuingAuthority}}" data-key="licenseIssuingAuthority" bindinput="inputSetData"
+  />
+  <van-field
+    disabled="true"
+    placeholder="从业资格证号"
+    label="从业资格证号"
+    value="{{info.qualifyCertId}}" data-key="qualifyCertId" bindinput="inputSetData"
+  />
+</van-cell-group>
+<view class="myField">
+ <view class="item clearfix">
+  <view class="label">有效期限</view>
+  <view class="input-text disabled">
+    {{info.effectiveDate}}
+  </view>
+ </view>
+ <view class="item clearfix">
+  <view class="label">至</view>
+  <view class="input-text disabled">
+    {{info.expireDate}}
+  </view>
+ </view>
+ <view class="item clearfix">
+  <view class="label">绑定供应商</view>
+  <view class="input-text disabled">
+    <text>{{info.suppliersName}}</text>
+  </view>
+ </view>
+</view>
+
+<view class="footerBtn" bindtap="submit" wx:if="{{isEdit}}">
+  <button>绑定</button>
+</view>

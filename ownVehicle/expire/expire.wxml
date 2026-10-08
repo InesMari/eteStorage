@@ -1,0 +1,22 @@
+<view class="serchView">
+  <picker mode="selector" range="{{expireDayTypeList}}" bindchange="expireDayTypeChange" range-key="codeName" value="{{expireDayTypeIndex}}">
+    <view wx:if="{{expireDayTypeList.length !=0 &&expireDayTypeIndex!=null}}">
+      {{expireDayTypeList[expireDayTypeIndex].codeName}}
+    </view>
+    <view style="color:#c8c9cc;" wx:else>请选择</view>
+    <van-icon name="arrow-down" class="arrow-down" />
+  </picker>
+  <input type="number" placeholder="请输入车牌号" value="{{param.searchKey}}" data-key="searchKey" bindinput="inputSetDataDefault"></input>
+  <button size="mini" type="primary" bind:tap="doQuery">查询</button>
+</view>
+<view class="table">
+  <view class="thead">
+    <view class="td" wx:for="{{head}}">{{item.name}}</view>
+  </view>
+  <view class="tbody" wx:for="{{list}}">
+    <view class="td" wx:for="{{head}}" wx:for-item="hd">
+    <text wx:if="{{code == 'dayText'&& item.day<0}}" class="red">{{item[hd.code]}}</text>
+    <text wx:else>{{item[hd.code]}}</text>    
+    </view>
+  </view>
+</view>

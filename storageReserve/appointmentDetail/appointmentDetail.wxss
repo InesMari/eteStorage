@@ -1,0 +1,131 @@
+@import '../appointment/appointment.wxss';
+
+.footerBtn2 {
+  border: none;
+  background: none;
+  bottom: 50%;
+  box-shadow: none;
+}
+
+.footerBtn2 .tip {
+  text-align: center;
+  line-height: 100rpx;
+  color: #999;
+}
+
+.storageInfo {
+  border-top: 1rpx solid #eee;
+}
+
+.storageInfo .item {
+  display: flex;
+  padding-left: 30rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.storageInfo .item .label {
+  width: 200rpx;
+}
+
+.storageInfo .item .input-text {
+  flex: 1;
+}
+
+.storageInfo .item .label,
+.storageInfo .item .input-text {
+  padding: 18rpx 0;
+  font-size: 28rpx;
+  line-height: 52rpx;
+}
+.van-dialog__header{
+  padding: 48rpx 0;
+}
+.footerBtn.btns.appointFooter{
+  display: flex;
+  justify-content: flex-end;
+  gap: 5%;
+}
+.footerBtn.btns.appointFooter button{
+  font-size: 26rpx;
+  margin: 0;
+}
+.footerBtn button.success{
+  background-color: #67C23A;
+}
+
+/* 廉洁举报弹窗样式 */
+.report-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.report-dialog {
+  width: 600rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.report-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 32rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.report-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.report-close {
+  position: absolute;
+  right: 32rpx;
+  font-size: 48rpx;
+  color: #999;
+  line-height: 1;
+}
+
+.report-body {
+  padding: 40rpx;
+}
+
+.report-logo {
+  width: 250rpx;
+  height: auto;
+  display: block;
+  margin: 0 auto 30rpx;
+}
+
+.report-content {
+  font-size: 26rpx;
+  line-height: 1.8;
+  color: #666;
+  text-align: justify;
+  text-indent: 52rpx;
+}
+
+.report-phone {
+  color: #1989fa;
+  text-decoration: underline;
+}
+
+.report-btn {
+  width: 50%;
+  margin: 30rpx auto 10rpx;
+  background: #1989fa;
+  color: #fff;
+  font-size: 30rpx;
+  border-radius: 8rpx;
+}

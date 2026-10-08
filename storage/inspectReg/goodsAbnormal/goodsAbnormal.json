@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "仓库异常品登记",
+  "usingComponents": {
+    "datetimepicker": "/common/components/datetimepicker/datetimepicker"     
+  }
+}

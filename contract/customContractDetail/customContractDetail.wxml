@@ -1,0 +1,187 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<block wx:if="{{!showFinish}}">
+<van-tabs active="{{active}}" bind:click="toScroll">
+  <van-tab title="基本信息"></van-tab>
+  <van-tab title="合同信息"></van-tab>
+</van-tabs>
+<!-- <view class="stepViewRow">
+  <view wx:for="{{info.reviewUserList}}" class="item {{item.reviewSts==2?'ispass':''}}">
+    <view class="org">{{item.orgName}}</view>
+    <view class="icon">
+      <van-icon name="underway-o" wx:if="{{item.reviewSts == 1}}" style="color: #999;"/>
+      <van-icon name="passed" wx:if="{{item.reviewSts == 2}}" style="color: green;" />
+      <van-icon name="close" wx:if="{{item.reviewSts == 3}}" style="color: red;" />
+    </view>
+    <view class="staff">{{item.userName}}</view>
+    <view class="date">{{format.formatEmpty(item.reviewDate)}}</view>
+  </view>
+</view> -->
+<view class="mb_20">
+<view class="titleTab" id="base">基本信息</view>
+<van-cell-group>
+  <van-cell title="*合同评审编码" value="{{info.contractNum}}" />
+  <van-cell title="*客户名称" value="{{info.tenantName}}" />
+  <van-cell title="*结算主体" value="{{info.settleBodyName}}" />
+</van-cell-group>
+<van-cell-group>
+  <van-cell title="*申请事由" value="{{format.formatTo_(info.remark)}}" />
+  <van-cell title="*申请部门" value="{{format.formatTo_(info.orgName)}}" />
+  <van-cell title="*申请人" value="{{format.formatTo_(info.createUserName)}}" />
+  <van-cell title="*申请日期" value="{{format.formatTo_(info.createDate)}}" />
+  <van-cell title="*合同类型" value="{{format.formatTo_(info.contractTypeName)}}" />
+  <van-cell title="*合同类别" value="{{format.formatTo_(info.contractClassName)}}" />
+  <!-- <van-cell title="*评审人员" value="{{format.formatTo_(info.userName)}}" /> -->
+  <van-cell title="*评审截止日期" value="{{format.formatTo_(info.expireDate)}}" />
+  <van-cell title="*评审状态" value="{{format.formatTo_(info.stsName)}}" />
+</van-cell-group>
+<view class="titleTab mt_20" id="constract">合同信息</view>
+<view class="titleInner">丨客户主体资质审查</view>
+<van-cell-group>
+  <van-cell title="*运输区域" value="{{format.formatTo_(info.transitAreasName)}}" />
+  <van-cell title="*仓储区域" value="{{format.formatTo_(workNames)}}" />
+  <van-cell title="*相关证照">
+    <van-radio-group value="{{ info.certificate }}" >
+      <block wx:for="{{certificate}}">
+        <van-radio name="{{item.codeValue}}" shape="square" icon-size="24rpx">{{item.codeName}}</van-radio>
+      </block>
+    </van-radio-group>
+  </van-cell>
+  <van-cell title="*成立日期" value="{{format.formatTo_(info.establishmentDate)}}" />
+  <van-cell title="*注册资本" value="{{format.formatTo_(info.registeredCapital)}}" />
+  <van-cell title="*注册地址" value="{{format.formatTo_(info.registeredAddress)}}" />
+</van-cell-group>
+<view class="titleInner pt_30">丨服务内容</view>
+<van-cell-group>
+  <van-cell title="*运输类" value="{{format.formatTo_(info.transportNames)}}" />
+  <van-cell title="*仓库类" value="{{format.formatTo_(info.storageNames)}}" />
+  <van-cell title="*包装类" value="{{format.formatTo_(info.packingNames)}}" />
+  <van-cell title="*其他服务" value="{{format.formatTo_(info.otherService)}}" />
+  <van-cell title="*服务的物料产品" value="{{format.formatTo_(info.serviceProducts)}}" />
+  <van-cell title="*其他注意事项" value="{{format.formatTo_(info.otherItem)}}" />
+  <van-cell title="*履约期限" value="{{info.keepStartDate}} 至 {{info.keepEndDate}}" />
+  <van-cell title="*合同纠纷法院" value="{{format.formatTo_(info.disputeCourt)}}" />
+</van-cell-group>
+<view class="titleInner pt_30">丨结款条件</view>
+<van-cell-group>
+  <van-cell title="*付款方式">
+    <van-radio-group value="{{ info.payMode }}" >
+      <block wx:for="{{customerContractPayMode}}">
+        <van-radio name="{{item.codeValue}}" shape="square" icon-size="24rpx">{{item.codeName}}</van-radio>
+      </block>
+    </van-radio-group>
+  </van-cell>
+  <van-cell title="*对账" value="{{'每月'+info.reconciliationDate+'号前对账，每月'+info.invoiceDate+'号前交发票。'}}" />
+  <van-cell title="*发票">
+    <van-radio-group value="{{ info.invoiceType }}" >
+      <block wx:for="{{contractInvoiceType}}">
+        <van-radio name="{{item.codeValue}}" shape="square" icon-size="24rpx">{{item.codeName}}</van-radio>
+      </block>
+    </van-radio-group>
+  </van-cell>
+  <van-cell title="*税率">
+    <van-radio-group value="{{ info.taxRate }}" >
+      <block wx:for="{{taxRate}}">
+        <van-radio name="{{item.codeValue}}" shape="square" icon-size="24rpx">{{item.codeName}}</van-radio>
+      </block>
+    </van-radio-group>
+  </van-cell>
+  <van-cell title="*账期见票结">
+    <van-radio-group value="{{ info.accountPeriod }}" >
+      <block wx:for="{{customerAccountPeriod}}">
+        <van-radio name="{{item.codeValue}}" shape="square" icon-size="24rpx">{{item.codeName}}</van-radio>
+      </block>
+      <text wx:if="{{info.accountPeriodValue}}" style="color: #333;">{{format.formatTo_(info.accountPeriodValue)}}天</text>
+    </van-radio-group>
+  </van-cell>
+  <van-cell title="*押金">
+    <van-radio-group value="{{ info.deposit }}" >
+      <block wx:for="{{haveOrNot}}">
+        <van-radio name="{{item.codeValue}}" shape="square" icon-size="24rpx">{{item.codeName}}</van-radio>
+      </block>
+    </van-radio-group>
+    <text style="margin-left: 30rpx;">支付/退回期限 {{format.formatTo_(info.returnDate)}} 天</text>
+  </van-cell>
+  <van-cell title="*结算信用">
+    <view style="display: flex;">
+    <van-rate value="{{ info.creditLevel }}" />
+    <view class="text" style="margin: -1px 0 0 10px;">{{texts[info.creditLevel-1]}}</view>
+    </view>
+  </van-cell>
+</van-cell-group>
+</view>
+
+<view class="uploadImg mb_20" wx:if="{{info.fileList.length>0}}">
+  <view class="list clearfix">
+    <view class="item" wx:for="{{info.fileList}}">
+      <fileviewer url="{{item.fileUrl}}"></fileviewer>
+    </view>
+  </view>
+</view>
+
+<!-- 审核信息 -->
+<view class="titleTab fw">审核信息</view>
+<view class="stepView">
+  <view wx:for="{{info.reviewUserList}}" class="item {{item.reviewSts==2?'ispass':''}}">
+    <view class="icon">
+      <van-icon name="underway-o" wx:if="{{item.reviewSts == 1}}" style="color: #999;"/>
+      <van-icon name="passed" wx:if="{{item.reviewSts == 2}}" style="color: green;" />
+      <van-icon name="close" wx:if="{{item.reviewSts == 3}}" style="color: red;" />
+    </view>
+    <view class="staff">审核部门：{{format.formatTo_(item.orgName)}}</view>
+    <view class="org">审核人：{{format.formatTo_(item.userName)}} {{format.formatEmpty(item.reviewDate)}}</view>
+    <view class="org">审核意见：{{format.formatTo_(item.reviewRemark)}}</view>
+  </view>
+</view>
+
+<view class="footerBtn btns" wx:if="{{info.showButton && entitys[1011040]}}">
+  <button class="default" bindtap="showAlertMethod" data-type="1">评审通过</button>
+  <button bindtap="showAlertMethod" data-type="2">评审不通过</button>
+</view>
+</block>
+
+<!-- 评审不通过原因 -->
+<alert isshow="{{showAlert}}" title="提示" class="showAlert" bind:closealert="cancelAlert" aStyle="width:500rpx;">  
+  <view class="content">
+    <view class="label">请输入评审意见：</view>
+    <input type="text" value="{{remark}}" bindinput="inputSetRemark" placeholder=""></input>
+  </view>
+  <view class="bottom clearfix">
+    <button bindtap="cancelAlert">取消</button>
+    <button bindtap="sureAlert">确定</button>  
+  </view>
+</alert>
+
+
+<!-- 评审完成 -->
+<block wx:if="{{showFinish}}">
+  <view class="finishPage">
+    <van-icon name="checked" />
+    <view class="tipText">评审完成，系统会对应提示申请人</view>
+    <view class="numTip">合同评审编码：{{info.contractNum}}</view>
+    <view class="con">
+      <view class="item clearfix">
+        <text class="label fl">客户名称</text>
+        <text class="fr">{{info.tenantName}}</text>
+      </view>
+      <view class="item clearfix">
+        <text class="label fl">申请事由</text>
+        <text class="fr">{{format.formatTo_(info.remark)}}</text>
+      </view>
+      <view class="item clearfix">
+        <text class="label fl">申请部门</text>
+        <text class="fr">{{format.formatTo_(info.orgName)}}</text>
+      </view>
+      <view class="item clearfix">
+        <text class="label fl">申请人</text>
+        <text class="fr">{{format.formatTo_(info.createUserName)}}</text>
+      </view>
+      <view class="item clearfix">
+        <text class="label fl">评审截止日期</text>
+        <text class="fr">{{format.formatTo_(info.expireDate)}}</text>
+      </view>
+    </view>
+    <view class="finishView">
+      <button bindtap="back">完成</button>
+    </view>
+  </view>
+</block>

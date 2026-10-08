@@ -1,0 +1,71 @@
+<wxs src="../../../common/wxs/format.wxs" module="format"></wxs>
+
+<view class="contain">
+  <view class="headInfo">
+    <image class="bg" src="/common/images/info_bg.png"></image>
+    <view class="userInfo" bindtap="goback">
+      <image class="back" src="/common/images/back.png" mode="widthFix"></image>
+    </view>
+    <view class="workName">报表查询</view>
+  </view>
+  <view class="list clearfix">
+    <view class="item" bindtap="sensorChooseMonth" wx:if="{{entitys[1005271]}}">
+      <image src="/common/images/i_37.png"></image>
+      <view class="name">温湿度记录表</view>
+      <view class="explain">扫描查询仓库温湿度记录表</view>
+    </view>
+    <view class="item" bindtap="forkliftChooseMonth" wx:if="{{entitys[1005272]}}">
+      <image src="/common/images/i_38.png"></image>
+      <view class="name">按日巡检记录表</view>
+      <view class="explain">扫描查询按日巡检记录表</view>
+    </view>
+    <view class="item" bindtap="fireHydrantChooseMonth" wx:if="{{entitys[1005283]}}">
+      <image src="/common/images/i_43.png"></image>
+      <view class="name">按月巡检记录表</view>
+      <view class="explain">扫描查询按月巡检记录表</view>
+    </view>
+  </view>
+</view>
+
+
+<!-- 温湿度选择月份 -->
+<alert isshow="{{showSensorAlert}}" title="选择报表格式" class="showAlert" bind:closealert="cancelSensorAlert" aStyle="width:500rpx;">
+  <view class="content">
+    <view class="label">选择月份：</view>    
+    <picker mode="date" fields="month" value="{{sensorMonth}}" bindchange="chooseSensorMonth">
+        {{sensorMonth}}
+    </picker>
+  </view>
+  <view class="bottom clearfix">
+    <button bindtap="randomTime">随机时间段</button>
+    <button bindtap="fixedTime">固定时间段</button>
+  </view>
+</alert>
+
+<!-- 选择巡检月份 -->
+<alert isshow="{{showForkliftAlert}}" title="选择巡检月份" class="showAlert" bind:closealert="cancelForkliftAlert" aStyle="width:500rpx;">
+  <view class="content">
+    <view class="label">选择月份：</view>    
+    <picker mode="date" fields="month" value="{{forkliftMonth}}" bindchange="chooseForkliftMonth">
+        {{forkliftMonth}}
+    </picker>
+  </view>
+  <view class="bottom clearfix">
+    <button bindtap="cancelForkliftAlert" style="background-color: #ffe6e6;">取消</button>
+    <button bindtap="confirmForkliftAlert">确认</button>
+  </view>
+</alert>
+
+<!-- 选择巡检年份 -->
+<alert isshow="{{showFireHydrantAlert}}" title="选择巡检年份" class="showAlert" bind:closealert="cancelFireHydrantAlert" aStyle="width:500rpx;">
+  <view class="content">
+    <view class="label">选择年份：</view>
+    <picker mode="date" fields="year" value="{{fireHydrantYear}}" bindchange="chooseFireHydrantYear">
+        {{fireHydrantYear}}
+    </picker>
+  </view>
+  <view class="bottom clearfix">
+    <button bindtap="cancelFireHydrantAlert" style="background-color: #ffe6e6;">取消</button>
+    <button bindtap="confirmFireHydrantAlert">确认</button>
+  </view>
+</alert>

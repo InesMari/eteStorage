@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "自有车运力统计",
+  "usingComponents": {
+    "ec-canvas":"/ownVehicle/ec-canvas/ec-canvas"    
+  }
+}

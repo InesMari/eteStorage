@@ -1,0 +1,4 @@
+@import "../contractDetail/contractDetail.wxss";
+van-radio:last-of-type{
+  margin-right: 10rpx;
+}

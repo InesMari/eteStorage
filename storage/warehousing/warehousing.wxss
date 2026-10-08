@@ -1,0 +1,313 @@
+page{
+  background: #f1f2f5;
+  padding: 30rpx 0 120rpx;
+  box-sizing: border-box;
+}
+
+.packageView {
+  margin: 0 30rpx 30rpx;
+  padding: 0;
+  height: calc(100% - 360rpx);
+  position: relative;
+}
+
+.myField {
+  margin: 0 110rpx 0 20rpx;
+}
+.orderScan{
+  font-size: 70rpx;
+  position: absolute;
+  top: 40rpx;
+  right: 20rpx;
+  color: #1990ff;
+}
+.tabs{
+  background: #fff;
+}
+.tabItem{
+  float: left;
+  width: 120rpx;
+  text-align: center;
+  line-height: 80rpx;
+  position: relative;
+}
+.tabItem.active{
+  color:#ee0a24;
+}
+.tabItem.active::after{
+  content: "";
+  position: absolute;
+  width: 100%;
+  background: #ee0a24;
+  height: 4rpx;
+  left: 0;
+  bottom: 0;
+}
+.baseInfo {
+  border-radius: 10rpx;
+  background: #fff;
+  margin: 20rpx;
+}
+.baseInfo .detail{
+  border-bottom: 1rpx solid #F6F6F6;
+}
+.baseInfo .detail .item {
+  border-bottom: 1rpx dashed #F6F6F6;
+}
+
+.baseInfo .detail .item:last-child {
+  border: none;
+}
+
+.baseInfo .detail .title {
+  margin: 24rpx 0;
+  padding: 0 30rpx;
+  font-size: 24rpx; 
+  font-weight: bold;
+}
+
+.baseInfo .detail .inner {
+  padding: 0 30rpx;
+}
+
+.baseInfo .detail .inner>view {
+  float: left;
+  margin-bottom: 20rpx;
+  font-size: 24rpx;
+  width: 100%;
+  color: #666;
+}
+
+.baseInfo .detail .inner .view50 {
+  width: 50%;
+}
+
+.baseInfo .detail .inner .view33 {
+  width: 33.3333%;
+}
+
+.baseInfo .detail .inner .sdCodeScan{
+  font-size: 50rpx;
+  color: #1990ff;
+  float: right;
+}
+
+.sdScanBtn {
+  line-height: 50rpx;
+  font-size: 26rpx;
+  font-weight: normal;
+  position: absolute;
+  right: 10rpx;
+  color: #1990ff;
+  top: -6rpx;
+  border: 1rpx solid #1990ff;
+}
+
+.sdScanBtn .sdScan {
+  font-size: 32rpx;
+  vertical-align: text-bottom;
+  margin-right: 6rpx;
+}
+
+.wayTitle {
+  font-size: 28rpx;
+  line-height: 1;
+  margin-bottom: 30rpx;
+  padding: 30rpx 30rpx 0;
+  font-weight: bold;
+  position: relative;
+}
+
+.warehouseInfo {
+  border-radius: 10rpx;
+  background: #fff;
+  margin: 20rpx;
+  padding: 20rpx;
+}
+
+.warehouseInfo .table {
+  border-top: 1rpx solid #efefef;
+  border-left: 1rpx solid #efefef;
+  float: left;
+  width: calc(100% - 70rpx);
+}
+
+.warehouseInfo .table .tr {
+  display: flex;
+}
+
+.warehouseInfo .table .td,
+.warehouseInfo .table .th {
+  flex: 1;
+  height: 60rpx;
+  display: flex;
+  font-size: 24rpx;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1rpx solid #efefef;
+  border-right: 1rpx solid #efefef;
+}
+
+.warehouseInfo .table picker,
+.warehouseInfo .table input {
+  width: 100%;
+  position: relative;
+  text-align: center;
+}
+
+.warehouseInfo .table .arrow-down {
+  position: absolute;
+  top: 50%;
+  right: 10rpx;
+  margin-top: -12rpx;
+}
+
+.warehouseInfo .opBtns {
+  float: right;
+  margin-right: 5rpx;
+}
+
+.warehouseInfo .opBtns .add {
+  margin-top: 5rpx;
+  font-size: 50rpx;
+  color: #1990ff;
+  display: block;
+}
+.warehouseInfo .opBtns .minus{
+  margin: 10rpx 5rpx 20rpx;
+  width: 40rpx;
+  height: 40rpx;
+  background: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+  border-radius: 6rpx;
+}
+.warehouseInfo .opBtns .minus::after{
+  content: "";
+  width: 20rpx;
+  height: 2rpx;
+  background: #fff;
+  display: block;
+}
+
+.warehouseInfo .opBtns .scan {
+  margin-top: 10rpx;
+  font-size: 50rpx;
+  color: #1990ff;
+  display: block;
+}
+
+.warehouseInfo .opBtns .delete {
+  margin-top: 70rpx;
+  font-size: 46rpx;
+  display: block;
+  color: red;
+}
+
+.warehouseInfo .inner {
+  margin-top: 20rpx;
+  position: relative;
+}
+
+.warehouseInfo .innerFrom {
+  line-height: 50rpx;
+  float: left;
+  font-size: 24rpx;
+  margin-right: 15rpx;
+}
+
+.warehouseInfo .innerFrom input {
+  height: 50rpx;
+  border: 1rpx solid #efefef;
+  display: inline-block;
+  vertical-align: middle;
+  width: 130rpx;
+  padding: 0 12rpx;
+}
+
+.warehouseInfo .innerFrom van-switch {
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.filter-container {
+  height: 100%;
+}
+
+.filter-container input {
+  width: 90%;
+  display: block;
+  margin: 20rpx auto;
+  border: 1rpx solid #dee2e9;
+  border-radius: 6rpx;
+  padding: 0 24rpx;
+  box-sizing: border-box;
+  height: 80rpx;
+}
+
+.filter-container .scrollList {
+  height: calc(100% - 280rpx);
+}
+
+.filter-container .scrollList .item {
+  line-height: 40rpx;
+  padding: 20rpx 24rpx;
+  border-bottom: 1rpx solid #dee2e9;
+}
+
+.filter-container .scrollList .item.active {
+  color: #fff;
+  background: #1990ff;
+}
+
+.filter-container .scrollList .item:first-child {
+  border-top: 1rpx solid #dee2e9;
+}
+
+.filter-container .btn {
+  margin: 30rpx 5% 30rpx 10%;
+  width: 35%;
+  float: left;
+  height: 80rpx;
+  font-size: 30rpx;
+  padding: 0;
+  line-height: 80rpx;
+}
+
+.filter-container .btn:last-child {
+  margin: 30rpx 10% 30rpx 5%;
+}
+
+
+.scanTable {
+  border-top: 1rpx solid #efefef;
+  border-left: 1rpx solid #efefef;
+  margin: 20rpx;
+  background: #fff;
+}
+
+.scanTable .tr {
+  display: flex;
+}
+
+.scanTable .th {
+  background: #eee;
+}
+
+.scanTable .td,
+.scanTable .th {
+  flex: 1;
+  height: 60rpx;
+  display: flex;
+  font-size: 24rpx;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1rpx solid #efefef;
+  border-right: 1rpx solid #efefef;
+}
+
+.scanTable .del {
+  font-size: 36rpx;
+  color: red;
+}

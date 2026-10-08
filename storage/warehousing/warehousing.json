@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "入库扫码",
+  "usingComponents": {
+    "alert":"/common/components/alert/alert",
+    "popover": "/common/components/popover/popover"
+  }
+}

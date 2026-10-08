@@ -1,0 +1,31 @@
+<van-search value="{{ value }}" bind:change="search" placeholder="搜索司机" />
+<image mode="widthFix" wx:if="{{isRefresh}}" class="loading-icon" src="/common/images/loading.gif"></image>
+<scroll-view class="scorll" scroll-y="{{true}}" bindscrolltoupper="toupper" upper-threshold="1" bindscrolltolower="scrolltolowerHandler">
+  <view class="comList">
+    <van-swipe-cell right-width="{{ 65 }}" left-width="{{ 0 }}" wx:for="{{list}}" wx:key="{{index}}" >
+      <view class="clearfix item {{item.sts==0?'disabled':''}}" slot="" bindtap="toDetail" data-id="{{item.id}}" data-state="{{item.authStateInternal}}" >
+        <view class="header">
+          <image src="/common/images/driverHeader.png"></image>
+        </view>
+        <view class="info">
+          <view class="editView" catchtap="toEdit" data-id="{{item.id}}" wx:if="{{entitys[1002027]}}">
+            <van-icon name="edit" class="edit" />
+          </view>
+          <view class="name" style="line-height:40rpx;">{{item.driverName}}
+            <!-- <text class="state green-bg" wx:if="{{item.authStateInternal==0}}">运作中</text> -->
+            <text class="state skyBlue-bg" wx:if="{{item.authStateInternal==1}}">空闲中</text>
+            <text class="state gray-bg" wx:if="{{item.authStateInternal==0}}">审核中</text>
+            <text class="state red-bg" wx:if="{{item.authStateInternal==2}}">不通过</text>
+          </view>
+          <view class="phone">{{item.driverPhone}}</view>
+          <view class="phone zt_999" wx:if="{{item.authStateInternal==2}}">不通过原因：{{item.authStateInternalName}}</view>
+        </view>
+      </view>
+      <view wx:if="{{entitys[1002029]}}" slot="right" catchtap="updateState" data-item="{{item}}" style="line-height:214rpx;">{{item.sts==1?'禁用':'启用'}}</view>
+    </van-swipe-cell>
+  </view>
+</scroll-view>
+<view class="footerBtn">
+  <!-- <button bindtap="toDetail" class="default">绑定司机</button> -->
+  <button bindtap="toAddDriver" wx:if="{{entitys[1002026]}}">新增司机</button>
+</view>

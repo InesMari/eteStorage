@@ -1,0 +1,81 @@
+<wxs src="../../common/wxs/format.wxs" module="format"></wxs>
+<block wx:if="{{!showFinish}}">
+<van-cell-group>
+  <van-cell title="车牌号码" value="{{info.plateNumber}}" />
+  <van-cell title="日期" value="{{info.feeDate}}" />
+  <van-cell title="备注" value="{{format.formatTo_(info.remark)}}" />
+  <van-cell title="费用类型" value="{{format.formatTo_(info.repairTypeName)}}" />
+  <van-cell title="结算方式" value="{{format.formatTo_(info.payModeName)}}" />
+  <van-cell title="金额" value="{{info.fee}}" />
+  <block wx:if="{{maintenanceShow}}">    
+    <van-cell title="下次保养日期" value="{{info.nextMaintenanceDate}}" />
+    <van-cell title="下次保养里程" value="{{info.nextMaintenanceMileage}}" />
+  </block>
+  <block wx:if="{{!maintenanceShow}}">    
+    <van-cell title="修理项目名称" value="{{info.feeProject}}" />
+  </block>
+  <van-cell title="供应商名称" value="{{info.supplierName}}" />
+  <van-cell title="维修联系人" value="{{info.linkMan}}" />
+  <van-cell title="维修联系电话" value="{{info.linkPhone}}" />
+  <van-cell wx:if="{{info.verifyUserName}}" title="审核人" value="{{info.verifyUserName}}" />
+  <van-cell wx:if="{{info.verifyDate}}" title="审核时间" value="{{info.verifyDate}}" />
+  <van-cell wx:if="{{info.verifyRemark}}" title="审核备注" value="{{info.verifyRemark}}" />
+</van-cell-group>
+
+<view class="uploadImg" wx:if="{{fileList.length>0}}">
+  <view class="title">附件</view>
+  <view class="list clearfix">
+    <view class="item" wx:for="{{fileList}}">
+      <fileviewer url="{{item.fullPath}}"></fileviewer>
+    </view>
+  </view>
+</view>
+
+<view class="footerBtn btns">
+  <button wx:if="{{info.verifyState==0 && entitys[1002144]}}" class="default" bindtap="audit" data-type="1">审核通过</button>
+  <button wx:if="{{info.verifyState==0 && entitys[1002144]}}" bindtap="showUnPassAlertMethod" data-type="2">审核不通过</button>
+</view>
+</block>
+
+<!-- 审核不通过原因 -->
+<alert isshow="{{showUnPassAlert}}" title="提示" class="showUnPassAlert" bind:closealert="cancelAlert" aStyle="width:500rpx;">  
+  <view class="content">
+    <view class="label">请输入审核不通过原因：</view>
+    <input type="text" value="{{remark}}" bindinput="inputSetRemark" placeholder=""></input>
+  </view>
+  <view class="bottom clearfix">
+    <button bindtap="cancelAlert">取消</button>
+    <button bindtap="sureAlert">确定</button>  
+  </view>
+</alert>
+
+
+<!-- 调度完成 -->
+<block wx:if="{{showFinish}}">
+  <view class="finishPage">
+    <van-icon name="checked" />
+    <view class="tipText">审核完成，系统会对应提示申请人</view>
+    <view class="numTip">付款单：{{info.payNum}}</view>
+    <view class="con">
+      <view class="item clearfix">
+        <text class="label fl">报销部门</text>
+        <text class="fr">{{info.orgName}}</text>
+      </view>
+      <view class="item clearfix">
+        <text class="label fl">支付金额</text>
+        <text class="fr">{{info.payFee}}</text>
+      </view>
+      <view class="item clearfix">
+        <text class="label fl">填写日期</text>
+        <text class="fr">{{info.createDate}}</text>
+      </view>
+      <view class="item clearfix">
+        <text class="label fl">付款日期</text>
+        <text class="fr">{{info.expectDate}}</text>
+      </view>
+    </view>
+    <view class="finishView">
+      <button bindtap="back">完成</button>
+    </view>
+  </view>
+</block>

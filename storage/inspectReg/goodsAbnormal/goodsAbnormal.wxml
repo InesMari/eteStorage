@@ -1,0 +1,53 @@
+<view class="myField">
+  <view class="item clearfix">
+    <view class="label"><text class="red">*</text>客户名称</view>
+    <view class="input-text">
+      <input type="text" placeholder="请输入客户名称" value="{{info.customerName}}" data-key="customerName" data-index="{{index}}" bindinput="inputSetDataDefault" disabled="{{disabled}}"></input>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label"><text class="red">*</text>料号</view>
+    <view class="input-text">
+      <input type="text" placeholder="请输入料号" value="{{info.materialNum}}" data-key="materialNum" data-index="{{index}}" bindinput="inputSetDataDefault" disabled="{{disabled}}"></input>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label"><text class="red">*</text>批次号</view>
+    <view class="input-text">
+      <input type="text" placeholder="请输入批次号" value="{{info.batchNum}}" data-key="batchNum" data-index="{{index}}" bindinput="inputSetDataDefault" disabled="{{disabled}}"></input>
+    </view>
+  </view>
+  <view class="item clearfix">
+    <view class="label"><text class="red">*</text>数量</view>
+    <view class="input-text">
+      <input type="number" placeholder="请输入数量" value="{{info.count}}" data-key="count" data-index="{{index}}" bindinput="inputSetDataDefault" disabled="{{disabled}}"></input>
+    </view>
+  </view>
+
+  <view class="item clearfix">
+    <view class="label"><text class="red">*</text>计划处理时间</view>
+    <view class="input-text">      
+      <datetimepicker placeholder="选择时间" dStyle="{{disabled?'pointer-events: none;':''}}" bind:change="changeDate" type="minute" initValue="{{info.planDealDate}}" isInit="{{disabled}}"></datetimepicker>
+        <van-icon class="arrow-down" name="arrow" />
+    </view>
+  </view>
+
+  <view class="uploadImg">
+    <view class="title">上传图片<text>最多上传5张，已经上传<text class="zt_333">{{ticketList.length}}</text>张</text></view>
+    <view class="tip">只能上传jpg/png文件，单张图片不超过20mb</view>
+    <view class="list">
+      <view class="item" style="padding: 0;">
+        <van-uploader 
+          file-list="{{info.imgList}}" disabled="{{disabled}}" deletable="{{!disabled}}"
+          bind:after-read="afterRead" bind:delete="deleteImg" upload-text="上传图片" 
+          show-upload="{{info.imgList.length<5}}"
+        />
+      </view>
+    </view>
+  </view>
+  
+</view>
+
+<view class="footerBtn" wx:if="{{!disabled}}">
+  <button bindtap="submit">提交</button>
+</view>

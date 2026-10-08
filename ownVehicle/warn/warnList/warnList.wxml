@@ -1,0 +1,24 @@
+<view class="list">
+   <view class="item" bind:tap="toOffLine">
+    <view class="iconView">
+      <image mode="widthFix" src="/common/images/offLine.png"></image>
+    </view>
+    <view class="contentView">
+      <view class="title">长时间离线提醒</view>
+      <view class="content" wx:if="{{offLine}}">{{offLine.content}}</view>
+    </view>
+    <view class="tip" wx:if="{{offLineTotal > 0}}">{{offLineTotal}}</view>
+    <van-icon name="arrow" class="arrow" />
+   </view>
+   <view class="item" bind:tap="toFatigueDriving">
+    <view class="iconView">
+      <image mode="widthFix" src="/common/images/fatigueDriving.png"></image>
+    </view>
+    <view class="contentView" bind:tap="toFatigueDriving">
+      <view class="title">疲劳驾驶提醒</view>
+      <view class="content" wx:if="{{fatigueDriving}}">{{fatigueDriving.content}}</view>
+    </view>
+    <view class="tip" wx:if="{{fatigueDrivingTotal > 0}}">{{fatigueDrivingTotal}}</view>
+    <van-icon name="arrow" class="arrow" />
+   </view>
+</view>

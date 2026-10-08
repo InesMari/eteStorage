@@ -1,0 +1,20 @@
+<view>
+    <view class="title" wx:if="{{isFirst}}">初次登陆，需要您重置密码 !</view>
+    <view class="title" wx:if="{{!isFirst}}">设置新的密码</view>
+    <view class="logs-inputBox">
+      <view class="verifyIpt">
+        <view class="label fl">新密码</view>
+        <input placeholder="请输入新密码" value="{{password}}" data-key="password" bindinput="inputSetData" type="password" password="{{true}}"></input>
+        <van-icon name="close" wx:if="{{password}}" bindtap="clearData" data-key="password" />
+      </view>
+      <view class="verifyIpt">     
+        <view class="label fl">确认密码</view> 
+        <input placeholder="请再次输入新密码" value="{{confirmPassword}}" data-key="confirmPassword" bindinput="inputSetData" type="password" password="{{true}}"></input>
+        <van-icon name="close" wx:if="{{confirmPassword}}" bindtap="clearData" data-key="confirmPassword"  />
+      </view>
+      <view class="pswTip">密码长度8~32位，须包含数字、字母、符号至少两种或以上元素</view>
+    </view>
+    <view class="button-box">
+        <button class="logs-bot {{!password||!confirmPassword?'disabled':''}}" bindtap="submit" decode='true'>确<text style="margin:0 25rpx;"></text>认</button>
+    </view>
+</view>

@@ -1,0 +1,48 @@
+page{
+  background: #f5f5f5;
+}
+.list{
+  background-color: #fff;
+  border-top: 1rpx solid #eee;
+}
+.list .item{
+  display: flex;
+  position: relative;
+  padding: 30rpx;
+  border-bottom: 1rpx solid #eee;
+}
+.list .item .iconView{
+  display: flex;
+  border:4rpx solid #d81e06;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  width: 100rpx;
+  height: 100rpx;
+  position: relative;
+}
+.list .item .iconView image{
+  width: 60%;
+}
+.list .item .contentView{
+  flex: 1;
+  padding:0 0 0 40rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.list .item .contentView .plateNumber{
+  font-size: 26rpx;
+  color: #333;
+}
+.list .item .contentView .driverUserName{
+  font-size: 26rpx;
+  color: #333;
+  margin: 0 30rpx;
+}
+.list .item .contentView .content{
+  font-size: 24rpx;
+  color: #333;
+  flex: 1;
+  text-align: right;
+}

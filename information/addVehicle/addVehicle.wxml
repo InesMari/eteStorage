@@ -1,0 +1,254 @@
+<view class="myField">
+ <view class="field-title">行驶证</view>
+ <view class="item-upload clearfix">
+  <view class="upload-box fl">
+    <van-uploader 
+      file-list="{{vehicleLicenseFrontList}}" 
+      show-upload="{{vehicleLicenseFrontList.length<1 || !vehicleLicenseFrontList}}"
+      data-id="vehicleLicenseFront"
+      bind:after-read="afterRead" bind:delete="deleteImg" upload-text="上传正面"  >
+        <view class="upload-show" wx:if="{{vehicleLicenseFrontList.length<1 || !vehicleLicenseFrontList}}">
+          <image class="bg" src="../../common/images/xsz_bg.png" alt=""></image>
+          <image class="icon" src="../../common/images/upload_icon.png" alt=""></image>
+          <text>上传行驶证正面</text>
+        </view>
+    </van-uploader >
+  </view>
+  <view class="upload-box fr">
+    <van-uploader 
+      file-list="{{vehicleLicenseBackList}}" 
+      show-upload="{{vehicleLicenseBackList.length<1 || !vehicleLicenseBackList}}"
+      data-id="vehicleLicenseBack"
+      bind:after-read="afterRead" bind:delete="deleteImg" upload-text="上传正面"  >
+        <view class="upload-show" wx:if="{{vehicleLicenseBackList.length<1 || !vehicleLicenseBackList}}">
+          <image class="bg" src="../../common/images/xsz_bg.png" alt=""></image>
+          <image class="icon" src="../../common/images/upload_icon.png" alt=""></image>
+          <text>上传行驶证反面</text>
+        </view>
+    </van-uploader >
+  </view>
+ </view>
+ <view class="dbUpload clearfix">
+  <view class="fl">
+    <view class="field-title">道路运输证</view>
+    <view class="item-upload clearfix">
+      <view class="upload-box fl">
+        <van-uploader 
+          file-list="{{roadTransportCertificateList}}" 
+          show-upload="{{roadTransportCertificateList.length<1 || !roadTransportCertificateList}}"
+          data-id="roadTransportCertificate" 
+          bind:after-read="afterRead" bind:delete="deleteImg" upload-text="上传图片"  >
+            <view class="upload-show" wx:if="{{roadTransportCertificateList.length<1 || !roadTransportCertificateList}}">
+              <image class="bg" src="../../common/images/xsz_bg.png" alt=""></image>
+              <image class="icon" src="../../common/images/upload_icon.png" alt=""></image>
+              <text>上传道路运输证</text>
+            </view>
+        </van-uploader >
+      </view>
+    </view>
+  </view>
+  <view class="fr">
+    <view class="field-title">道路运输经营许可证</view>
+    <view class="item-upload clearfix">
+      <view class="upload-box fl">
+        <van-uploader 
+          file-list="{{roadOperatingPermitList}}" 
+          show-upload="{{roadOperatingPermitList.length<1 || !roadOperatingPermitList}}"
+          data-id="roadOperatingPermit" 
+          bind:after-read="afterRead" bind:delete="deleteImg" upload-text="上传图片"  >
+            <view class="upload-show" wx:if="{{roadOperatingPermitList.length<1 || !roadOperatingPermitList}}">
+              <image class="bg" src="../../common/images/xsz_bg.png" alt=""></image>
+              <image class="icon" src="../../common/images/upload_icon.png" alt=""></image>
+              <text>上传道路运输经营许可证</text>
+            </view>
+        </van-uploader >
+      </view>
+    </view>
+  </view>
+ </view>
+</view>
+<van-cell-group>
+  <van-field
+    placeholder=""
+    label="审核状态"
+    readonly="true"
+    value="{{info.authStateInternalText}}"
+    class="red"
+    wx:if="{{isUpdate}}"
+  />  
+  <van-field
+    placeholder=""
+    label="审核备注"
+    readonly="true"
+    value="{{info.authRemarkInternal}}"
+    wx:if="{{isUpdate}}"
+  />  
+  <van-field
+    placeholder="车牌号"
+    label="车牌号"
+    value="{{info.plateNumber}}" data-key="plateNumber" bindinput="inputSetData"
+  />
+  
+  <view class="myField">
+    <view class="item clearfix">
+      <view class="label">车牌颜色</view>
+      <view class="input-text">
+        <picker mode="selector" range="{{licensePlateColorList}}" bindchange="licensePlateColorChange" range-key="codeName" value="{{licensePlateColorIndex}}">
+          <view wx:if="{{licensePlateColorList.length !=0 &&licensePlateColorIndex!=null}}">
+            {{licensePlateColorList[licensePlateColorIndex].codeName}}
+          </view>
+          <view style="color:#c8c9cc;" wx:else>请选择车牌颜色</view>
+        </picker>
+      </view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">车型</view>
+      <view class="input-text">
+        <picker mode="selector" range="{{vehicleTypeList}}" bindchange="vehicleTypeChange" range-key="codeName" value="{{vehicleTypeIndex}}">
+          <view wx:if="{{vehicleTypeList.length !=0 &&vehicleTypeIndex!=null}}">
+            {{vehicleTypeList[vehicleTypeIndex].codeName}}
+          </view>
+          <view style="color:#c8c9cc;" wx:else>请选择车型</view>
+        </picker>
+      </view>
+    </view>
+    <view class="item clearfix">
+    <view class="label">报价车型</view>
+      <view class="input-text">
+        <picker mode="selector" range="{{vehicleTypeQuoteList}}" bindchange="vehicleTypeQuoteChange" range-key="codeName" value="{{vehicleTypeQuoteIndex}}">
+          <view wx:if="{{vehicleTypeQuoteList.length !=0 &&vehicleTypeQuoteIndex!=null}}">
+            {{vehicleTypeQuoteList[vehicleTypeQuoteIndex].codeName}}
+          </view>
+          <view style="color:#c8c9cc;" wx:else>请选择报价车型</view>
+        </picker>
+      </view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">车长</view>
+      <view class="input-text">
+        <picker mode="selector" range="{{vehicleLengthList}}" bindchange="vehicleLengthChange" range-key="codeName" value="{{vehicleLengthIndex}}">
+          <view wx:if="{{vehicleLengthList.length !=0 &&vehicleLengthIndex!=null}}">
+            {{vehicleLengthList[vehicleLengthIndex].codeName}}
+          </view>
+          <view style="color:#c8c9cc;" wx:else>请选择车长</view>
+        </picker>
+      </view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">能源类型</view>
+      <view class="input-text">
+        <picker mode="selector" range="{{energyTypeList}}" bindchange="energyTypeChange" range-key="codeName" value="{{energyTypeIndex}}">
+          <view wx:if="{{energyTypeList.length !=0 &&energyTypeIndex!=null}}">
+            {{energyTypeList[energyTypeIndex].codeName}}
+          </view>
+          <view style="color:#c8c9cc;" wx:else>请选择能源类型</view>
+        </picker>
+      </view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">核定载质量</view>
+      <view class="input-text">
+        <input type="number" placeholder="核定载质量" value="{{info.loadWeight}}" data-key="loadWeight" bindinput="inputSetDataDefault"></input>
+      </view>
+      <view class="unit">KG</view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">总质量</view>
+      <view class="input-text">
+        <input type="number" placeholder="总质量" value="{{info.totalWeight}}" data-key="totalWeight" bindinput="inputSetDataDefault"></input>
+      </view>
+      <view class="unit">KG</view>
+    </view>
+  </view>
+  <van-field
+    placeholder="识别代号"
+    label="识别代号"
+    value="{{info.vin}}" data-key="vin" bindinput="inputSetData"
+  />
+  <van-field
+    placeholder="车辆所有人"
+    label="车辆所有人"
+    value="{{info.vehicleOwner}}" data-key="vehicleOwner" bindinput="inputSetData"
+  />
+  <view class="myField">
+    <view class="item clearfix">
+      <view class="label">使用性质</view>
+      <view class="input-text">
+        <picker mode="selector" range="{{useCharacterList}}" bindchange="useCharacterChange" range-key="codeName" value="{{useCharacterIndex}}">
+          <view wx:if="{{useCharacterList.length !=0 &&useCharacterIndex!=null}}">
+            {{useCharacterList[useCharacterIndex].codeName}}
+          </view>
+          <view style="color:#c8c9cc;" wx:else>请选择使用性质</view>
+        </picker>
+      </view>
+    </view>
+  </view>
+  <van-field
+    placeholder="发证机关"
+    label="发证机关"
+    value="{{info.issueUnit}}" data-key="issueUnit" bindinput="inputSetData"
+  />
+  <view class="myField">
+    <view class="item clearfix">
+      <view class="label">发证日期</view>
+      <view class="input-text">
+        <picker mode="date" value="{{info.issueDate}}" bindchange="bindDateChange" data-key="issueDate">
+          <view wx:if="{{info.issueDate}}">
+            {{info.issueDate}}
+          </view>
+          <view style="color:#c8c9cc;" wx:else>发证日期</view>
+        </picker>
+      </view>
+    </view>
+    <view class="item clearfix">
+      <view class="label">注册日期</view>
+      <view class="input-text">
+        <picker mode="date" value="{{info.registerDate}}" bindchange="bindDateChange" data-key="registerDate">
+          <view wx:if="{{info.registerDate}}">
+            {{info.registerDate}}
+          </view>
+          <view style="color:#c8c9cc;" wx:else>注册日期</view>
+        </picker>
+      </view>
+    </view>
+  </view>
+  <van-field
+    placeholder="道路运输证号"
+    label="道路运输证号"
+    value="{{info.roadTransportCertificate}}" data-key="roadTransportCertificate" bindinput="inputSetData"
+  />
+  <van-field
+    placeholder="道路运输经营许可证书"
+    label="道路运输经营许可证书"
+    value="{{info.roadOperatingPermit}}" data-key="roadOperatingPermit" bindinput="inputSetData"
+  />
+</van-cell-group>
+<view class="myField">
+  <view class="item clearfix">
+  <view class="label">绑定供应商</view>
+  <view class="input-text overflow" bind:tap="showSupplierPopover">
+    <text wx:if="{{info.supplierList}}">{{info.suppliersName}}</text>
+    <text style="color:#c8c9cc;" wx:else>选择供应商</text>
+  </view>
+ </view>
+</view>
+<view class="footerBtn">
+  <button bindtap="submit">提交</button>
+</view>
+
+
+<!-- 选择供应商 -->
+<popover is-show="{{isShowSupplierPopover}}">
+  <view class="filter-container">
+    <input type="text" placeholder="请输入供应商" bindinput='searchSupplierList'
+      value="{{supplierListSearch}}"></input>
+    <scroll-view class="scrollList" scroll-y="{{true}}">
+      <view class="item {{item.select?'active':''}}" wx:for="{{supplierList}}" wx:key="{{index}}"
+        bindtap="selectSupplier" data-item="{{item}}" data-index="{{index}}">{{item.label}}</view>
+    </scroll-view>
+    <view class="botBtn clearfix">
+      <button type="warn" class="btn" catchtap="clearSupplier">清空</button>
+      <button type="primary" class="btn" catchtap="sureSupplier">确定</button>
+    </view>
+  </view>
+</popover>

@@ -1,0 +1,116 @@
+page{
+  height: 100%;
+}
+.humitureLogPyPage {
+  box-sizing: border-box;
+  height: 100%;
+  overflow: auto;
+  padding-bottom: 100rpx;
+}
+.scanView {
+  width: 60%;
+  margin:30vh auto;
+}
+
+.codeView {
+  display: flex;
+  margin-bottom: 50rpx;
+}
+
+.codeView input {
+  flex: 1;
+  border: 1rpx solid #999;
+  line-height: 90rpx;
+  height: 90rpx;
+  padding: 0 20rpx;
+}
+
+.codeView button {
+  width: 150rpx;
+}
+
+.common-info {
+  min-height: 100%;
+  box-sizing: border-box;
+}
+
+.tableBox {
+  overflow: auto;
+}
+
+.tableTitle {
+  position: relative;
+  padding-bottom: 20px;
+}
+
+.tableTitle image {
+  position: absolute;
+  height: 40px;
+  left: 10px;
+  top: 10px;
+}
+
+.title-h3 {
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 40px;
+  text-align: center;
+  color: #000;
+}
+
+.title-p {
+  text-align: center;
+  line-height: 36rpx;
+}
+
+  /* 表格样式 */
+  .table {
+    width: 100%;
+  }
+
+  .tr {
+    width: 100%;
+    display: inline-flex;
+  }
+
+  .thead-tr .th{
+    background-color: #f5f5f5;
+    border-top: 1px solid #e5e5e5;
+  }
+
+  .th,
+  .td {
+    border-right: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 8px 5px;
+    text-align: center;
+    box-sizing: border-box;
+    font-size: 24rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0; /* 不允许收缩 */
+  }
+  .td.left{
+    justify-content: flex-start;
+  }
+  .td.flex>view{
+    margin-right: 20rpx;
+  }
+
+  .th:last-child,
+  .td:last-child {
+    border-right: none;
+  }
+
+ 
+  .tip {
+    margin-top: 20px;
+    padding: 0 20rpx;
+  }
+
+  .tip-p {
+    line-height: 40rpx;
+    margin: 5px 0;
+    font-size: 24rpx;
+  }
